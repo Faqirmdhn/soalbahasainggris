@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Belajar Bahasa Inggris</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header dengan efek glassmorphism */
+        .header {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 25px 50px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.05), transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: rotateGlow 10s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 60px rgba(100, 100, 255, 0.1);
+            }
+
+            50% {
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 80px rgba(100, 100, 255, 0.2);
+            }
+        }
+
+        .header span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Card dengan efek 3D dan glassmorphism */
+        .card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 35px 20px 30px;
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 24px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent, rgba(255, 255, 255, 0.05));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* Warna gradien berbeda untuk setiap card */
+        .card:nth-child(1) {
+            background: linear-gradient(145deg, rgba(255, 107, 107, 0.2), rgba(78, 52, 46, 0.15));
+        }
+
+        .card:nth-child(2) {
+            background: linear-gradient(145deg, rgba(78, 205, 196, 0.2), rgba(44, 62, 80, 0.15));
+        }
+
+        .card:nth-child(3) {
+            background: linear-gradient(145deg, rgba(255, 159, 67, 0.2), rgba(44, 62, 80, 0.15));
+        }
+
+        .card:nth-child(4) {
+            background: linear-gradient(145deg, rgba(255, 107, 107, 0.2), rgba(142, 68, 173, 0.15));
+        }
+
+        .card:nth-child(5) {
+            background: linear-gradient(145deg, rgba(46, 204, 113, 0.2), rgba(44, 62, 80, 0.15));
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .card:active {
+            transform: translateY(-5px) scale(0.98);
+        }
+
+        /* Efek glow di pojok card */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            transition: all 0.6s ease;
+        }
+
+        .card:hover::after {
+            top: -30%;
+            right: -30%;
+            width: 120%;
+            height: 120%;
+        }
+
+        .icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card:hover .icon {
+            transform: scale(1.2) rotate(-5deg);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.5;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Animasi fade in */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+        }
+
+        /* Badge pop-up efek */
+        .card .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 3;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.85rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                font-size: 1.4rem;
+                padding: 20px 25px;
+                margin-bottom: 35px;
+            }
+
+            .container {
+                grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+                gap: 20px;
+            }
+
+            .card {
+                padding: 25px 15px 20px;
+                min-height: 210px;
+            }
+
+            .icon {
+                font-size: 2.8rem;
+            }
+
+            .card h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* JUDUL DASHBOARD */
+        .judul-dashboard {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .judul-icon {
+            font-size: 3.5rem;
+            display: block;
+            margin-bottom: 10px;
+            animation: bounceIcon 2s ease-in-out infinite;
+        }
+
+        @keyframes bounceIcon {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .judul-utama {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #a8a8ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 0 0 60px rgba(100, 100, 255, 0.2);
+        }
+
+        .judul-sub {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 8px;
+            letter-spacing: 4px;
+            font-weight: 300;
+        }
+
+        /* Responsive judul */
+        @media (max-width: 768px) {
+            .judul-utama {
+                font-size: 2rem;
+            }
+
+            .judul-icon {
+                font-size: 2.8rem;
+            }
+
+            .judul-sub {
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .judul-utama {
+                font-size: 1.5rem;
+            }
+
+            .judul-icon {
+                font-size: 2.2rem;
+            }
+
+            .judul-dashboard {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                font-size: 1.1rem;
+                padding: 15px 18px;
+            }
+
+            .container {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+
+            .card {
+                padding: 20px 12px 16px;
+                min-height: 180px;
+                border-radius: 18px;
+            }
+
+            .icon {
+                font-size: 2.2rem;
+                margin-bottom: 10px;
+            }
+
+            .card h2 {
+                font-size: 1rem;
+            }
+
+            .card p {
+                font-size: 0.8rem;
+                margin-bottom: 14px;
+            }
+
+            .btn {
+                padding: 7px 20px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- JUDUL DASHBOARD -->
+    <div class="judul-dashboard">
+        <span class="judul-icon">🚀</span>
+        <h1 class="judul-utama">Dashboard Belajar Bahasa Inggris</h1>
+        <p class="judul-sub">Mudah & Menyenangkan</p>
+    </div>
+
+    <!-- CONTAINER CARD -->
+    <div class="container">
+
+        <div class="card fade-in" onclick="openPage('present.html')">
+            <div class="badge">⭐ Populer</div>
+            <div class="icon">📝</div>
+            <h2>Present Tense</h2>
+            <p>Kejadian sekarang & kebiasaan</p>
+            <a class="btn">✨ Masuk</a>
+        </div>
+
+        <div class="card fade-in" onclick="openPage('past.html')" style="animation-delay:0.15s;">
+            <div class="badge">📖</div>
+            <div class="icon">🕰️</div>
+            <h2>Past Tense</h2>
+            <p>Kejadian di masa lalu</p>
+            <a class="btn">✨ Masuk</a>
+        </div>
+
+        <div class="card fade-in" onclick="openPage('future.html')" style="animation-delay:0.3s;">
+            <div class="badge">🚀</div>
+            <div class="icon">🔮</div>
+            <h2>Future Tense</h2>
+            <p>Kejadian di masa depan</p>
+            <a class="btn">✨ Masuk</a>
+        </div>
+
+        <div class="card fade-in" onclick="openPage('tofel.html')" style="animation-delay:0.45s;">
+            <div class="badge">🏆</div>
+            <div class="icon">🎯</div>
+            <h2>TOEFL</h2>
+            <p>Soal-soal TOEFL</p>
+            <a class="btn">✨ Masuk</a>
+        </div>
+
+        <div class="card fade-in" onclick="openPage('/words/words.html')" style="animation-delay:0.6s;">
+            <div class="badge">📚</div>
+            <div class="icon">📚</div>
+            <h2>Words</h2>
+            <p>Kosakata Inggris</p>
+            <a class="btn">✨ Masuk</a>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        ✨ Belajar Bahasa Inggris Menjadi Lebih Mudah & Menyenangkan ✨
+    </div>
+
+    <script>
+        function openPage(page) {
+            window.location.href = page;
+        }
+
+        // Efek tambahan saat card diklik
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function (e) {
+                // Jangan trigger jika klik tombol
+                if (e.target.classList.contains('btn')) return;
+
+                // Efek ripple
+                const ripple = document.createElement('span');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255,255,255,0.15);
+                    width: 300px;
+                    height: 300px;
+                    transform: translate(-50%, -50%) scale(0);
+                    animation: rippleAnim 0.8s ease-out forwards;
+                    pointer-events: none;
+                    z-index: 10;
+                `;
+                const rect = card.getBoundingClientRect();
+                ripple.style.left = (e.clientX - rect.left) + 'px';
+                ripple.style.top = (e.clientY - rect.top) + 'px';
+                card.appendChild(ripple);
+
+                setTimeout(() => ripple.remove(), 800);
+            });
+        });
+
+        // Tambahkan keyframe ripple
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleAnim {
+                0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+
+</html>

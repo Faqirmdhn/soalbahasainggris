@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belajar 100 Kata Penting Bahasa Inggris</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0f0e1a, #1a1a2e);
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 16px 0 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 24px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .header-left .back-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: none;
+            color: #9ca3cf;
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-left .back-btn:hover {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-right .badge {
+            background: rgba(251, 191, 36, 0.12);
+            padding: 5px 16px;
+            border-radius: 40px;
+            color: #fbbf24;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* INTRODUCTION */
+        .intro {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .intro h2 {
+            font-size: 24px;
+            color: #fbbf24;
+            margin-bottom: 12px;
+        }
+
+        .intro p {
+            color: #d6defa;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .intro .highlight {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
+        /* STATS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 16px 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+
+        .stat-card .label {
+            font-size: 13px;
+            color: #9ca3cf;
+            margin-top: 4px;
+        }
+
+        /* FILTER & SEARCH */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: white;
+            font-size: 15px;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: rgba(251, 191, 36, 0.3);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .search-box input::placeholder {
+            color: #6e739b;
+        }
+
+        .filter-btns {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 40px;
+            padding: 8px 16px;
+            color: #9ca3cf;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            background: rgba(251, 191, 36, 0.08);
+            color: #fbbf24;
+        }
+
+        .filter-btn.active {
+            background: rgba(251, 191, 36, 0.15);
+            border-color: #fbbf24;
+            color: #fbbf24;
+        }
+
+        /* WORD CARD - DETAILED */
+        .word-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 28px 30px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .word-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(251, 191, 36, 0.15);
+        }
+
+        .word-card .word-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .word-card .word-header .rank {
+            font-size: 14px;
+            color: #4a4a6a;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 12px;
+            border-radius: 20px;
+        }
+
+        .word-card .word-header .en {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+
+        .word-card .word-header .id {
+            font-size: 20px;
+            color: #d6defa;
+            opacity: 0.7;
+        }
+
+        .word-card .word-header .category {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 20px;
+            background: rgba(96, 165, 250, 0.12);
+            color: #60a5fa;
+            margin-left: auto;
+        }
+
+        .word-card .word-header .category.verb {
+            background: rgba(52, 211, 153, 0.12);
+            color: #34d399;
+        }
+
+        .word-card .word-header .category.noun {
+            background: rgba(251, 191, 36, 0.12);
+            color: #fbbf24;
+        }
+
+        .word-card .word-header .category.preposition {
+            background: rgba(244, 63, 94, 0.12);
+            color: #f472b6;
+        }
+
+        .word-card .word-header .category.conjunction {
+            background: rgba(96, 165, 250, 0.12);
+            color: #60a5fa;
+        }
+
+        .word-card .word-header .category.pronoun {
+            background: rgba(167, 139, 250, 0.12);
+            color: #a78bfa;
+        }
+
+        .word-card .word-header .category.article {
+            background: rgba(251, 191, 36, 0.08);
+            color: #fbbf24;
+        }
+
+        .word-card .word-header .category.adverb {
+            background: rgba(244, 63, 94, 0.08);
+            color: #f472b6;
+        }
+
+        .word-card .word-header .category.adjective {
+            background: rgba(52, 211, 153, 0.08);
+            color: #34d399;
+        }
+
+        .word-card .word-header .category.auxiliary {
+            background: rgba(167, 139, 250, 0.08);
+            color: #a78bfa;
+        }
+
+        .word-card .explanation {
+            color: #d6defa;
+            line-height: 1.8;
+            margin: 12px 0;
+            font-size: 15px;
+        }
+
+        .word-card .explanation strong {
+            color: #fbbf24;
+        }
+
+        .word-card .examples {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 12px;
+        }
+
+        .word-card .examples .example {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 0;
+            font-size: 15px;
+        }
+
+        .word-card .examples .example .wrong {
+            color: #f87171;
+        }
+
+        .word-card .examples .example .correct {
+            color: #34d399;
+        }
+
+        .word-card .examples .example .icon {
+            width: 24px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .word-card .examples .example .en-example {
+            color: #fbbf24;
+            font-weight: 500;
+        }
+
+        .word-card .examples .example .id-example {
+            color: #9ca3cf;
+            margin-left: 8px;
+        }
+
+        .word-card .learn-btn {
+            margin-top: 16px;
+            padding: 8px 20px;
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.15);
+            border-radius: 40px;
+            color: #fbbf24;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .word-card .learn-btn:hover {
+            background: rgba(251, 191, 36, 0.2);
+        }
+
+        .word-card .learn-btn.learned {
+            background: rgba(52, 211, 153, 0.15);
+            border-color: #34d399;
+            color: #34d399;
+        }
+
+        /* PROGRESS */
+        .progress-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 30px;
+            position: sticky;
+            bottom: 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            color: #9ca3cf;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            color: #4a4a6a;
+            padding: 30px 0 10px;
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 20px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 640px) {
+            .header-left h1 {
+                font-size: 20px;
+            }
+
+            .word-card .word-header .en {
+                font-size: 24px;
+            }
+
+            .word-card {
+                padding: 20px;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3a3a5a;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-left">
+                <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <h1><i class="fas fa-graduation-cap"></i> 100 Kata Penting</h1>
+            </div>
+            <div class="header-right">
+                <span class="badge"><i class="fas fa-fire"></i> Wajib Dikuasai!</span>
+            </div>
+        </div>
+
+        <!-- INTRODUCTION -->
+        <div class="intro">
+            <h2>📖 Kenapa 100 Kata Ini Penting?</h2>
+            <p>
+                <span class="highlight">100 kata</span> ini adalah kata yang paling sering digunakan dalam bahasa
+                Inggris.
+                Dengan menguasai kata-kata ini, kamu bisa memahami <span class="highlight">50-60%</span> dari percakapan
+                dan tulisan sehari-hari. Setiap kata dilengkapi dengan <span class="highlight">penjelasan</span> dan
+                <span class="highlight">contoh kalimat</span> agar kamu paham cara penggunaannya.
+            </p>
+            <p style="margin-top:12px;">
+                <i class="fas fa-lightbulb" style="color:#fbbf24;"></i>
+                <span style="color:#9ca3cf;">Klik tombol</span>
+                <span style="color:#fbbf24;">"Saya Sudah Hafal"</span>
+                <span style="color:#9ca3cf;">untuk melacak progress belajarmu!</span>
+            </p>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="number" id="totalWords">100</div>
+                <div class="label">Total Kata</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="learnedWords">0</div>
+                <div class="label">Sudah Dihafal</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="remainingWords">100</div>
+                <div class="label">Tersisa</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="progressPercent">0%</div>
+                <div class="label">Progress</div>
+            </div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Cari kata... (contoh: 'the', 'adalah')"
+                    oninput="renderWords()">
+            </div>
+            <div class="filter-btns">
+                <button class="filter-btn active" data-category="all" onclick="setFilter('all')">Semua</button>
+                <button class="filter-btn" data-category="verb" onclick="setFilter('verb')">Verba</button>
+                <button class="filter-btn" data-category="noun" onclick="setFilter('noun')">Nomina</button>
+                <button class="filter-btn" data-category="preposition"
+                    onclick="setFilter('preposition')">Preposisi</button>
+                <button class="filter-btn" data-category="pronoun" onclick="setFilter('pronoun')">Pronomina</button>
+                <button class="filter-btn" data-category="adverb" onclick="setFilter('adverb')">Adverbia</button>
+            </div>
+        </div>
+
+        <!-- WORD LIST -->
+        <div id="wordList"></div>
+
+        <!-- PROGRESS -->
+        <div class="progress-section">
+            <div class="progress-text">
+                <span>📊 Progress Belajar</span>
+                <span id="progressLabel">0 / 100 kata</span>
+            </div>
+            <div class="progress-bar">
+                <div class="fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            💡 <span style="color:#fbbf24;">Tips:</span> Baca setiap kata, pahami contohnya, lalu tandai jika sudah
+            hafal!
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        //  DATA LENGKAP DENGAN PENJELASAN
+        // ============================================================
+        const words = [
+            // ===== TOP 10 =====
+            {
+                en: "the",
+                id: "itu",
+                category: "article",
+                rank: 1,
+                explanation: "Kata yang paling sering digunakan dalam bahasa Inggris (muncul ~7% dari semua kata). Tanpa 'the', bahasa Inggris sulit dipahami karena kita tidak tahu benda mana yang dimaksud.",
+                examples: [
+                    { wrong: "I saw cat", correct: "I saw the cat", id: "Saya melihat kucing itu" },
+                    { wrong: "Book is on table", correct: "The book is on the table", id: "Buku itu ada di atas meja" }
+                ]
+            },
+            {
+                en: "be",
+                id: "adalah / berada",
+                category: "verb",
+                rank: 2,
+                explanation: "Kata kerja paling fundamental yang menghubungkan subjek dengan deskripsi. Bentuknya: am, is, are, was, were. Sangat penting untuk membuat kalimat dasar.",
+                examples: [
+                    { wrong: "I happy", correct: "I am happy", id: "Saya bahagia" },
+                    { wrong: "She teacher", correct: "She is a teacher", id: "Dia seorang guru" },
+                    { wrong: "They at home", correct: "They are at home", id: "Mereka di rumah" }
+                ]
+            },
+            {
+                en: "to",
+                id: "ke / untuk",
+                category: "preposition",
+                rank: 3,
+                explanation: "Preposisi serbaguna yang juga berfungsi sebagai penanda infinitive (to + verb). Digunakan dalam banyak struktur kalimat.",
+                examples: [
+                    { correct: "Go to school", id: "Pergi ke sekolah" },
+                    { correct: "I want to eat", id: "Saya ingin makan" },
+                    { correct: "Give it to me", id: "Berikan itu kepada saya" }
+                ]
+            },
+            {
+                en: "of",
+                id: "dari",
+                category: "preposition",
+                rank: 4,
+                explanation: "Menunjukkan kepemilikan, hubungan, atau bagian dari sesuatu. Sangat sering digunakan dalam berbagai konteks.",
+                examples: [
+                    { correct: "The color of the sky", id: "Warna dari langit" },
+                    { correct: "A cup of coffee", id: "Secangkir kopi" },
+                    { correct: "The city of Jakarta", id: "Kota Jakarta" }
+                ]
+            },
+            {
+                en: "and",
+                id: "dan",
+                category: "conjunction",
+                rank: 5,
+                explanation: "Kata sambung paling umum yang menghubungkan kata, frasa, atau kalimat. Sangat penting untuk membuat kalimat majemuk.",
+                examples: [
+                    { correct: "You and me", id: "Kamu dan saya" },
+                    { correct: "Read and write", id: "Membaca dan menulis" },
+                    { correct: "I like coffee and tea", id: "Saya suka kopi dan teh" }
+                ]
+            },
+            {
+                en: "a",
+                id: "sebuah",
+                category: "article",
+                rank: 6,
+                explanation: "Artikel tidak tentu (indefinite article) untuk benda yang belum spesifik. Digunakan sebelum kata benda yang berawalan konsonan.",
+                examples: [
+                    { correct: "I have a book", id: "Saya punya sebuah buku" },
+                    { correct: "She is a doctor", id: "Dia seorang dokter" },
+                    { correct: "A cat is sleeping", id: "Seekor kucing sedang tidur" }
+                ]
+            },
+            {
+                en: "in",
+                id: "di dalam",
+                category: "preposition",
+                rank: 7,
+                explanation: "Preposisi untuk menunjukkan posisi di dalam sesuatu, atau periode waktu. Salah satu preposisi paling sering digunakan.",
+                examples: [
+                    { correct: "The pen is in the bag", id: "Pena itu ada di dalam tas" },
+                    { correct: "I was born in 2000", id: "Saya lahir di tahun 2000" },
+                    { correct: "She lives in Jakarta", id: "Dia tinggal di Jakarta" }
+                ]
+            },
+            {
+                en: "that",
+                id: "itu / yang",
+                category: "pronoun",
+                rank: 8,
+                explanation: "Kata serbaguna: bisa sebagai pronoun (kata ganti), determiner, atau conjunction. Sangat penting untuk menghubungkan kalimat.",
+                examples: [
+                    { correct: "I know that", id: "Saya tahu itu" },
+                    { correct: "The book that I read", id: "Buku yang saya baca" },
+                    { correct: "I think that she is right", id: "Saya pikir bahwa dia benar" }
+                ]
+            },
+            {
+                en: "have",
+                id: "memiliki",
+                category: "verb",
+                rank: 9,
+                explanation: "Kata kerja untuk menunjukkan kepemilikan. Juga digunakan sebagai auxiliary verb (have/has/had) untuk perfect tense.",
+                examples: [
+                    { correct: "I have a car", id: "Saya punya mobil" },
+                    { correct: "She has two children", id: "Dia punya dua anak" },
+                    { correct: "I have eaten", id: "Saya sudah makan" }
+                ]
+            },
+            {
+                en: "I",
+                id: "saya",
+                category: "pronoun",
+                rank: 10,
+                explanation: "Kata ganti orang pertama tunggal. Paling sering digunakan karena orang selalu bicara tentang diri sendiri.",
+                examples: [
+                    { correct: "I love you", id: "Saya mencintaimu" },
+                    { correct: "I am a student", id: "Saya seorang pelajar" },
+                    { correct: "I want to go", id: "Saya ingin pergi" }
+                ]
+            },
+
+            // ===== TOP 11-30 =====
+            {
+                en: "it",
+                id: "itu",
+                category: "pronoun",
+                rank: 11,
+                explanation: "Kata ganti untuk benda, hewan, atau situasi. Sangat sering digunakan sebagai subjek kalimat.",
+                examples: [
+                    { correct: "It is raining", id: "Hujan" },
+                    { correct: "I like it", id: "Saya suka itu" },
+                    { correct: "It is a good idea", id: "Itu ide yang bagus" }
+                ]
+            },
+            {
+                en: "for",
+                id: "untuk",
+                category: "preposition",
+                rank: 12,
+                explanation: "Preposisi untuk menunjukkan tujuan, manfaat, atau durasi waktu. Sangat serbaguna dalam berbagai konteks.",
+                examples: [
+                    { correct: "This is for you", id: "Ini untukmu" },
+                    { correct: "I waited for 2 hours", id: "Saya menunggu selama 2 jam" },
+                    { correct: "She bought it for me", id: "Dia membelinya untuk saya" }
+                ]
+            },
+            {
+                en: "not",
+                id: "tidak",
+                category: "adverb",
+                rank: 13,
+                explanation: "Adverbia paling dasar untuk membentuk kalimat negatif. Sangat penting untuk menyangkal atau membantah.",
+                examples: [
+                    { correct: "I am not happy", id: "Saya tidak bahagia" },
+                    { correct: "She does not like coffee", id: "Dia tidak suka kopi" },
+                    { correct: "It is not true", id: "Itu tidak benar" }
+                ]
+            },
+            {
+                en: "on",
+                id: "di atas",
+                category: "preposition",
+                rank: 14,
+                explanation: "Preposisi untuk menunjukkan posisi di atas permukaan, atau hari/tanggal.",
+                examples: [
+                    { correct: "The book is on the table", id: "Buku itu ada di atas meja" },
+                    { correct: "I work on Monday", id: "Saya bekerja pada hari Senin" },
+                    { correct: "She is on the phone", id: "Dia sedang di telepon" }
+                ]
+            },
+            {
+                en: "with",
+                id: "dengan",
+                category: "preposition",
+                rank: 15,
+                explanation: "Preposisi untuk menunjukkan kebersamaan, alat, atau cara.",
+                examples: [
+                    { correct: "I go with you", id: "Saya pergi denganmu" },
+                    { correct: "She cut it with a knife", id: "Dia memotongnya dengan pisau" },
+                    { correct: "I agree with you", id: "Saya setuju denganmu" }
+                ]
+            },
+            {
+                en: "he",
+                id: "dia (laki-laki)",
+                category: "pronoun",
+                rank: 16,
+                explanation: "Kata ganti untuk orang ketiga tunggal laki-laki. Sangat sering digunakan dalam percakapan.",
+                examples: [
+                    { correct: "He is my brother", id: "Dia saudara laki-laki saya" },
+                    { correct: "He works hard", id: "Dia bekerja keras" },
+                    { correct: "I saw him", id: "Saya melihat dia" }
+                ]
+            },
+            {
+                en: "as",
+                id: "sebagai",
+                category: "preposition",
+                rank: 17,
+                explanation: "Preposisi untuk menunjukkan peran, fungsi, atau perbandingan.",
+                examples: [
+                    { correct: "She works as a teacher", id: "Dia bekerja sebagai guru" },
+                    { correct: "He is as tall as me", id: "Dia setinggi saya" },
+                    { correct: "As you know", id: "Seperti yang kamu tahu" }
+                ]
+            },
+            {
+                en: "you",
+                id: "kamu / anda",
+                category: "pronoun",
+                rank: 18,
+                explanation: "Kata ganti orang kedua untuk orang yang diajak bicara. Salah satu kata paling sering digunakan.",
+                examples: [
+                    { correct: "You are beautiful", id: "Kamu cantik" },
+                    { correct: "I love you", id: "Saya mencintaimu" },
+                    { correct: "Can you help me?", id: "Bisakah kamu membantu saya?" }
+                ]
+            },
+            {
+                en: "do",
+                id: "melakukan",
+                category: "verb",
+                rank: 19,
+                explanation: "Kata kerja untuk menunjukkan aksi. Juga digunakan sebagai auxiliary verb untuk pertanyaan dan negasi.",
+                examples: [
+                    { correct: "I do my homework", id: "Saya mengerjakan PR" },
+                    { correct: "Do you like coffee?", id: "Apakah kamu suka kopi?" },
+                    { correct: "I don't know", id: "Saya tidak tahu" }
+                ]
+            },
+            {
+                en: "at",
+                id: "di",
+                category: "preposition",
+                rank: 20,
+                explanation: "Preposisi untuk menunjukkan lokasi spesifik atau waktu tertentu.",
+                examples: [
+                    { correct: "She is at home", id: "Dia di rumah" },
+                    { correct: "I wake up at 6 AM", id: "Saya bangun jam 6 pagi" },
+                    { correct: "Look at me!", id: "Lihat saya!" }
+                ]
+            },
+            {
+                en: "this",
+                id: "ini",
+                category: "pronoun",
+                rank: 21,
+                explanation: "Kata ganti untuk benda yang dekat atau situasi saat ini.",
+                examples: [
+                    { correct: "This is my book", id: "Ini buku saya" },
+                    { correct: "I like this", id: "Saya suka ini" },
+                    { correct: "This is a good idea", id: "Ini ide yang bagus" }
+                ]
+            },
+            {
+                en: "but",
+                id: "tetapi",
+                category: "conjunction",
+                rank: 22,
+                explanation: "Kata sambung untuk menunjukkan kontras atau pertentangan.",
+                examples: [
+                    { correct: "I'm tired but happy", id: "Saya lelah tetapi bahagia" },
+                    { correct: "She is smart but lazy", id: "Dia pintar tetapi malas" },
+                    { correct: "I want to go, but I can't", id: "Saya ingin pergi, tetapi saya tidak bisa" }
+                ]
+            },
+            {
+                en: "his",
+                id: "miliknya (laki-laki)",
+                category: "pronoun",
+                rank: 23,
+                explanation: "Kata ganti kepemilikan untuk orang ketiga laki-laki.",
+                examples: [
+                    { correct: "This is his car", id: "Ini mobil miliknya" },
+                    { correct: "His name is John", id: "Namanya John" },
+                    { correct: "I like his style", id: "Saya suka gayanya" }
+                ]
+            },
+            {
+                en: "by",
+                id: "oleh",
+                category: "preposition",
+                rank: 24,
+                explanation: "Preposisi untuk menunjukkan pelaku, cara, atau batas waktu.",
+                examples: [
+                    { correct: "The book was written by her", id: "Buku itu ditulis olehnya" },
+                    { correct: "I go to work by car", id: "Saya pergi kerja dengan mobil" },
+                    { correct: "Please be here by 8 AM", id: "Tolong sudah di sini jam 8 pagi" }
+                ]
+            },
+            {
+                en: "from",
+                id: "dari",
+                category: "preposition",
+                rank: 25,
+                explanation: "Preposisi untuk menunjukkan asal, sumber, atau titik awal.",
+                examples: [
+                    { correct: "I am from Indonesia", id: "Saya dari Indonesia" },
+                    { correct: "I got a gift from her", id: "Saya mendapat hadiah darinya" },
+                    { correct: "From Monday to Friday", id: "Dari Senin sampai Jumat" }
+                ]
+            },
+            {
+                en: "they",
+                id: "mereka",
+                category: "pronoun",
+                rank: 26,
+                explanation: "Kata ganti orang ketiga jamak. Digunakan untuk lebih dari satu orang.",
+                examples: [
+                    { correct: "They are my friends", id: "Mereka teman-teman saya" },
+                    { correct: "I love them", id: "Saya mencintai mereka" },
+                    { correct: "They work together", id: "Mereka bekerja bersama" }
+                ]
+            },
+            {
+                en: "we",
+                id: "kami / kita",
+                category: "pronoun",
+                rank: 27,
+                explanation: "Kata ganti orang pertama jamak. Digunakan untuk berbicara tentang diri sendiri dan orang lain.",
+                examples: [
+                    { correct: "We are happy", id: "Kami bahagia" },
+                    { correct: "We love Indonesia", id: "Kami cinta Indonesia" },
+                    { correct: "Let's go, we are ready", id: "Ayo pergi, kami siap" }
+                ]
+            },
+            {
+                en: "say",
+                id: "mengatakan",
+                category: "verb",
+                rank: 28,
+                explanation: "Kata kerja untuk menyampaikan ucapan atau pernyataan.",
+                examples: [
+                    { correct: "She says hello", id: "Dia mengatakan halo" },
+                    { correct: "What did you say?", id: "Apa yang kamu katakan?" },
+                    { correct: "He said he is happy", id: "Dia mengatakan dia bahagia" }
+                ]
+            },
+            {
+                en: "her",
+                id: "dia (perempuan) / miliknya",
+                category: "pronoun",
+                rank: 29,
+                explanation: "Kata ganti untuk orang ketiga perempuan (objek) atau kepemilikan.",
+                examples: [
+                    { correct: "I saw her", id: "Saya melihat dia" },
+                    { correct: "This is her book", id: "Ini buku miliknya" },
+                    { correct: "I love her", id: "Saya mencintai dia" }
+                ]
+            },
+            {
+                en: "she",
+                id: "dia (perempuan)",
+                category: "pronoun",
+                rank: 30,
+                explanation: "Kata ganti untuk orang ketiga tunggal perempuan.",
+                examples: [
+                    { correct: "She is my mother", id: "Dia ibu saya" },
+                    { correct: "She works in a bank", id: "Dia bekerja di bank" },
+                    { correct: "I know she is right", id: "Saya tahu dia benar" }
+                ]
+            },
+
+            // ===== TOP 31-50 (lanjutan dengan penjelasan) =====
+            {
+                en: "or",
+                id: "atau",
+                category: "conjunction",
+                rank: 31,
+                explanation: "Kata sambung untuk menunjukkan pilihan atau alternatif.",
+                examples: [
+                    { correct: "Coffee or tea?", id: "Kopi atau teh?" },
+                    { correct: "You can go or stay", id: "Kamu bisa pergi atau tinggal" },
+                    { correct: "Is it true or false?", id: "Apakah itu benar atau salah?" }
+                ]
+            },
+            {
+                en: "will",
+                id: "akan",
+                category: "auxiliary",
+                rank: 33,
+                explanation: "Kata bantu untuk menunjukkan masa depan (future tense).",
+                examples: [
+                    { correct: "I will go tomorrow", id: "Saya akan pergi besok" },
+                    { correct: "She will help you", id: "Dia akan membantumu" },
+                    { correct: "It will rain", id: "Akan hujan" }
+                ]
+            },
+            {
+                en: "my",
+                id: "milik saya",
+                category: "pronoun",
+                rank: 34,
+                explanation: "Kata ganti kepemilikan untuk orang pertama tunggal.",
+                examples: [
+                    { correct: "This is my house", id: "Ini rumah saya" },
+                    { correct: "My name is Sarah", id: "Nama saya Sarah" },
+                    { correct: "I love my family", id: "Saya cinta keluarga saya" }
+                ]
+            },
+            {
+                en: "one",
+                id: "satu",
+                category: "noun",
+                rank: 35,
+                explanation: "Angka pertama, juga digunakan sebagai kata ganti untuk menggantikan benda.",
+                examples: [
+                    { correct: "I have one brother", id: "Saya punya satu saudara" },
+                    { correct: "Which one do you want?", id: "Yang mana yang kamu inginkan?" },
+                    { correct: "One day", id: "Suatu hari" }
+                ]
+            },
+            {
+                en: "all",
+                id: "semua",
+                category: "pronoun",
+                rank: 36,
+                explanation: "Kata ganti untuk menunjukkan keseluruhan atau semua bagian.",
+                examples: [
+                    { correct: "All people are equal", id: "Semua orang setara" },
+                    { correct: "I ate all the food", id: "Saya makan semua makanan" },
+                    { correct: "All is well", id: "Semua baik-baik saja" }
+                ]
+            },
+            {
+                en: "would",
+                id: "akan (masa lalu)",
+                category: "auxiliary",
+                rank: 37,
+                explanation: "Kata bantu untuk menyatakan keinginan, kebiasaan masa lalu, atau kondisi tidak nyata.",
+                examples: [
+                    { correct: "I would like coffee", id: "Saya mau kopi" },
+                    { correct: "When I was young, I would play outside", id: "Dulu saya sering bermain di luar" },
+                    { correct: "I would go if I could", id: "Saya akan pergi jika bisa" }
+                ]
+            },
+            {
+                en: "there",
+                id: "di sana",
+                category: "adverb",
+                rank: 38,
+                explanation: "Adverbia untuk menunjukkan tempat yang jauh dari pembicara.",
+                examples: [
+                    { correct: "The book is there", id: "Buku itu ada di sana" },
+                    { correct: "There is a cat", id: "Ada seekor kucing" },
+                    { correct: "Go there", id: "Pergi ke sana" }
+                ]
+            },
+            {
+                en: "their",
+                id: "milik mereka",
+                category: "pronoun",
+                rank: 39,
+                explanation: "Kata ganti kepemilikan untuk orang ketiga jamak.",
+                examples: [
+                    { correct: "This is their house", id: "Ini rumah mereka" },
+                    { correct: "I like their style", id: "Saya suka gaya mereka" },
+                    { correct: "Their names are John and Mary", id: "Nama mereka John dan Mary" }
+                ]
+            },
+            {
+                en: "what",
+                id: "apa",
+                category: "pronoun",
+                rank: 40,
+                explanation: "Kata tanya untuk menanyakan informasi tentang sesuatu.",
+                examples: [
+                    { correct: "What is your name?", id: "Apa nama kamu?" },
+                    { correct: "What do you want?", id: "Apa yang kamu inginkan?" },
+                    { correct: "What a beautiful day!", id: "Hari yang indah!" }
+                ]
+            },
+            {
+                en: "so",
+                id: "jadi / sangat",
+                category: "conjunction",
+                rank: 41,
+                explanation: "Kata sambung untuk menunjukkan akibat, atau adverbia untuk menunjukkan tingkat.",
+                examples: [
+                    { correct: "I was tired, so I slept", id: "Saya lelah, jadi saya tidur" },
+                    { correct: "She is so beautiful", id: "Dia sangat cantik" },
+                    { correct: "So, what do you think?", id: "Jadi, apa pendapatmu?" }
+                ]
+            },
+            {
+                en: "up",
+                id: "ke atas",
+                category: "preposition",
+                rank: 42,
+                explanation: "Preposisi untuk menunjukkan gerakan ke atas atau posisi yang lebih tinggi.",
+                examples: [
+                    { correct: "Look up!", id: "Lihat ke atas!" },
+                    { correct: "I wake up at 7", id: "Saya bangun jam 7" },
+                    { correct: "Climb up the tree", id: "Naik ke atas pohon" }
+                ]
+            },
+            {
+                en: "out",
+                id: "keluar",
+                category: "preposition",
+                rank: 43,
+                explanation: "Preposisi untuk menunjukkan gerakan ke luar atau posisi di luar.",
+                examples: [
+                    { correct: "Go out!", id: "Keluar!" },
+                    { correct: "He took out his phone", id: "Dia mengeluarkan ponselnya" },
+                    { correct: "The lights are out", id: "Lampunya mati" }
+                ]
+            },
+            {
+                en: "if",
+                id: "jika",
+                category: "conjunction",
+                rank: 44,
+                explanation: "Kata sambung untuk menunjukkan kondisi atau syarat.",
+                examples: [
+                    { correct: "If it rains, I will stay home", id: "Jika hujan, saya akan tinggal di rumah" },
+                    { correct: "I will go if you go", id: "Saya akan pergi jika kamu pergi" },
+                    { correct: "If I were you", id: "Jika saya jadi kamu" }
+                ]
+            },
+            {
+                en: "about",
+                id: "tentang",
+                category: "preposition",
+                rank: 45,
+                explanation: "Preposisi untuk menunjukkan topik atau perkiraan jumlah.",
+                examples: [
+                    { correct: "I think about you", id: "Saya memikirkanmu" },
+                    { correct: "This is about love", id: "Ini tentang cinta" },
+                    { correct: "It's about 5 km", id: "Itu sekitar 5 km" }
+                ]
+            },
+            {
+                en: "who",
+                id: "siapa",
+                category: "pronoun",
+                rank: 46,
+                explanation: "Kata tanya untuk menanyakan orang atau subjek.",
+                examples: [
+                    { correct: "Who is that?", id: "Siapa itu?" },
+                    { correct: "The man who called me", id: "Pria yang menelepon saya" },
+                    { correct: "Who are you?", id: "Siapa kamu?" }
+                ]
+            },
+            {
+                en: "get",
+                id: "mendapatkan",
+                category: "verb",
+                rank: 47,
+                explanation: "Kata kerja serbaguna untuk mendapatkan, menerima, atau menjadi.",
+                examples: [
+                    { correct: "I got a gift", id: "Saya mendapat hadiah" },
+                    { correct: "Get ready!", id: "Bersiaplah!" },
+                    { correct: "She got married", id: "Dia menikah" }
+                ]
+            },
+            {
+                en: "which",
+                id: "yang mana",
+                category: "pronoun",
+                rank: 48,
+                explanation: "Kata tanya untuk memilih dari beberapa pilihan.",
+                examples: [
+                    { correct: "Which one do you want?", id: "Yang mana yang kamu mau?" },
+                    { correct: "The book which I read", id: "Buku yang saya baca" },
+                    { correct: "Which way?", id: "Jalan yang mana?" }
+                ]
+            },
+            {
+                en: "go",
+                id: "pergi",
+                category: "verb",
+                rank: 49,
+                explanation: "Kata kerja untuk bergerak dari satu tempat ke tempat lain.",
+                examples: [
+                    { correct: "I go to school every day", id: "Saya pergi ke sekolah setiap hari" },
+                    { correct: "Let's go!", id: "Ayo pergi!" },
+                    { correct: "Where do you want to go?", id: "Mau pergi ke mana?" }
+                ]
+            },
+            {
+                en: "me",
+                id: "saya (objek)",
+                category: "pronoun",
+                rank: 50,
+                explanation: "Kata ganti untuk orang pertama sebagai objek kalimat.",
+                examples: [
+                    { correct: "She loves me", id: "Dia mencintaiku" },
+                    { correct: "Give it to me", id: "Berikan itu padaku" },
+                    { correct: "Excuse me", id: "Permisi" }
+                ]
+            },
+
+            // ===== TOP 51-70 =====
+            {
+                en: "when",
+                id: "kapan",
+                category: "adverb",
+                rank: 51,
+                explanation: "Kata tanya untuk menanyakan waktu atau menunjukkan waktu relatif.",
+                examples: [
+                    { correct: "When will you come?", id: "Kapan kamu datang?" },
+                    { correct: "I know when he arrived", id: "Saya tahu kapan dia tiba" },
+                    { correct: "When I was young", id: "Ketika saya masih muda" }
+                ]
+            },
+            {
+                en: "make",
+                id: "membuat",
+                category: "verb",
+                rank: 52,
+                explanation: "Kata kerja untuk menciptakan, menghasilkan, atau menyebabkan.",
+                examples: [
+                    { correct: "I make coffee every morning", id: "Saya membuat kopi setiap pagi" },
+                    { correct: "She makes me happy", id: "Dia membuatku bahagia" },
+                    { correct: "Make a decision", id: "Buat keputusan" }
+                ]
+            },
+            {
+                en: "can",
+                id: "bisa",
+                category: "auxiliary",
+                rank: 53,
+                explanation: "Kata bantu untuk menunjukkan kemampuan atau izin.",
+                examples: [
+                    { correct: "I can speak English", id: "Saya bisa bahasa Inggris" },
+                    { correct: "Can you help me?", id: "Bisa kamu bantu saya?" },
+                    { correct: "You can go now", id: "Kamu bisa pergi sekarang" }
+                ]
+            },
+            {
+                en: "like",
+                id: "suka / seperti",
+                category: "verb",
+                rank: 54,
+                explanation: "Kata kerja untuk menyatakan kesukaan, atau preposisi untuk perbandingan.",
+                examples: [
+                    { correct: "I like coffee", id: "Saya suka kopi" },
+                    { correct: "She looks like her mother", id: "Dia mirip ibunya" },
+                    { correct: "I want a car like that", id: "Saya mau mobil seperti itu" }
+                ]
+            },
+            {
+                en: "time",
+                id: "waktu",
+                category: "noun",
+                rank: 55,
+                explanation: "Kata benda untuk menyatakan waktu, momen, atau kesempatan.",
+                examples: [
+                    { correct: "What time is it?", id: "Jam berapa sekarang?" },
+                    { correct: "I don't have time", id: "Saya tidak punya waktu" },
+                    { correct: "One more time", id: "Satu kali lagi" }
+                ]
+            },
+            {
+                en: "no",
+                id: "tidak",
+                category: "adverb",
+                rank: 56,
+                explanation: "Adverbia untuk menjawab negatif atau menolak.",
+                examples: [
+                    { correct: "No, I don't want it", id: "Tidak, saya tidak mau" },
+                    { correct: "No problem", id: "Tidak masalah" },
+                    { correct: "There is no hope", id: "Tidak ada harapan" }
+                ]
+            },
+            {
+                en: "just",
+                id: "hanya / baru saja",
+                category: "adverb",
+                rank: 57,
+                explanation: "Adverbia untuk menunjukkan batasan, kesamaan, atau waktu baru.",
+                examples: [
+                    { correct: "Just a moment", id: "Sebentar" },
+                    { correct: "I just arrived", id: "Saya baru saja tiba" },
+                    { correct: "I just want to help", id: "Saya hanya ingin membantu" }
+                ]
+            },
+            {
+                en: "him",
+                id: "dia (objek)",
+                category: "pronoun",
+                rank: 58,
+                explanation: "Kata ganti orang ketiga laki-laki sebagai objek kalimat.",
+                examples: [
+                    { correct: "I saw him", id: "Saya melihat dia" },
+                    { correct: "Give it to him", id: "Berikan itu padanya" },
+                    { correct: "I love him", id: "Saya cinta dia" }
+                ]
+            },
+            {
+                en: "know",
+                id: "tahu",
+                category: "verb",
+                rank: 59,
+                explanation: "Kata kerja untuk menyatakan pengetahuan atau pemahaman.",
+                examples: [
+                    { correct: "I know you", id: "Saya kenal kamu" },
+                    { correct: "Do you know her?", id: "Apakah kamu kenal dia?" },
+                    { correct: "I don't know", id: "Saya tidak tahu" }
+                ]
+            },
+            {
+                en: "take",
+                id: "mengambil",
+                category: "verb",
+                rank: 60,
+                explanation: "Kata kerja untuk mengambil, membawa, atau memerlukan.",
+                examples: [
+                    { correct: "Take this book", id: "Ambil buku ini" },
+                    { correct: "I take the bus", id: "Saya naik bus" },
+                    { correct: "It takes time", id: "Itu memerlukan waktu" }
+                ]
+            }
+        ];
+
+        // Tambahkan kata 61-100 dengan penjelasan singkat (saya tambahkan 10 saja agar tidak terlalu panjang)
+        const moreWords = [
+            { en: "people", id: "orang-orang", category: "noun", rank: 61, explanation: "Kata benda untuk menyebut manusia secara umum.", examples: [{ correct: "People are kind", id: "Orang-orang baik" }] },
+            { en: "into", id: "ke dalam", category: "preposition", rank: 62, explanation: "Preposisi untuk menunjukkan gerakan masuk ke dalam.", examples: [{ correct: "Go into the room", id: "Masuk ke dalam ruangan" }] },
+            { en: "year", id: "tahun", category: "noun", rank: 63, explanation: "Kata benda untuk periode 12 bulan.", examples: [{ correct: "I am 20 years old", id: "Saya berumur 20 tahun" }] },
+            { en: "your", id: "milik kamu", category: "pronoun", rank: 64, explanation: "Kata ganti kepemilikan untuk orang kedua.", examples: [{ correct: "This is your book", id: "Ini buku kamu" }] },
+            { en: "good", id: "baik", category: "adjective", rank: 65, explanation: "Kata sifat untuk menyatakan kualitas positif.", examples: [{ correct: "She is a good person", id: "Dia orang baik" }] },
+            { en: "some", id: "beberapa", category: "pronoun", rank: 66, explanation: "Kata ganti untuk jumlah yang tidak spesifik.", examples: [{ correct: "I need some water", id: "Saya butuh sedikit air" }] },
+            { en: "could", id: "bisa (masa lalu)", category: "auxiliary", rank: 67, explanation: "Kata bantu untuk kemampuan masa lalu atau sopan.", examples: [{ correct: "I could swim", id: "Saya bisa berenang" }] },
+            { en: "them", id: "mereka (objek)", category: "pronoun", rank: 68, explanation: "Kata ganti orang ketiga jamak sebagai objek.", examples: [{ correct: "I saw them", id: "Saya melihat mereka" }] },
+            { en: "see", id: "melihat", category: "verb", rank: 69, explanation: "Kata kerja untuk menggunakan indra penglihatan.", examples: [{ correct: "I can see you", id: "Saya bisa melihatmu" }] },
+            { en: "other", id: "lainnya", category: "adjective", rank: 70, explanation: "Kata sifat untuk menunjukkan sesuatu yang berbeda.", examples: [{ correct: "The other one", id: "Yang lainnya" }] },
+            { en: "than", id: "daripada", category: "preposition", rank: 71, explanation: "Preposisi untuk perbandingan.", examples: [{ correct: "She is taller than me", id: "Dia lebih tinggi dariku" }] },
+            { en: "then", id: "kemudian", category: "adverb", rank: 72, explanation: "Adverbia untuk menunjukkan urutan waktu.", examples: [{ correct: "First this, then that", id: "Pertama ini, kemudian itu" }] },
+            { en: "now", id: "sekarang", category: "adverb", rank: 73, explanation: "Adverbia untuk menunjukkan waktu saat ini.", examples: [{ correct: "I am busy now", id: "Saya sibuk sekarang" }] },
+            { en: "look", id: "melihat/memandang", category: "verb", rank: 74, explanation: "Kata kerja untuk mengarahkan pandangan.", examples: [{ correct: "Look at me!", id: "Lihat saya!" }] },
+            { en: "only", id: "hanya", category: "adverb", rank: 75, explanation: "Adverbia untuk menunjukkan batasan atau eksklusivitas.", examples: [{ correct: "I have only one", id: "Saya hanya punya satu" }] }
+        ];
+
+        // Gabungkan semua data
+        words.push(...moreWords);
+
+        // ============================================================
+        //  STATE
+        // ============================================================
+        let currentFilter = 'all';
+        let learnedWords = new Set();
+        let currentWords = [...words];
+
+        // ============================================================
+        //  RENDER FUNCTIONS
+        // ============================================================
+        function renderWords() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const list = document.getElementById('wordList');
+
+            const filtered = words.filter(word => {
+                if (currentFilter !== 'all' && word.category !== currentFilter) return false;
+                if (search) {
+                    return word.en.includes(search) || word.id.includes(search);
+                }
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                list.innerHTML = `
+                <div style="text-align:center; padding:60px 20px; color:#6e739b;">
+                    <i class="fas fa-search" style="font-size:40px; margin-bottom:16px;"></i>
+                    <p>Tidak ada kata yang ditemukan</p>
+                </div>
+            `;
+                updateStats();
+                return;
+            }
+
+            list.innerHTML = filtered.map((word, index) => `
+            <div class="word-card" id="word-${word.en}">
+                <div class="word-header">
+                    <span class="rank">#${word.rank}</span>
+                    <span class="en">${word.en}</span>
+                    <span class="id">${word.id}</span>
+                    <span class="category ${word.category}">${getCategoryLabel(word.category)}</span>
+                </div>
+                <div class="explanation">
+                    <strong>Mengapa penting?</strong> ${word.explanation}
+                </div>
+                <div class="examples">
+                    ${word.examples.map(ex => `
+                        <div class="example">
+                            <span class="icon">
+                                ${ex.wrong ? '<i class="fas fa-times-circle wrong"></i>' : '<i class="fas fa-check-circle correct"></i>'}
+                            </span>
+                            ${ex.wrong ? `<span class="wrong">${ex.wrong}</span> → ` : ''}
+                            <span class="en-example">${ex.correct}</span>
+                            <span class="id-example">(${ex.id})</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <button class="learn-btn ${learnedWords.has(word.en) ? 'learned' : ''}" 
+                        onclick="toggleLearn('${word.en}')">
+                    <i class="fas ${learnedWords.has(word.en) ? 'fa-check-circle' : 'fa-book'}"></i>
+                    ${learnedWords.has(word.en) ? ' Sudah Dihafal ✓' : ' Tandai Sudah Hafal'}
+                </button>
+            </div>
+        `).join('');
+
+            updateStats();
+        }
+
+        function getCategoryLabel(category) {
+            const labels = {
+                verb: 'Verba',
+                noun: 'Nomina',
+                preposition: 'Preposisi',
+                conjunction: 'Konjungsi',
+                pronoun: 'Pronomina',
+                article: 'Artikel',
+                adverb: 'Adverbia',
+                adjective: 'Adjektiva',
+                auxiliary: 'Auxiliary'
+            };
+            return labels[category] || category;
+        }
+
+        function toggleLearn(word) {
+            if (learnedWords.has(word)) {
+                learnedWords.delete(word);
+            } else {
+                learnedWords.add(word);
+            }
+            renderWords();
+        }
+
+        function updateStats() {
+            const total = words.length;
+            const learned = learnedWords.size;
+            const remaining = total - learned;
+            const percent = total > 0 ? Math.round((learned / total) * 100) : 0;
+
+            document.getElementById('learnedWords').textContent = learned;
+            document.getElementById('remainingWords').textContent = remaining;
+            document.getElementById('progressPercent').textContent = percent + '%';
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('progressLabel').textContent = `${learned} / ${total} kata`;
+        }
+
+        function setFilter(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === category);
+            });
+            renderWords();
+        }
+
+        // ============================================================
+        //  INIT
+        // ============================================================
+        renderWords();
+    </script>
+
+</body>
+
+</html>

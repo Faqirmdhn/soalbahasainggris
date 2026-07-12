@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>High Frequency Words · Flashcard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0f0e1a, #1a1a2e);
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 16px 0 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 24px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .header-left .back-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: none;
+            color: #9ca3cf;
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-left .back-btn:hover {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+        }
+
+        .header-left h1 {
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-right .badge {
+            background: rgba(251, 191, 36, 0.12);
+            padding: 5px 16px;
+            border-radius: 40px;
+            color: #fbbf24;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* ===== FLASHCARD ===== */
+        .flashcard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            padding: 10px 0 30px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 600px;
+            min-height: 250px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 30px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+
+        .card .indonesia {
+            font-size: 42px;
+            font-weight: 700;
+            color: #f0f3fa;
+            margin-bottom: 8px;
+        }
+
+        .card .hint {
+            font-size: 16px;
+            color: #6e739b;
+            margin-bottom: 16px;
+        }
+
+        .card .english {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fbbf24;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .card .english.show {
+            display: block;
+        }
+
+        .card .card-number {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 14px;
+            color: #4a4a6a;
+            font-weight: 600;
+        }
+
+        .card .click-hint {
+            position: absolute;
+            bottom: 16px;
+            color: #4a4a6a;
+            font-size: 13px;
+        }
+
+        .card .click-hint i {
+            margin-right: 6px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ===== OPTIONS / JAWABAN ===== */
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 16px 20px;
+            color: #d6defa;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .option-btn:hover {
+            background: rgba(251, 191, 36, 0.08);
+            border-color: rgba(251, 191, 36, 0.2);
+            transform: scale(1.02);
+        }
+
+        .option-btn.correct {
+            background: rgba(52, 211, 153, 0.15);
+            border-color: #34d399;
+            color: #34d399;
+        }
+
+        .option-btn.wrong {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: #ef4444;
+            color: #fca5a5;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* ===== NAVIGASI ===== */
+        .nav-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 40px;
+            padding: 12px 28px;
+            color: #d6defa;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn:hover {
+            background: rgba(251, 191, 36, 0.08);
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.primary {
+            background: rgba(251, 191, 36, 0.12);
+            border-color: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+
+        .nav-btn.primary:hover {
+            background: rgba(251, 191, 36, 0.2);
+        }
+
+        /* ===== SCORE ===== */
+        .score-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .score-bar .item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            color: #9ca3cf;
+        }
+
+        .score-bar .item .num {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .score-bar .item .num.gold {
+            color: #fbbf24;
+        }
+
+        .score-bar .item .num.green {
+            color: #34d399;
+        }
+
+        .score-bar .item .num.red {
+            color: #f87171;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            color: #4a4a6a;
+            padding: 30px 0 10px;
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 20px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-left h1 {
+                font-size: 20px;
+            }
+
+            .card .indonesia {
+                font-size: 30px;
+            }
+
+            .card .english {
+                font-size: 28px;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                min-height: 200px;
+                padding: 30px 20px;
+            }
+
+            .score-bar {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3a3a5a;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-left">
+                <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <h1><i class="fas fa-book"></i> Conjungtions</h1>
+            </div>
+            <div class="header-right">
+                <span class="badge"><i class="fas fa-list"></i> <span id="totalBadge">0</span> Kata</span>
+                <span class="badge" style="background:rgba(96,165,250,0.12);color:#60a5fa;">
+                    <i class="fas fa-random"></i> Acak
+                </span>
+            </div>
+        </div>
+
+        <!-- FLASHCARD -->
+        <div class="flashcard-container">
+
+            <!-- Score -->
+            <div class="score-bar">
+                <div class="item"><i class="fas fa-star" style="color:#fbbf24;"></i> Skor: <span class="num gold"
+                        id="scoreDisplay">0</span></div>
+                <div class="item"><i class="fas fa-check-circle" style="color:#34d399;"></i> Benar: <span
+                        class="num green" id="correctDisplay">0</span></div>
+                <div class="item"><i class="fas fa-times-circle" style="color:#f87171;"></i> Salah: <span
+                        class="num red" id="wrongDisplay">0</span></div>
+                <div class="item"><i class="fas fa-flag" style="color:#60a5fa;"></i> Soal: <span class="num"
+                        id="questionCounter">1</span>/<span id="totalQuestions">100</span></div>
+            </div>
+
+            <!-- Card -->
+            <div class="card" id="flashcard" onclick="toggleAnswer()">
+                <span class="card-number" id="cardNumber">#1</span>
+                <div class="indonesia" id="indonesiaWord">Loading...</div>
+                <div class="hint">👆 Klik kartu untuk lihat jawaban</div>
+                <div class="english" id="englishWord">---</div>
+                <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Klik untuk membalik</div>
+            </div>
+
+            <!-- Pilihan Jawaban (Mode Kuis) -->
+            <div class="options" id="optionsContainer">
+                <!-- Diisi oleh JS -->
+            </div>
+
+            <!-- Navigasi -->
+            <div class="nav-buttons">
+                <button class="nav-btn" id="prevBtn" onclick="prevQuestion()">
+                    <i class="fas fa-chevron-left"></i> Sebelumnya
+                </button>
+                <button class="nav-btn primary" id="resetBtn" onclick="resetQuiz()">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+                <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">
+                    Selanjutnya <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <span style="color:#fbbf24;">Klik kartu</span> untuk melihat jawaban • Mode <span
+                style="color:#60a5fa;">Kuis</span> pilih 4 opsi
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        //  DATA Extra
+        // ============================================================
+        const data = [
+            // Common
+            { en: "actually", id: "sebenarnya" },
+            { en: "basically", id: "pada dasarnya" },
+            { en: "especially", id: "terutama" },
+            { en: "particularly", id: "khususnya" },
+            { en: "mainly", id: "terutama" },
+            { en: "mostly", id: "sebagian besar" },
+            { en: "largely", id: "sebagian besar" },
+            { en: "generally", id: "umumnya" },
+            { en: "normally", id: "biasanya" },
+            { en: "usually", id: "biasanya" },
+            { en: "commonly", id: "umumnya" },
+            { en: "frequently", id: "sering" },
+            { en: "often", id: "sering" },
+            { en: "sometimes", id: "kadang-kadang" },
+            { en: "occasionally", id: "sesekali" },
+            { en: "rarely", id: "jarang" },
+            { en: "seldom", id: "jarang" },
+            { en: "never", id: "tidak pernah" },
+            { en: "always", id: "selalu" },
+
+            // Sequence
+            { en: "first", id: "pertama" },
+            { en: "firstly", id: "pertama" },
+            { en: "second", id: "kedua" },
+            { en: "secondly", id: "kedua" },
+            { en: "third", id: "ketiga" },
+            { en: "finally", id: "akhirnya" },
+            { en: "eventually", id: "pada akhirnya" },
+            { en: "ultimately", id: "akhirnya" },
+            { en: "meanwhile", id: "sementara itu" },
+            { en: "afterwards", id: "setelah itu" },
+            { en: "beforehand", id: "sebelumnya" },
+            { en: "previously", id: "sebelumnya" },
+            { en: "recently", id: "baru-baru ini" },
+            { en: "currently", id: "saat ini" },
+            { en: "presently", id: "saat ini" },
+            { en: "soon", id: "segera" },
+            { en: "later", id: "nanti" },
+
+            // Degree
+            { en: "very", id: "sangat" },
+            { en: "really", id: "benar-benar" },
+            { en: "quite", id: "cukup" },
+            { en: "rather", id: "agak" },
+            { en: "fairly", id: "cukup" },
+            { en: "pretty", id: "cukup" },
+            { en: "too", id: "terlalu" },
+            { en: "extremely", id: "sangat" },
+            { en: "highly", id: "sangat" },
+            { en: "totally", id: "sepenuhnya" },
+            { en: "completely", id: "sepenuhnya" },
+            { en: "absolutely", id: "mutlak" },
+            { en: "entirely", id: "sepenuhnya" },
+            { en: "fully", id: "sepenuhnya" },
+            { en: "partly", id: "sebagian" },
+            { en: "slightly", id: "sedikit" },
+            { en: "barely", id: "hampir tidak" },
+            { en: "hardly", id: "hampir tidak" },
+            { en: "almost", id: "hampir" },
+            { en: "nearly", id: "hampir" },
+
+            // Certainty
+            { en: "certainly", id: "tentu" },
+            { en: "definitely", id: "pasti" },
+            { en: "surely", id: "pasti" },
+            { en: "indeed", id: "memang" },
+            { en: "exactly", id: "tepat sekali" },
+            { en: "precisely", id: "dengan tepat" },
+            { en: "obviously", id: "jelas" },
+            { en: "clearly", id: "jelas" },
+            { en: "evidently", id: "jelas" },
+            { en: "undoubtedly", id: "tidak diragukan" },
+
+            // Possibility
+            { en: "probably", id: "mungkin" },
+            { en: "possibly", id: "mungkin" },
+            { en: "perhaps", id: "mungkin" },
+            { en: "maybe", id: "mungkin" },
+            { en: "apparently", id: "rupanya" },
+            { en: "presumably", id: "diduga" },
+            { en: "supposedly", id: "katanya" },
+            { en: "allegedly", id: "diduga" },
+            { en: "reportedly", id: "dilaporkan" },
+
+            // Opinion
+            { en: "honestly", id: "jujur" },
+            { en: "personally", id: "secara pribadi" },
+            { en: "frankly", id: "terus terang" },
+            { en: "seriously", id: "serius" },
+            { en: "truly", id: "sungguh" },
+            { en: "literally", id: "secara harfiah" },
+
+            // Result
+            { en: "therefore", id: "oleh karena itu" },
+            { en: "thus", id: "dengan demikian" },
+            { en: "hence", id: "oleh sebab itu" },
+            { en: "consequently", id: "akibatnya" },
+            { en: "accordingly", id: "sesuai dengan itu" },
+
+            // Addition
+            { en: "also", id: "juga" },
+            { en: "too", id: "juga" },
+            { en: "as well", id: "juga" },
+            { en: "besides", id: "selain itu" },
+            { en: "moreover", id: "terlebih lagi" },
+            { en: "furthermore", id: "selain itu" },
+            { en: "additionally", id: "sebagai tambahan" },
+
+            // Contrast
+            { en: "however", id: "namun" },
+            { en: "nevertheless", id: "meskipun demikian" },
+            { en: "nonetheless", id: "walaupun begitu" },
+            { en: "instead", id: "sebagai gantinya" },
+            { en: "otherwise", id: "jika tidak" },
+
+            // Time
+            { en: "today", id: "hari ini" },
+            { en: "yesterday", id: "kemarin" },
+            { en: "tomorrow", id: "besok" },
+            { en: "now", id: "sekarang" },
+            { en: "then", id: "kemudian" },
+            { en: "already", id: "sudah" },
+            { en: "yet", id: "belum" },
+            { en: "still", id: "masih" },
+            { en: "again", id: "lagi" },
+            { en: "once", id: "sekali" },
+            { en: "twice", id: "dua kali" },
+
+            // Manner
+            { en: "quickly", id: "dengan cepat" },
+            { en: "slowly", id: "dengan lambat" },
+            { en: "carefully", id: "dengan hati-hati" },
+            { en: "easily", id: "dengan mudah" },
+            { en: "simply", id: "dengan sederhana" },
+            { en: "suddenly", id: "tiba-tiba" },
+            { en: "quietly", id: "dengan tenang" },
+            { en: "loudly", id: "dengan keras" },
+            { en: "happily", id: "dengan senang" },
+            { en: "sadly", id: "dengan sedih" },
+
+            // Positive
+            { en: "fortunately", id: "untungnya" },
+            { en: "luckily", id: "beruntung" },
+            { en: "thankfully", id: "syukurlah" },
+            { en: "hopefully", id: "semoga" },
+
+            // Negative
+            { en: "unfortunately", id: "sayangnya" },
+            { en: "sadly", id: "sayangnya" },
+
+            // Quantity
+            { en: "enough", id: "cukup" },
+            { en: "more", id: "lebih" },
+            { en: "less", id: "lebih sedikit" },
+            { en: "least", id: "paling sedikit" },
+            { en: "most", id: "paling banyak" },
+
+            // Useful Academic Words
+            { en: "important", id: "penting" },
+            { en: "importance", id: "kepentingan" },
+            { en: "possible", id: "mungkin" },
+            { en: "necessary", id: "diperlukan" },
+            { en: "common", id: "umum" },
+            { en: "different", id: "berbeda" },
+            { en: "similar", id: "mirip" },
+            { en: "available", id: "tersedia" },
+            { en: "successful", id: "berhasil" },
+            { en: "effective", id: "efektif" },
+            { en: "efficient", id: "efisien" },
+            { en: "appropriate", id: "sesuai" },
+            { en: "significant", id: "signifikan" },
+            { en: "essential", id: "penting" },
+            { en: "required", id: "dibutuhkan" }
+        ];
+        // ============================================================
+        //  GAME ENGINE
+        // ============================================================
+        const total = data.length;
+        let currentIndex = 0;
+        let score = 0;
+        let correct = 0;
+        let wrong = 0;
+        let isAnswered = false;
+
+        // DOM refs
+        const indonesiaWord = document.getElementById('indonesiaWord');
+        const englishWord = document.getElementById('englishWord');
+        const cardNumber = document.getElementById('cardNumber');
+        const questionCounter = document.getElementById('questionCounter');
+        const totalQuestions = document.getElementById('totalQuestions');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const correctDisplay = document.getElementById('correctDisplay');
+        const wrongDisplay = document.getElementById('wrongDisplay');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const flashcard = document.getElementById('flashcard');
+        const totalBadge = document.getElementById('totalBadge').textContent = data.length;
+
+        totalQuestions.textContent = total;
+
+        // Shuffle array
+        function shuffle(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // Ambil 4 opsi (1 benar + 3 salah acak)
+        function getOptions(correctEn, correctId) {
+            let others = data.filter(item => item.en !== correctEn);
+            shuffle(others);
+            let selected = others.slice(0, 3);
+            let options = selected.map(item => item.en);
+            options.push(correctEn);
+            shuffle(options);
+            return options;
+        }
+
+        function loadQuestion(index) {
+            const item = data[index];
+            if (!item) return;
+
+            indonesiaWord.textContent = item.id;
+            englishWord.textContent = item.en;
+            englishWord.classList.remove('show');
+            cardNumber.textContent = `#${index + 1}`;
+            questionCounter.textContent = index + 1;
+            isAnswered = false;
+
+            // Generate options
+            const options = getOptions(item.en, item.id);
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = opt;
+                btn.onclick = () => selectAnswer(btn, opt, item.en);
+                optionsContainer.appendChild(btn);
+            });
+
+            // Enable all option buttons
+            document.querySelectorAll('.option-btn').forEach(b => b.disabled = false);
+
+            // Reset card
+            flashcard.style.borderColor = 'rgba(255,255,255,0.06)';
+        }
+
+        function selectAnswer(btn, selected, correctEn) {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            if (selected === correctEn) {
+                btn.classList.add('correct');
+                score += 10;
+                correct++;
+                flashcard.style.borderColor = '#34d399';
+                englishWord.classList.add('show');
+            } else {
+                btn.classList.add('wrong');
+                wrong++;
+                flashcard.style.borderColor = '#ef4444';
+                // Tunjukkan jawaban benar
+                allBtns.forEach(b => {
+                    if (b.textContent === correctEn) {
+                        b.classList.add('correct');
+                    }
+                });
+                englishWord.classList.add('show');
+            }
+
+            updateScore();
+        }
+
+        function toggleAnswer() {
+            if (isAnswered) return;
+            // Tampilkan jawaban tanpa mempengaruhi skor
+            englishWord.classList.toggle('show');
+        }
+
+        function updateScore() {
+            scoreDisplay.textContent = score;
+            correctDisplay.textContent = correct;
+            wrongDisplay.textContent = wrong;
+        }
+
+        function nextQuestion() {
+            if (currentIndex < total - 1) {
+                currentIndex++;
+                loadQuestion(currentIndex);
+            } else {
+                // Sudah di soal terakhir
+                alert('🎉 Selamat! Kamu sudah menyelesaikan semua soal!');
+            }
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadQuestion(currentIndex);
+            }
+        }
+
+        function resetQuiz() {
+            currentIndex = 0;
+            score = 0;
+            correct = 0;
+            wrong = 0;
+            updateScore();
+            loadQuestion(0);
+        }
+
+        // ============================================================
+        //  INIT
+        // ============================================================
+        // Acak urutan soal
+        shuffle(data);
+        loadQuestion(0);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextQuestion();
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === ' ') {
+                e.preventDefault();
+                toggleAnswer();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

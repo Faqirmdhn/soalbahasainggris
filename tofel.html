@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOEFL Structure & Written Expression - Latihan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c1445 0%, #1a2a6c 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 span {
+            color: #ffd700;
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+        }
+
+        /* Timer & Score */
+        .info-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .score-box, .timer-box, .question-counter {
+            text-align: center;
+            flex: 1;
+        }
+
+        .score-box .label, .timer-box .label, .question-counter .label {
+            font-size: 12px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        .score-box .value, .timer-box .value, .question-counter .value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .score-box .value { color: #2d6a4f; }
+        .timer-box .value { color: #e53e3e; }
+        .question-counter .value { color: #667eea; }
+
+        /* Progress Bar */
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s;
+            border-radius: 10px;
+        }
+
+        /* Soal Card */
+        .soal-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .soal-number {
+            background: #667eea;
+            color: white;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .soal-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .soal-text strong {
+            color: #667eea;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            background: #f8f9ff;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: #e8ecf1;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #e0e7ff;
+            border-color: #667eea;
+        }
+
+        .option input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Tombol */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-check {
+            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+            color: white;
+        }
+
+        .btn-check:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45,106,79,0.4);
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-reset {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #c53030;
+        }
+
+        .btn-pembahasan {
+            background: #ed8936;
+            color: white;
+        }
+
+        .btn-pembahasan:hover {
+            background: #dd6b20;
+        }
+
+        /* Feedback & Pembahasan */
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            animation: fadeIn 0.5s;
+        }
+
+        .feedback.correct {
+            background: #c6f6d5;
+            color: #22543d;
+            border-left: 4px solid #48bb78;
+        }
+
+        .feedback.wrong {
+            background: #fed7d7;
+            color: #742a2a;
+            border-left: 4px solid #f56565;
+        }
+
+        .pembahasan {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fef9e6;
+            border-radius: 12px;
+            border-left: 4px solid #ed8936;
+            display: none;
+        }
+
+        .pembahasan.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .pembahasan h4 {
+            color: #ed8936;
+            margin-bottom: 8px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hasil Akhir */
+        .result-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .result-card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .final-score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2d6a4f;
+            margin: 20px 0;
+        }
+
+        .toefl-score {
+            font-size: 24px;
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+
+        .predicate {
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .predicate.excellent { background: #c6f6d5; color: #22543d; }
+        .predicate.good { background: #feebc8; color: #7b341e; }
+        .predicate.fair { background: #fed7d7; color: #742a2a; }
+
+        .btn-restart {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            margin-top: 20px;
+        }
+
+        /* Review Section */
+        .review-section {
+            margin-top: 30px;
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .review-item {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .review-item.correct { background: #e8f5e9; }
+        .review-item.wrong { background: #ffebee; }
+
+        .review-question {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .soal-text { font-size: 16px; }
+            .option label { font-size: 14px; }
+            .btn-group button { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📚 TOEFL <span>Structure & Written Expression</span></h1>
+            <p>Latihan Soal Structure (Grammar) & Written Expression | 100 Soal</p>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="info-panel" id="infoPanel">
+            <div class="score-box">
+                <div class="label">✅ SKOR</div>
+                <div class="value" id="score">0</div>
+            </div>
+            <div class="question-counter">
+                <div class="label">📝 SOAL</div>
+                <div class="value" id="currentQuestion">1</div>
+                <div class="label" style="font-size: 12px;">/ <span id="totalSoal">100</span></div>
+            </div>
+            <div class="timer-box">
+                <div class="label">⏱️ WAKTU</div>
+                <div class="value" id="timer">00:00</div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Soal Container -->
+        <div id="soalContainer"></div>
+    </div>
+
+    <script>
+        // ============ DATABASE SOAL TOEFL (100 SOAL) ============
+        const toeflQuestions = [
+            // Structure Questions (1-50) - Pilih kata yang tepat
+            { type: "structure", text: "The committee ________ to approve the budget yesterday.", options: ["decide", "decided", "deciding", "has decided"], answer: 1, pembahasan: "Kata 'yesterday' menunjukkan waktu lampau, jadi menggunakan Simple Past (decided)." },
+            { type: "structure", text: "She is the woman ________ won the competition.", options: ["who", "which", "whom", "whose"], answer: 0, pembahasan: "'Who' digunakan untuk menerangkan orang sebagai subjek." },
+            { type: "structure", text: "If I ________ you, I would take the job.", options: ["am", "was", "were", "be"], answer: 2, pembahasan: "Conditional type 2 menggunakan 'were' untuk semua subjek." },
+            { type: "structure", text: "They ________ dinner when I arrived.", options: ["had", "were having", "have", "are having"], answer: 1, pembahasan: "Past Continuous untuk kejadian sedang berlangsung ketika kejadian lain terjadi." },
+            { type: "structure", text: "This is the book ________ I told you about.", options: ["who", "whom", "which", "whose"], answer: 2, pembahasan: "'Which' digunakan untuk menerangkan benda." },
+            { type: "structure", text: "By next year, I ________ here for 10 years.", options: ["work", "will work", "will have worked", "have worked"], answer: 2, pembahasan: "Future Perfect untuk kejadian yang akan selesai di masa depan." },
+            { type: "structure", text: "She speaks English ________ than her brother.", options: ["good", "well", "better", "best"], answer: 2, pembahasan: "Comparative menggunakan 'better' (good → better)." },
+            { type: "structure", text: "Neither the teacher nor the students ________ in the classroom.", options: ["is", "am", "are", "be"], answer: 2, pembahasan: "Subject setelah 'nor' menentukan verb (students = plural → are)." },
+            { type: "structure", text: "I wish I ________ more time to travel.", options: ["have", "had", "have had", "will have"], answer: 1, pembahasan: "Wish untuk kondisi tidak nyata menggunakan past tense." },
+            { type: "structure", text: "The movie was ________ boring that I fell asleep.", options: ["so", "such", "very", "too"], answer: 0, pembahasan: "'So + adjective + that' menunjukkan akibat." },
+            { type: "structure", text: "She is looking forward to ________ her family.", options: ["see", "seeing", "saw", "seen"], answer: 1, pembahasan: "'Look forward to' diikuti gerund (V-ing)." },
+            { type: "structure", text: "Had he known, he ________ differently.", options: ["would act", "acted", "would have acted", "acts"], answer: 2, pembahasan: "Inversion conditional type 3: Had + S + V3, S + would have + V3." },
+            { type: "structure", text: "This is the most delicious cake I ________.", options: ["ever eat", "have ever eaten", "ever ate", "was eating"], answer: 1, pembahasan: "Present Perfect untuk pengalaman seumur hidup." },
+            { type: "structure", text: "The manager made his employees ________ overtime.", options: ["work", "to work", "working", "worked"], answer: 0, pembahasan: "Make + object + V1 (bare infinitive)." },
+            { type: "structure", text: "________ the weather was bad, we continued the trip.", options: ["Although", "Because", "Despite", "However"], answer: 0, pembahasan: "'Although' diikuti klausa (S + V)." },
+            { type: "structure", text: "She suggested ________ to the beach.", options: ["go", "to go", "going", "went"], answer: 2, pembahasan: "'Suggest' diikuti gerund." },
+            { type: "structure", text: "The more you practice, ________ you will get.", options: ["better", "the better", "best", "the best"], answer: 1, pembahasan: "The + comparative, the + comparative." },
+            { type: "structure", text: "By the time we arrived, the movie ________.", options: ["started", "was starting", "has started", "had started"], answer: 3, pembahasan: "Past Perfect untuk kejadian yang selesai sebelum kejadian lain." },
+            { type: "structure", text: "He is known ________ a great leader.", options: ["as", "like", "to be", "being"], answer: 0, pembahasan: "'Known as' berarti dikenal sebagai." },
+            { type: "structure", text: "Not only ________ late, but he also forgot the tickets.", options: ["he was", "was he", "he is", "is he"], answer: 1, pembahasan: "Inversion setelah 'Not only'." },
+            { type: "structure", text: "She has ________ her mind about the decision.", options: ["change", "changed", "changing", "to change"], answer: 1, pembahasan: "Present Perfect: have + V3." },
+            { type: "structure", text: "The students, ________ have finished the exam, may leave.", options: ["who", "whom", "which", "whose"], answer: 0, pembahasan: "'Who' menerangkan 'the students' sebagai subjek." },
+            { type: "structure", text: "I'd rather you ________ quiet.", options: ["keep", "kept", "to keep", "keeping"], answer: 1, pembahasan: "'Would rather + subject + past tense' untuk harapan." },
+            { type: "structure", text: "The house ________ green is my aunt's.", options: ["painted", "painting", "to paint", "paints"], answer: 0, pembahasan: "Past participle sebagai adjective (the house that is painted)." },
+            { type: "structure", text: "She is accustomed to ________ early.", options: ["wake up", "waking up", "woke up", "wakes up"], answer: 1, pembahasan: "'Accustomed to' + gerund." },
+            
+            // Written Expression Questions (26-50) - Cari kata yang salah
+            { type: "error", text: "The professor, together with his students, <strong>are</strong> going to the conference.", options: ["The professor", "together with", "are", "to the conference"], answer: 2, pembahasan: "Subject 'The professor' singular, harusnya 'is', bukan 'are'." },
+            { type: "error", text: "She <strong>don't</strong> like spicy food.", options: ["She", "don't", "like", "spicy food"], answer: 1, pembahasan: "She adalah singular, harusnya 'doesn't', bukan 'don't'." },
+            { type: "error", text: "If I <strong>was</strong> rich, I would buy a car.", options: ["If I", "was", "would buy", "a car"], answer: 1, pembahasan: "Conditional type 2 menggunakan 'were' untuk semua subjek." },
+            { type: "error", text: "He has <strong>went</strong> to Jakarta yesterday.", options: ["He", "has went", "to Jakarta", "yesterday"], answer: 1, pembahasan: "Present Perfect perlu V3, 'went' harusnya 'gone'." },
+            { type: "error", text: "This is the <strong>more</strong> beautiful painting I've ever seen.", options: ["This is", "more", "beautiful painting", "I've ever seen"], answer: 1, pembahasan: "Superlative menggunakan 'most', bukan 'more'." },
+            { type: "error", text: "She <strong>enjoy</strong> reading novels in her free time.", options: ["She", "enjoy", "reading", "in her free time"], answer: 1, pembahasan: "She (singular) → enjoys." },
+            { type: "error", text: "Neither the manager nor the employees <strong>is</strong> happy with the decision.", options: ["Neither", "nor the employees", "is", "with the decision"], answer: 2, pembahasan: "Subject setelah 'nor' (employees) plural → 'are'." },
+            { type: "error", text: "I look forward to <strong>meet</strong> you soon.", options: ["I look", "forward to", "meet", "you soon"], answer: 2, pembahasan: "'Look forward to' + gerund → meeting." },
+            { type: "error", text: "She is <strong>more taller</strong> than her sister.", options: ["She is", "more taller", "than", "her sister"], answer: 1, pembahasan: "Taller sudah comparative, tidak perlu 'more'." },
+            { type: "error", text: "He suggested <strong>to go</strong> to the cinema.", options: ["He", "suggested", "to go", "to the cinema"], answer: 2, pembahasan: "'Suggest' + gerund → going." },
+            { type: "error", text: "The book <strong>who</strong> I read was very interesting.", options: ["The book", "who", "I read", "was very interesting"], answer: 1, pembahasan: "Untuk benda menggunakan 'which/that', bukan 'who'." },
+            { type: "error", text: "She <strong>have</strong> lived here since 2010.", options: ["She", "have", "lived", "since 2010"], answer: 1, pembahasan: "She singular → has." },
+            { type: "error", text: "This is the <strong>more</strong> expensive car in the showroom.", options: ["This is", "more", "expensive car", "in the showroom"], answer: 1, pembahasan: "Superlative → most expensive." },
+            { type: "error", text: "They <strong>was</strong> playing football when it rained.", options: ["They", "was", "playing football", "when it rained"], answer: 1, pembahasan: "They plural → were." },
+            { type: "error", text: "She is <strong>enough smart</strong> to solve the problem.", options: ["She is", "enough smart", "to solve", "the problem"], answer: 1, pembahasan: "Urutan yang benar: smart enough." },
+            { type: "error", text: "The reason <strong>because</strong> he was late is unknown.", options: ["The reason", "because", "he was late", "is unknown"], answer: 1, pembahasan: "The reason that/why, bukan 'because'." },
+            { type: "error", text: "She <strong>didn't went</strong> to school yesterday.", options: ["She", "didn't went", "to school", "yesterday"], answer: 1, pembahasan: "Did not + V1 → go, bukan went." },
+            { type: "error", text: "I have <strong>never saw</strong> such a beautiful view.", options: ["I have", "never saw", "such a", "beautiful view"], answer: 1, pembahasan: "Present Perfect → have seen." },
+            { type: "error", text: "Each of the students <strong>are</strong> responsible for their work.", options: ["Each of", "the students", "are", "for their work"], answer: 2, pembahasan: "Each + singular verb → is." },
+            { type: "error", text: "She is <strong>more young</strong> than her brother.", options: ["She is", "more young", "than", "her brother"], answer: 1, pembahasan: "Younger, bukan more young." },
+            { type: "error", text: "He is <strong>interested on</strong> learning new languages.", options: ["He is", "interested on", "learning", "new languages"], answer: 1, pembahasan: "Interested in, bukan on." },
+            { type: "error", text: "The news <strong>are</strong> very surprising.", options: ["The news", "are", "very", "surprising"], answer: 1, pembahasan: "News adalah uncountable singular → is." },
+            { type: "error", text: "She <strong>use to</strong> live in Bandung.", options: ["She", "use to", "live", "in Bandung"], answer: 1, pembahasan: "Used to, bukan use to." },
+            { type: "error", text: "I <strong>didn't see</strong> nobody at the party.", options: ["I", "didn't see", "nobody", "at the party"], answer: 2, pembahasan: "Double negative → anyone/somebody." },
+            { type: "error", text: "The police <strong>is</strong> investigating the case.", options: ["The police", "is", "investigating", "the case"], answer: 1, pembahasan: "Police plural → are." },
+            
+            // Additional Structure Questions (51-75)
+            { type: "structure", text: "She ________ a shower when the phone rang.", options: ["had", "was having", "has", "is having"], answer: 1, pembahasan: "Past Continuous untuk kejadian yang sedang berlangsung." },
+            { type: "structure", text: "I'd rather ________ at home tonight.", options: ["stay", "to stay", "staying", "stayed"], answer: 0, pembahasan: "'Would rather' + V1." },
+            { type: "structure", text: "The concert ________ by thousands of people.", options: ["attended", "was attended", "attending", "to attend"], answer: 1, pembahasan: "Passive voice: was attended." },
+            { type: "structure", text: "She is the girl ________ mother is a doctor.", options: ["who", "whom", "which", "whose"], answer: 3, pembahasan: "'Whose' menunjukkan kepemilikan." },
+            { type: "structure", text: "If she had studied harder, she ________ the exam.", options: ["passed", "would pass", "would have passed", "had passed"], answer: 2, pembahasan: "Conditional type 3: would have + V3." },
+            { type: "structure", text: "He is ________ to be a great musician.", options: ["consider", "considered", "considering", "to consider"], answer: 1, pembahasan: "Passive: is considered." },
+            { type: "structure", text: "________ in heavy traffic, we arrived late.", options: ["Caught", "Catching", "To catch", "Catch"], answer: 0, pembahasan: "Past participle sebagai keterangan." },
+            { type: "structure", text: "She has difficulty ________ English.", options: ["speak", "to speak", "speaking", "spoken"], answer: 2, pembahasan: "Have difficulty + V-ing." },
+            { type: "structure", text: "The more he ate, ________ he became.", options: ["fuller", "the fuller", "fullest", "the fullest"], answer: 1, pembahasan: "The + comparative, the + comparative." },
+            { type: "structure", text: "She ________ to be a doctor since she was a child.", options: ["wanted", "has wanted", "had wanted", "was wanting"], answer: 1, pembahasan: "Present Perfect untuk keinginan sejak masa lalu." },
+            { type: "structure", text: "The building ________ in 1990 is still standing.", options: ["built", "building", "to build", "builds"], answer: 0, pembahasan: "Past participle sebagai adjective." },
+            { type: "structure", text: "She spends her free time ________ books.", options: ["read", "to read", "reading", "reads"], answer: 2, pembahasan: "Spend time + V-ing." },
+            { type: "structure", text: "The reason ________ he was absent is unknown.", options: ["why", "that", "which", "who"], answer: 0, pembahasan: "'Why' untuk alasan." },
+            { type: "structure", text: "She is ________ of the two sisters.", options: ["taller", "the taller", "tallest", "the tallest"], answer: 1, pembahasan: "Comparative untuk dua orang." },
+            { type: "structure", text: "The more you save, ________ you will have.", options: ["more", "the more", "most", "the most"], answer: 1, pembahasan: "The + comparative, the + comparative." },
+            { type: "structure", text: "She ________ her keys. She can't find them anywhere.", options: ["lost", "has lost", "had lost", "was losing"], answer: 1, pembahasan: "Present Perfect untuk kejadian yang masih berakibat." },
+            { type: "structure", text: "He is the man ________ I met yesterday.", options: ["who", "whom", "which", "whose"], answer: 1, pembahasan: "'Whom' sebagai objek." },
+            { type: "structure", text: "By the time you arrive, we ________ dinner.", options: ["finish", "will finish", "will have finished", "have finished"], answer: 2, pembahasan: "Future Perfect." },
+            { type: "structure", text: "She is used to ________ alone.", options: ["live", "to live", "living", "lived"], answer: 2, pembahasan: "Be used to + V-ing." },
+            { type: "structure", text: "The problem is ________ difficult to solve.", options: ["too", "so", "very", "such"], answer: 0, pembahasan: "'Too + adjective + to infinitive'." },
+            { type: "structure", text: "She insisted ________ seeing the manager.", options: ["on", "in", "at", "for"], answer: 0, pembahasan: "Insist on + V-ing." },
+            { type: "structure", text: "________ the rain, we went out.", options: ["Although", "Despite", "Because", "However"], answer: 1, pembahasan: "Despite + noun." },
+            { type: "structure", text: "She is ________ to be a lawyer.", options: ["enough smart", "smart enough", "too smart", "so smart"], answer: 1, pembahasan: "Adjective + enough." },
+            { type: "structure", text: "The committee ________ in disagreement.", options: ["is", "am", "are", "be"], answer: 0, pembahasan: "Committee sebagai kesatuan → singular." },
+            { type: "structure", text: "She can't help ________ when she sees him.", options: ["laugh", "to laugh", "laughing", "laughed"], answer: 2, pembahasan: "Can't help + V-ing." },
+            
+            // Additional Error Questions (76-100)
+            { type: "error", text: "She <strong>don't have</strong> enough money to buy that bag.", options: ["She", "don't have", "enough money", "to buy that bag"], answer: 1, pembahasan: "She doesn't have, bukan don't have." },
+            { type: "error", text: "He is <strong>enough strong</strong> to lift the box.", options: ["He is", "enough strong", "to lift", "the box"], answer: 1, pembahasan: "Strong enough, bukan enough strong." },
+            { type: "error", text: "She is <strong>interest</strong> in learning Japanese.", options: ["She is", "interest", "in learning", "Japanese"], answer: 1, pembahasan: "Interested (adjective), bukan interest." },
+            { type: "error", text: "They <strong>has</strong> completed the project.", options: ["They", "has", "completed", "the project"], answer: 1, pembahasan: "They have, bukan has." },
+            { type: "error", text: "This is the <strong>more</strong> delicious food I've ever tasted.", options: ["This is", "more", "delicious food", "I've ever tasted"], answer: 1, pembahasan: "Most delicious, bukan more delicious." },
+            { type: "error", text: "She <strong>go</strong> to school by bus every day.", options: ["She", "go", "to school", "by bus every day"], answer: 1, pembahasan: "She goes, bukan go." },
+            { type: "error", text: "He <strong>didn't came</strong> to the party last night.", options: ["He", "didn't came", "to the party", "last night"], answer: 1, pembahasan: "Didn't come, bukan didn't came." },
+            { type: "error", text: "She is <strong>the most tall</strong> girl in the class.", options: ["She is", "the most tall", "girl", "in the class"], answer: 1, pembahasan: "The tallest, bukan the most tall." },
+            { type: "error", text: "I look forward to <strong>see</strong> you again.", options: ["I look forward", "to see", "you", "again"], answer: 1, pembahasan: "To seeing (gerund)." },
+            { type: "error", text: "She <strong>didn't see</strong> someone at the door.", options: ["She", "didn't see", "someone", "at the door"], answer: 2, pembahasan: "Kalimat negatif pakai anyone." },
+            { type: "error", text: "The news <strong>were</strong> very shocking.", options: ["The news", "were", "very", "shocking"], answer: 1, pembahasan: "News singular → was." },
+            { type: "error", text: "He is <strong>more old</strong> than his brother.", options: ["He is", "more old", "than", "his brother"], answer: 1, pembahasan: "Older, bukan more old." },
+            { type: "error", text: "She <strong>use to</strong> play tennis when she was young.", options: ["She", "use to", "play tennis", "when she was young"], answer: 1, pembahasan: "Used to, bukan use to." },
+            { type: "error", text: "The police <strong>is</strong> looking for the suspect.", options: ["The police", "is", "looking for", "the suspect"], answer: 1, pembahasan: "Police plural → are." },
+            { type: "error", text: "She is <strong>interesting</strong> in art.", options: ["She is", "interesting", "in", "art"], answer: 1, pembahasan: "Interested, bukan interesting." },
+            { type: "error", text: "He <strong>don't</strong> like coffee.", options: ["He", "don't", "like", "coffee"], answer: 1, pembahasan: "He doesn't, bukan don't." },
+            { type: "error", text: "This is the <strong>more</strong> expensive restaurant in town.", options: ["This is", "more", "expensive restaurant", "in town"], answer: 1, pembahasan: "Most expensive, bukan more expensive." },
+            { type: "error", text: "She <strong>didn't went</strong> to the party.", options: ["She", "didn't went", "to the", "party"], answer: 1, pembahasan: "Didn't go, bukan didn't went." },
+            { type: "error", text: "The reason <strong>because</strong> he left is unknown.", options: ["The reason", "because", "he left", "is unknown"], answer: 1, pembahasan: "The reason that/why." },
+            { type: "error", text: "Each of the boys <strong>are</strong> responsible.", options: ["Each of", "the boys", "are", "responsible"], answer: 2, pembahasan: "Each + singular verb → is." },
+            { type: "error", text: "She is <strong>more young</strong> than her sister.", options: ["She is", "more young", "than", "her sister"], answer: 1, pembahasan: "Younger, bukan more young." },
+            { type: "error", text: "He <strong>has went</strong> to the store.", options: ["He", "has went", "to the", "store"], answer: 1, pembahasan: "Has gone, bukan has went." },
+            { type: "error", text: "She <strong>enjoy</strong> watching movies.", options: ["She", "enjoy", "watching", "movies"], answer: 1, pembahasan: "She enjoys, bukan enjoy." },
+            { type: "error", text: "I have <strong>never saw</strong> that movie.", options: ["I have", "never saw", "that", "movie"], answer: 1, pembahasan: "Have never seen." },
+            { type: "error", text: "She is <strong>more happier</strong> now.", options: ["She is", "more happier", "now", ""], answer: 1, pembahasan: "Happier (sudah comparative)." }
+        ];
+
+        // State
+        let currentIndex = 0;
+        let userAnswers = new Array(toeflQuestions.length).fill(null);
+        let score = 0;
+        let answered = new Array(toeflQuestions.length).fill(false);
+        let timerSeconds = 0;
+        let timerInterval = null;
+        let quizFinished = false;
+
+        // DOM Elements
+        const soalContainer = document.getElementById('soalContainer');
+        const scoreElement = document.getElementById('score');
+        const currentQuestionElement = document.getElementById('currentQuestion');
+        const totalSoalElement = document.getElementById('totalSoal');
+        const timerElement = document.getElementById('timer');
+        const progressFill = document.getElementById('progressFill');
+
+        totalSoalElement.textContent = toeflQuestions.length;
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (!quizFinished) {
+                    timerSeconds++;
+                    const minutes = Math.floor(timerSeconds / 60);
+                    const seconds = timerSeconds % 60;
+                    timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        function updateProgress() {
+            const answeredCount = answered.filter(a => a === true).length;
+            const progress = (answeredCount / toeflQuestions.length) * 100;
+            progressFill.style.width = progress + '%';
+        }
+
+        function updateScore() {
+            score = 0;
+            for (let i = 0; i < toeflQuestions.length; i++) {
+                if (userAnswers[i] !== null && userAnswers[i] === toeflQuestions[i].answer) {
+                    score++;
+                }
+            }
+            scoreElement.textContent = score;
+        }
+
+        function renderQuestion() {
+            const q = toeflQuestions[currentIndex];
+            const isAnswered = answered[currentIndex];
+            const selectedAnswer = userAnswers[currentIndex];
+
+            let html = `
+                <div class="soal-card">
+                    <div class="soal-number">Soal ${currentIndex + 1} dari ${toeflQuestions.length}</div>
+                    <div class="soal-text">
+                        ${q.text}
+                    </div>
+                    <div class="options">
+            `;
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = (selectedAnswer === idx);
+                html += `
+                    <div class="option ${isSelected ? 'selected' : ''}" onclick="selectAnswer(${idx})">
+                        <input type="radio" name="answer" value="${idx}" id="opt${idx}" ${isSelected ? 'checked' : ''} ${isAnswered ? 'disabled' : ''}>
+                        <label for="opt${idx}">${String.fromCharCode(65+idx)}. ${opt}</label>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn-check" onclick="checkAnswer()" ${isAnswered ? 'disabled' : ''}>✅ CEK JAWABAN</button>
+                        <button class="btn-next" onclick="nextQuestion()">⏩ SOAL BERIKUTNYA</button>
+                        <button class="btn-reset" onclick="resetQuiz()">🔄 RESET</button>
+                        <button class="btn-pembahasan" onclick="togglePembahasan()">📖 LIHAT PEMBAHASAN</button>
+                    </div>
+                    <div class="feedback" id="feedback"></div>
+                    <div class="pembahasan" id="pembahasan">
+                        <h4>📝 Pembahasan:</h4>
+                        <p>${q.pembahasan}</p>
+                    </div>
+                </div>
+            `;
+
+            soalContainer.innerHTML = html;
+            currentQuestionElement.textContent = currentIndex + 1;
+            updateProgress();
+        }
+
+        function selectAnswer(answerIndex) {
+            if (answered[currentIndex]) return;
+            userAnswers[currentIndex] = answerIndex;
+            renderQuestion();
+        }
+
+        function checkAnswer() {
+            if (answered[currentIndex]) {
+                showFeedback('⚠️ Kamu sudah menjawab soal ini! Lanjut ke soal berikutnya.', 'wrong');
+                return;
+            }
+
+            const selected = userAnswers[currentIndex];
+            if (selected === null) {
+                showFeedback('⚠️ Pilih jawaban dulu ya!', 'wrong');
+                return;
+            }
+
+            const q = toeflQuestions[currentIndex];
+            const isCorrect = (selected === q.answer);
+            
+            answered[currentIndex] = true;
+            
+            if (isCorrect) {
+                showFeedback(`✅ BENAR! Jawaban yang tepat adalah ${String.fromCharCode(65+q.answer)}. ${q.options[q.answer]}`, 'correct');
+                createConfetti();
+            } else {
+                showFeedback(`❌ SALAH! Jawaban yang benar adalah ${String.fromCharCode(65+q.answer)}. ${q.options[q.answer]}`, 'wrong');
+            }
+            
+            updateScore();
+            renderQuestion();
+            
+            // Auto move to next question after 2 seconds
+            setTimeout(() => {
+                if (currentIndex + 1 < toeflQuestions.length) {
+                    nextQuestion();
+                } else if (!quizFinished) {
+                    finishQuiz();
+                }
+            }, 2000);
+        }
+
+        function showFeedback(message, type) {
+            const feedbackDiv = document.getElementById('feedback');
+            if (feedbackDiv) {
+                feedbackDiv.innerHTML = message;
+                feedbackDiv.className = `feedback ${type}`;
+            }
+        }
+
+        function togglePembahasan() {
+            const pembahasanDiv = document.getElementById('pembahasan');
+            if (pembahasanDiv) {
+                pembahasanDiv.classList.toggle('show');
+            }
+        }
+
+        function nextQuestion() {
+            if (currentIndex + 1 < toeflQuestions.length) {
+                currentIndex++;
+                renderQuestion();
+            } else {
+                if (!quizFinished) {
+                    finishQuiz();
+                }
+            }
+        }
+
+        function finishQuiz() {
+            quizFinished = true;
+            if (timerInterval) clearInterval(timerInterval);
+            
+            const finalScore = score;
+            const percentage = (finalScore / toeflQuestions.length) * 100;
+            let toeflScaled = Math.round((percentage / 100) * 677);
+            toeflScaled = Math.max(200, Math.min(677, toeflScaled));
+            
+            let predicate = '';
+            let predicateClass = '';
+            if (percentage >= 80) {
+                predicate = 'EXCELLENT! Kamu memiliki pemahaman grammar yang sangat baik!';
+                predicateClass = 'excellent';
+            } else if (percentage >= 60) {
+                predicate = 'GOOD! Kamu cukup baik, tapi perlu lebih banyak latihan!';
+                predicateClass = 'good';
+            } else if (percentage >= 40) {
+                predicate = 'FAIR! Kamu perlu belajar lebih giat lagi!';
+                predicateClass = 'fair';
+            } else {
+                predicate = 'NEEDS IMPROVEMENT! Perbanyak latihan structure TOEFL!';
+                predicateClass = 'fair';
+            }
+            
+            // Create review of wrong answers
+            let wrongAnswersHtml = '';
+            for (let i = 0; i < toeflQuestions.length; i++) {
+                if (userAnswers[i] !== null && userAnswers[i] !== toeflQuestions[i].answer) {
+                    const q = toeflQuestions[i];
+                    wrongAnswersHtml += `
+                        <div class="review-item wrong">
+                            <div class="review-question">Soal ${i+1}: ${q.text}</div>
+                            <div>Jawaban kamu: ${String.fromCharCode(65+userAnswers[i])}. ${q.options[userAnswers[i]]}</div>
+                            <div>Jawaban benar: ${String.fromCharCode(65+q.answer)}. ${q.options[q.answer]}</div>
+                            <div style="font-size: 12px; margin-top: 5px;">📖 ${q.pembahasan}</div>
+                        </div>
+                    `;
+                }
+            }
+            
+            const resultHtml = `
+                <div class="result-card">
+                    <h2>🎉 HASIL LATIHAN TOEFL 🎉</h2>
+                    <div class="final-score">${finalScore} / ${toeflQuestions.length}</div>
+                    <div class="toefl-score">📊 Skor TOEFL (Estimated): ${toeflScaled}</div>
+                    <div class="predicate ${predicateClass}">${predicate}</div>
+                    <div>⏱️ Waktu yang ditempuh: ${timerElement.textContent}</div>
+                    <button class="btn-restart" onclick="resetQuiz()">🔄 MULAI LAGI</button>
+                    ${wrongAnswersHtml ? `
+                        <div style="margin-top: 30px;">
+                            <h3>📋 Review Soal yang Salah:</h3>
+                            <div class="review-section">
+                                ${wrongAnswersHtml}
+                            </div>
+                        </div>
+                    ` : '<div style="margin-top: 30px; color: #2d6a4f;">🎯 SEMPURNA! Tidak ada soal yang salah!</div>'}
+                </div>
+            `;
+            
+            soalContainer.innerHTML = resultHtml;
+        }
+
+        function resetQuiz() {
+            quizFinished = false;
+            currentIndex = 0;
+            userAnswers = new Array(toeflQuestions.length).fill(null);
+            score = 0;
+            answered = new Array(toeflQuestions.length).fill(false);
+            timerSeconds = 0;
+            timerElement.textContent = '00:00';
+            scoreElement.textContent = '0';
+            
+            if (timerInterval) clearInterval(timerInterval);
+            startTimer();
+            
+            renderQuestion();
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.width = Math.random() * 8 + 4 + 'px';
+                confetti.style.height = Math.random() * 8 + 4 + 'px';
+                confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.borderRadius = '50%';
+                confetti.style.zIndex = '1000';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.animation = 'fall 2s linear forwards';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 2000);
+            }
+        }
+
+        // Initialize
+        startTimer();
+        renderQuestion();
+    </script>
+    <style>
+        @keyframes fall {
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</body>
+</html>

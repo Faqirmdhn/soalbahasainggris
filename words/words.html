@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1000+ Kosakata Inggris · Flashcard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0f0e1a, #1a1a2e);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #9ca3cf;
+            font-size: 18px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(167, 139, 250, 0.15);
+            color: #a78bfa;
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 10px;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 24px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .category-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(167, 139, 250, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .category-card .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: inline-block;
+            padding: 10px 12px;
+            border-radius: 14px;
+            background: rgba(167, 139, 250, 0.12);
+        }
+
+        .category-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .category-card .desc {
+            color: #9ca3cf;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .category-card .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #6e739b;
+        }
+
+        .category-card .meta .count {
+            background: rgba(167, 139, 250, 0.12);
+            padding: 2px 14px;
+            border-radius: 40px;
+            color: #a78bfa;
+        }
+
+        .category-card .arrow {
+            color: #a78bfa;
+            transition: 0.3s;
+        }
+
+        .category-card:hover .arrow {
+            transform: translateX(6px);
+        }
+
+        /* Warna per kategori */
+        .cat-nouns .icon {
+            background: rgba(251, 191, 36, 0.15) !important;
+            color: #fbbf24;
+        }
+
+        .cat-nouns:hover {
+            border-color: #fbbf24;
+        }
+
+        .cat-verbs .icon {
+            background: rgba(52, 211, 153, 0.15) !important;
+            color: #34d399;
+        }
+
+        .cat-verbs:hover {
+            border-color: #34d399;
+        }
+
+        .cat-adjectives .icon {
+            background: rgba(251, 146, 60, 0.15) !important;
+            color: #fb923c;
+        }
+
+        .cat-adjectives:hover {
+            border-color: #fb923c;
+        }
+
+        .cat-adverbs .icon {
+            background: rgba(96, 165, 250, 0.15) !important;
+            color: #60a5fa;
+        }
+
+        .cat-adverbs:hover {
+            border-color: #60a5fa;
+        }
+
+        .cat-pronouns .icon {
+            background: rgba(244, 114, 182, 0.15) !important;
+            color: #f472b6;
+        }
+
+        .cat-pronouns:hover {
+            border-color: #f472b6;
+        }
+
+        .cat-prepositions .icon {
+            background: rgba(167, 139, 250, 0.15) !important;
+            color: #a78bfa;
+        }
+
+        .cat-prepositions:hover {
+            border-color: #a78bfa;
+        }
+
+        .cat-conjunctions .icon {
+            background: rgba(52, 211, 153, 0.15) !important;
+            color: #34d399;
+        }
+
+        .cat-conjunctions:hover {
+            border-color: #34d399;
+        }
+
+        .cat-interjections .icon {
+            background: rgba(251, 191, 36, 0.15) !important;
+            color: #fbbf24;
+        }
+
+        .cat-interjections:hover {
+            border-color: #fbbf24;
+        }
+
+        .cat-phrases .icon {
+            background: rgba(244, 114, 182, 0.15) !important;
+            color: #f472b6;
+        }
+
+        .cat-phrases:hover {
+            border-color: #f472b6;
+        }
+
+        .footer {
+            text-align: center;
+            color: #4a4a6a;
+            padding: 40px 0 20px;
+            font-size: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 20px;
+        }
+
+        @media (max-width: 640px) {
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 1000+ Kosakata Inggris</h1>
+            <p>Belajar kosakata dengan sistem flashcard · Pilih kategori di bawah</p>
+            <span class="badge"><i class="fas fa-check-circle"></i> 1000+ Kata Siap Dipelajari</span>
+        </div>
+
+        <div class="categories">
+
+            <a href="nouns.html" class="category-card cat-nouns">
+                <div class="icon"><i class="fas fa-book"></i></div>
+                <h3>📘 Nouns</h3>
+                <div class="desc">Kata Benda · orang, tempat, benda</div>
+                <div class="meta">
+                    <span class="count"><i class="fas fa-list"></i> 100 Kata</span>
+                    <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="verbs.html" class="category-card cat-verbs">
+                <div class="icon"><i class="fas fa-running"></i></div>
+                <h3>🏃 Verbs</h3>
+                <div class="desc">Kata Kerja · aksi & aktivitas</div>
+                <div class="meta">
+                    <span class="count"><i class="fas fa-list"></i> 100 Kata</span>
+                    <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="adjectives.html" class="category-card cat-adjectives">
+                <div class="icon"><i class="fas fa-palette"></i></div>
+                <h3>🎨 Adjectives</h3>
+                <div class="desc">Kata Sifat · menjelaskan kata benda</div>
+                <div class="meta">
+                    <span class="count"><i class="fas fa-list"></i> 100 Kata</span>
+                    <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="adverbs.html" class="category-card cat-adverbs">
+                <div class="icon"><i class="fas fa-clock"></i></div>
+                <h3>⏰ Adverbs</h3>
+                <div class="desc">Kata Keterangan · menjelaskan kata kerja</div>
+                <div class="meta">
+                    <span class="count"><i class="fas fa-list"></i> 100 Kata</span>
+                    <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="pronouns.html" class="category-card cat-pronouns">
+                <div class="icon"><i class="fas fa-user"></i></div>
+                <h3>👤 Pronouns</h3>
+                <div class="desc">Kata Ganti · menggantikan kata benda</div>
+                <div class="meta">
+                    <span class="count"><i class="fas fa-list"></i> 50 Kata</span>
+                    <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="prepositions.html" class="category-card cat-prepositions">
+                <div class="icon"><i class="fas fa-location-dot"></i></div>
+                <h3>📍 Prepositions</h3>
+                <div class="desc">Kata Depan · menunjukkan hubungan</div>
+                <div class="meta">
+                    <span class="count"><i class="fas fa-list"></i> 50 Kata</span>
+                    <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="conjunctions.html" class="category-card cat-conjunctions">
+                <div class="icon"><i class="fas fa-link"></i></div>
+                <h3>🔗 Conjunctions</h3>
+                <div class="desc">Konjungsi · menghubungkan kalimat</div>
+                <div class="meta">
+                    <span class="count"><i class="fas fa-list"></i> 50 Kata</span>
+                    <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="interjections.html" class="category-card cat-interjections">
+                <div class="icon"><i class="fas fa-exclamation"></i></div>
+                <h3>😲 Interjections</h3>
+                <div class="desc">Kata Seru · ekspresi spontan</div>
+                <div class="meta">
+                    <span class="count"><i class="fas fa-list"></i> 50 Kata</span>
+                    <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="phrases.html" class="category-card cat-phrases">
+                <div class="icon"><i class="fas fa-comment"></i></div>
+                <h3>💬 Phrases</h3>
+                <div class="desc">Frasa & Ekspresi Sehari-hari</div>
+                <div class="meta">
+                    <span class="count"><i class="fas fa-list"></i> 100 Frasa</span>
+                    <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="extra.html" class="category-card cat-nouns"
+                style="background:rgba(255,255,255,0.02);border-style:dashed;">
+                <div class="icon"><i class="fas fa-gem"></i></div>
+                <h3>⭐ Bonus</h3>
+                <div class="desc">Kata-kata Penting Lainnya</div>
+                <div class="meta">
+                    <span class="count"><i class="fas fa-list"></i> 50 Kata</span>
+                    <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="footer">
+            <p>✨ Total: <strong>1000+</strong> kosakata bahasa Inggris lengkap dengan arti bahasa Indonesia</p>
+            <p style="margin-top:6px;color:#3a3a5a;">Klik kategori untuk mulai belajar dengan metode flashcard 📖</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

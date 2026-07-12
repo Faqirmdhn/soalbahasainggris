@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar 5 Future Tenses - Interaktif</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 50%, #2980b9 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 span {
+            background: white;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-stroke: 1px white;
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            box-shadow: 0 5px 15px rgba(243,156,18,0.4);
+        }
+
+        /* Kartu Materi */
+        .materi-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        .materi-card.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .materi-card h2 {
+            color: #e67e22;
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-left: 4px solid #e67e22;
+            padding-left: 15px;
+        }
+
+        .pola-box {
+            background: #fef9e6;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .pola-box h3 {
+            color: #e67e22;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .pola-box code {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e67e22;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .contoh-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .contoh-item {
+            background: #e8ecf1;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contoh-item:hover {
+            background: #e67e22;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Timer & Stats */
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .timer {
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        /* Kartu Soal */
+        .quiz-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .selected-tense {
+            background: #e67e22;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s;
+            border-radius: 10px;
+        }
+
+        .soal-area {
+            background: #f8f9ff;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .soal-indo {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .soal-indo span {
+            background: #e8ecf1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #e67e22;
+        }
+
+        .soal-eng {
+            font-size: 20px;
+            color: #e67e22;
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            border: 2px dashed #ddd;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 3px solid #e67e22;
+            color: #e67e22;
+            font-weight: bold;
+        }
+
+        input.answer-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: monospace;
+            transition: all 0.3s;
+        }
+
+        input.answer-input:focus {
+            outline: none;
+            border-color: #e67e22;
+            box-shadow: 0 0 10px rgba(230,126,34,0.3);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-check {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .btn-check:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(243,156,18,0.4);
+        }
+
+        .btn-next {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-next:hover {
+            background: #38a169;
+        }
+
+        .btn-hint {
+            background: #ed8936;
+            color: white;
+        }
+
+        .btn-hint:hover {
+            background: #dd6b20;
+        }
+
+        .btn-reset {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #c53030;
+        }
+
+        /* Feedback */
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+
+        .feedback.correct {
+            background: #c6f6d5;
+            color: #22543d;
+            border-left: 4px solid #48bb78;
+        }
+
+        .feedback.wrong {
+            background: #fed7d7;
+            color: #742a2a;
+            border-left: 4px solid #f56565;
+        }
+
+        .feedback.hint {
+            background: #feebc8;
+            color: #7b341e;
+            border-left: 4px solid #ed8936;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mode selector */
+        .mode-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 10px;
+            background: rgba(0,0,0,0.05);
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            border-color: #ffd700;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .soal-indo { font-size: 18px; }
+            .soal-eng { font-size: 16px; }
+            .stat-value { font-size: 18px; }
+            .btn-group button { font-size: 12px; }
+            .tab-btn { font-size: 11px; padding: 8px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔮 Belajar <span>5 Future Tenses</span></h1>
+            <p>Simple Future | Be Going To | Future Continuous | Future Perfect | Future Perfect Continuous</p>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('simple')">🔮 Simple Future</button>
+            <button class="tab-btn" onclick="switchTab('goingto')">🎯 Be Going To</button>
+            <button class="tab-btn" onclick="switchTab('continuous')">🔄 Future Continuous</button>
+            <button class="tab-btn" onclick="switchTab('perfect')">✨ Future Perfect</button>
+            <button class="tab-btn" onclick="switchTab('perfectcont')">⏳ Future Perfect Continuous</button>
+        </div>
+
+        <!-- Materi Simple Future -->
+        <div id="materi-simple" class="materi-card active">
+            <h2>🔮 Simple Future Tense (Will)</h2>
+            <div class="pola-box">
+                <h3>📐 Pola Kalimat:</h3>
+                <code>(+) S + will + V1 + O</code>
+                <code>(-) S + will + not + V1 + O</code>
+                <code>(?) Will + S + V1 + O?</code>
+            </div>
+            <div class="pola-box">
+                <h3>✨ Kapan Digunakan?</h3>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Keputusan spontan → I will answer the phone</li>
+                    <li>Prediksi tanpa bukti → It will rain tomorrow</li>
+                    <li>Janji → I will call you later</li>
+                    <li>Tawaran bantuan → I will help you</li>
+                </ul>
+            </div>
+            <h3>📝 Contoh Kalimat:</h3>
+            <div class="contoh-list">
+                <div class="contoh-item">I will call you tomorrow</div>
+                <div class="contoh-item">She will help you</div>
+                <div class="contoh-item">They will arrive at 8 PM</div>
+                <div class="contoh-item">It will rain today</div>
+            </div>
+        </div>
+
+        <!-- Materi Be Going To -->
+        <div id="materi-goingto" class="materi-card">
+            <h2>🎯 Be Going To Tense</h2>
+            <div class="pola-box">
+                <h3>📐 Pola Kalimat:</h3>
+                <code>(+) S + am/is/are + going to + V1 + O</code>
+                <code>(-) S + am/is/are + not + going to + V1 + O</code>
+                <code>(?) Am/Is/Are + S + going to + V1 + O?</code>
+            </div>
+            <div class="pola-box">
+                <h3>✨ Kapan Digunakan?</h3>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Rencana yang sudah dibuat → I am going to study tonight</li>
+                    <li>Prediksi dengan bukti → Look at those clouds! It is going to rain</li>
+                    <li>Niat yang kuat → She is going to be a doctor</li>
+                </ul>
+            </div>
+            <h3>📝 Contoh Kalimat:</h3>
+            <div class="contoh-list">
+                <div class="contoh-item">I am going to buy a new car</div>
+                <div class="contoh-item">She is going to visit her grandma</div>
+                <div class="contoh-item">They are going to watch a movie</div>
+                <div class="contoh-item">It is going to snow</div>
+            </div>
+        </div>
+
+        <!-- Materi Future Continuous -->
+        <div id="materi-continuous" class="materi-card">
+            <h2>🔄 Future Continuous Tense</h2>
+            <div class="pola-box">
+                <h3>📐 Pola Kalimat:</h3>
+                <code>(+) S + will + be + V-ing + O</code>
+                <code>(-) S + will + not + be + V-ing + O</code>
+                <code>(?) Will + S + be + V-ing + O?</code>
+            </div>
+            <div class="pola-box">
+                <h3>✨ Kapan Digunakan?</h3>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Kejadian sedang berlangsung di waktu tertentu di masa depan → At 8 PM, I will be watching TV</li>
+                    <li>Kejadian yang pasti terjadi → The sun will be rising at 6 AM</li>
+                    <li>Menanyakan rencana sopan → Will you be coming to the party?</li>
+                </ul>
+            </div>
+            <h3>📝 Contoh Kalimat:</h3>
+            <div class="contoh-list">
+                <div class="contoh-item">I will be sleeping at 10 PM</div>
+                <div class="contoh-item">She will be working tomorrow</div>
+                <div class="contoh-item">They will be traveling next week</div>
+                <div class="contoh-item">He will be studying all night</div>
+            </div>
+        </div>
+
+        <!-- Materi Future Perfect -->
+        <div id="materi-perfect" class="materi-card">
+            <h2>✨ Future Perfect Tense</h2>
+            <div class="pola-box">
+                <h3>📐 Pola Kalimat:</h3>
+                <code>(+) S + will + have + V3 + O</code>
+                <code>(-) S + will + not + have + V3 + O</code>
+                <code>(?) Will + S + have + V3 + O?</code>
+            </div>
+            <div class="pola-box">
+                <h3>✨ Kapan Digunakan?</h3>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Kejadian yang akan selesai SEBELUM waktu tertentu di masa depan → By 8 PM, I will have finished my homework</li>
+                    <li>Target penyelesaian → She will have graduated by next year</li>
+                </ul>
+            </div>
+            <h3>📝 Contoh Kalimat:</h3>
+            <div class="contoh-list">
+                <div class="contoh-item">I will have finished by tomorrow</div>
+                <div class="contoh-item">She will have left before you arrive</div>
+                <div class="contoh-item">They will have arrived by noon</div>
+                <div class="contoh-item">He will have eaten by then</div>
+            </div>
+        </div>
+
+        <!-- Materi Future Perfect Continuous -->
+        <div id="materi-perfectcont" class="materi-card">
+            <h2>⏳ Future Perfect Continuous Tense</h2>
+            <div class="pola-box">
+                <h3>📐 Pola Kalimat:</h3>
+                <code>(+) S + will + have + been + V-ing + O</code>
+                <code>(-) S + will + not + have + been + V-ing + O</code>
+                <code>(?) Will + S + have + been + V-ing + O?</code>
+            </div>
+            <div class="pola-box">
+                <h3>✨ Kapan Digunakan?</h3>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Durasi kejadian sampai waktu tertentu di masa depan → By next year, I will have been working here for 5 years</li>
+                    <li>Menekankan lamanya waktu → She will have been studying for 3 hours by 9 PM</li>
+                </ul>
+            </div>
+            <h3>📝 Contoh Kalimat:</h3>
+            <div class="contoh-list">
+                <div class="contoh-item">I will have been waiting for 2 hours</div>
+                <div class="contoh-item">She will have been teaching for 10 years</div>
+                <div class="contoh-item">They will have been living here since 2010</div>
+                <div class="contoh-item">He will have been running for an hour</div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-card">
+            <div class="quiz-header">
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="score">0</div>
+                        <div class="stat-label">✅ Skor</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="total">0</div>
+                        <div class="stat-label">📝 Soal</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="streak">0</div>
+                        <div class="stat-label">🔥 Streak</div>
+                    </div>
+                </div>
+                <div class="timer" id="timer">⏱️ 00:00</div>
+            </div>
+
+            <div class="mode-selector">
+                <button class="mode-btn active" onclick="setMode('all')">🎲 SEMUA TENSES</button>
+                <button class="mode-btn" onclick="setMode('simple')">🔮 Simple Future</button>
+                <button class="mode-btn" onclick="setMode('goingto')">🎯 Be Going To</button>
+                <button class="mode-btn" onclick="setMode('continuous')">🔄 Future Continuous</button>
+                <button class="mode-btn" onclick="setMode('perfect')">✨ Future Perfect</button>
+                <button class="mode-btn" onclick="setMode('perfectcont')">⏳ Future Perfect Continuous</button>
+            </div>
+
+            <div class="selected-tense" id="selectedTenseDisplay">🎲 Mode: Semua Tenses</div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="soal-area">
+                <div class="soal-indo">
+                    <span>🇮🇩 INDONESIA</span><br>
+                    <strong id="soalIndonesia">Saya akan meneleponmu besok</strong>
+                </div>
+                <div class="soal-eng">
+                    <span>🇬🇧 ENGLISH</span><br>
+                    <span id="soalInggris">I ________ you tomorrow</span>
+                </div>
+            </div>
+
+            <input type="text" class="answer-input" id="answerInput" placeholder="Ketik jawabanmu di sini..." autocomplete="off">
+
+            <div class="btn-group">
+                <button class="btn-check" onclick="checkAnswer()">✅ CEK JAWABAN</button>
+                <button class="btn-hint" onclick="showHint()">💡 BOCORAN</button>
+                <button class="btn-next" onclick="nextQuestion()">⏩ SOAL NEXT</button>
+                <button class="btn-reset" onclick="resetGame()">🔄 RESET GAME</button>
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+        </div>
+    </div>
+
+    <script>
+        // ============ DATABASE SOAL SEMUA FUTURE TENSES ============
+        const questionsDatabase = {
+            simple: [
+                { indo: "Saya akan meneleponmu besok", inggris: "I ________ you tomorrow", answer: "will call", hint: "will + V1 (keputusan spontan)" },
+                { indo: "Dia akan membantumu", inggris: "She ________ you", answer: "will help", hint: "will + V1 (tawaran bantuan)" },
+                { indo: "Mereka akan tiba jam 8 malam", inggris: "They ________ at 8 PM", answer: "will arrive", hint: "will + V1 (prediksi)" },
+                { indo: "Hujan akan turun hari ini", inggris: "It ________ today", answer: "will rain", hint: "will + V1 (ramalan cuaca)" },
+                { indo: "Saya tidak akan lupa", inggris: "I ________ forget", answer: "will not", hint: "will not + V1" },
+                { indo: "Apakah kamu akan datang ke pestaku?", inggris: "________ you come to my party?", answer: "will", hint: "Will + S + V1?" },
+                { indo: "Dia akan menjadi dokter suatu hari nanti", inggris: "She ________ a doctor someday", answer: "will be", hint: "will + be" },
+                { indo: "Kita akan bertemu lagi", inggris: "We ________ again", answer: "will meet", hint: "will + V1" },
+                { indo: "Saya akan menjawab teleponnya", inggris: "I ________ the phone", answer: "will answer", hint: "will + V1 (keputusan spontan)" },
+                { indo: "Dia akan membayarmu besok", inggris: "He ________ you tomorrow", answer: "will pay", hint: "will + V1 (janji)" }
+            ],
+            goingto: [
+                { indo: "Saya akan membeli mobil baru (sudah rencana)", inggris: "I ________ a new car", answer: "am going to buy", hint: "am/is/are + going to + V1" },
+                { indo: "Dia akan mengunjungi neneknya", inggris: "She ________ her grandmother", answer: "is going to visit", hint: "She + is going to + V1" },
+                { indo: "Lihat awan itu! Akan hujan", inggris: "Look at those clouds! It ________", answer: "is going to rain", hint: "Prediksi dengan bukti → is going to rain" },
+                { indo: "Mereka akan menonton film", inggris: "They ________ a movie", answer: "are going to watch", hint: "They + are going to + V1" },
+                { indo: "Saya akan belajar tadi malam", inggris: "I ________ last night", answer: "was going to study", hint: "Past plan → was/were going to" },
+                { indo: "Dia akan menjadi seorang dokter", inggris: "She ________ a doctor", answer: "is going to be", hint: "is going to + be" },
+                { indo: "Kami akan mengadakan pesta", inggris: "We ________ a party", answer: "are going to have", hint: "We + are going to + V1" },
+                { indo: "Dia tidak akan membeli mobil itu", inggris: "He ________ that car", answer: "is not going to buy", hint: "is not going to + V1" },
+                { indo: "Apakah kamu akan meneleponnya?", inggris: "________ you going to call him?", answer: "are", hint: "Are + S + going to?" },
+                { indo: "Saya akan memasak makan malam", inggris: "I ________ dinner", answer: "am going to cook", hint: "I + am going to + V1" }
+            ],
+            continuous: [
+                { indo: "Saya akan sedang tidur jam 10 malam", inggris: "I ________ at 10 PM", answer: "will be sleeping", hint: "will be + V-ing" },
+                { indo: "Dia akan sedang bekerja besok", inggris: "She ________ tomorrow", answer: "will be working", hint: "will be + V-ing" },
+                { indo: "Mereka akan sedang bepergian minggu depan", inggris: "They ________ next week", answer: "will be traveling", hint: "will be + V-ing" },
+                { indo: "Saya akan sedang belajar sepanjang malam", inggris: "I ________ all night", answer: "will be studying", hint: "will be + V-ing" },
+                { indo: "Jam 8 besok, saya akan sedang sarapan", inggris: "At 8 AM tomorrow, I ________ breakfast", answer: "will be having", hint: "will be + V-ing" },
+                { indo: "Dia tidak akan sedang tidur saat kamu datang", inggris: "She ________ when you come", answer: "will not be sleeping", hint: "will not be + V-ing" },
+                { indo: "Apakah kamu akan sedang bekerja jam 5?", inggris: "________ you be working at 5?", answer: "will", hint: "Will + S + be + V-ing?" },
+                { indo: "Matahari akan sedang terbit jam 6", inggris: "The sun ________ at 6 AM", answer: "will be rising", hint: "will be + V-ing" },
+                { indo: "Mereka akan sedang makan malam", inggris: "They ________ dinner", answer: "will be having", hint: "will be + V-ing" },
+                { indo: "Saya akan sedang menonton TV", inggris: "I ________ TV", answer: "will be watching", hint: "will be + V-ing" }
+            ],
+            perfect: [
+                { indo: "Saya akan sudah selesai besok", inggris: "I ________ by tomorrow", answer: "will have finished", hint: "will have + V3" },
+                { indo: "Dia akan sudah pergi sebelum kamu tiba", inggris: "She ________ before you arrive", answer: "will have left", hint: "will have + V3" },
+                { indo: "Mereka akan sudah tiba sebelum siang", inggris: "They ________ by noon", answer: "will have arrived", hint: "will have + V3" },
+                { indo: "Dia akan sudah makan saat itu", inggris: "He ________ by then", answer: "will have eaten", hint: "will have + V3" },
+                { indo: "Saya akan sudah menyelesaikan PR jam 8", inggris: "I ________ my homework by 8 PM", answer: "will have finished", hint: "will have + V3" },
+                { indo: "Dia akan sudah lulus tahun depan", inggris: "She ________ by next year", answer: "will have graduated", hint: "will have + V3" },
+                { indo: "Mereka akan sudah tidur saat kita tiba", inggris: "They ________ when we arrive", answer: "will have slept", hint: "will have + V3" },
+                { indo: "Saya akan sudah membaca buku itu", inggris: "I ________ that book", answer: "will have read", hint: "will have + V3 (read tetap read)" },
+                { indo: "Dia belum akan selesai jam 5", inggris: "She ________ by 5 PM", answer: "will not have finished", hint: "will not have + V3" },
+                { indo: "Apakah kamu akan sudah pergi sebelum saya tiba?", inggris: "________ you have left before I arrive?", answer: "will", hint: "Will + S + have + V3?" }
+            ],
+            perfectcont: [
+                { indo: "Saya akan sudah menunggu selama 2 jam", inggris: "I ________ for 2 hours", answer: "will have been waiting", hint: "will have been + V-ing" },
+                { indo: "Dia akan sudah mengajar selama 10 tahun", inggris: "She ________ for 10 years", answer: "will have been teaching", hint: "will have been + V-ing" },
+                { indo: "Mereka akan sudah tinggal di sini sejak 2010", inggris: "They ________ here since 2010", answer: "will have been living", hint: "will have been + V-ing" },
+                { indo: "Dia akan sudah berlari selama 1 jam", inggris: "He ________ for an hour", answer: "will have been running", hint: "will have been + V-ing" },
+                { indo: "Tahun depan, saya akan sudah bekerja di sini selama 5 tahun", inggris: "By next year, I ________ here for 5 years", answer: "will have been working", hint: "will have been + V-ing" },
+                { indo: "Jam 9 malam, dia akan sudah belajar selama 3 jam", inggris: "By 9 PM, she ________ for 3 hours", answer: "will have been studying", hint: "will have been + V-ing" },
+                { indo: "Mereka akan sudah menunggu selama satu jam", inggris: "They ________ for an hour", answer: "will have been waiting", hint: "will have been + V-ing" },
+                { indo: "Saya akan sudah memikirkannya sepanjang hari", inggris: "I ________ about it all day", answer: "will have been thinking", hint: "will have been + V-ing" },
+                { indo: "Dia belum akan belajar cukup lama", inggris: "She ________ long enough", answer: "will not have been studying", hint: "will not have been + V-ing" },
+                { indo: "Apakah kamu akan sudah bekerja di sini selama 10 tahun?", inggris: "________ you have been working here for 10 years?", answer: "will", hint: "Will + S + have been + V-ing?" }
+            ]
+        };
+
+        // State game
+        let currentMode = 'all';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let totalAnswered = 0;
+        let streak = 0;
+        let usedHint = false;
+        let timerSeconds = 0;
+        let timerInterval = null;
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function loadQuestionsForMode() {
+            if (currentMode === 'all') {
+                let allQuestions = [];
+                for (let tense in questionsDatabase) {
+                    allQuestions = allQuestions.concat(questionsDatabase[tense]);
+                }
+                currentQuestions = shuffleArray([...allQuestions]);
+            } else {
+                currentQuestions = shuffleArray([...questionsDatabase[currentMode]]);
+            }
+            document.getElementById('total').textContent = currentQuestions.length;
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerSeconds = 0;
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const minutes = Math.floor(timerSeconds / 60);
+                const seconds = timerSeconds % 60;
+                document.getElementById('timer').innerHTML = `⏱️ ${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+            }, 1000);
+        }
+
+        function resetGame() {
+            loadQuestionsForMode();
+            currentQuestionIndex = 0;
+            score = 0;
+            totalAnswered = 0;
+            streak = 0;
+            usedHint = false;
+            updateStats();
+            loadQuestion();
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('answerInput').value = '';
+            document.getElementById('answerInput').focus();
+            if (timerInterval) clearInterval(timerInterval);
+            startTimer();
+        }
+
+        function loadQuestion() {
+            if (currentQuestions.length === 0) {
+                loadQuestionsForMode();
+            }
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('soalIndonesia').innerHTML = q.indo;
+            document.getElementById('soalInggris').innerHTML = q.inggris;
+            document.getElementById('answerInput').value = '';
+            document.getElementById('answerInput').focus();
+            usedHint = false;
+            
+            const progress = (totalAnswered / currentQuestions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function updateStats() {
+            document.getElementById('score').innerHTML = score;
+            document.getElementById('streak').innerHTML = streak;
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+            
+            const modeNames = {
+                'all': '🎲 Mode: Semua Tenses',
+                'simple': '🔮 Mode: Simple Future (Will)',
+                'goingto': '🎯 Mode: Be Going To',
+                'continuous': '🔄 Mode: Future Continuous',
+                'perfect': '✨ Mode: Future Perfect',
+                'perfectcont': '⏳ Mode: Future Perfect Continuous'
+            };
+            document.getElementById('selectedTenseDisplay').innerHTML = modeNames[mode];
+            
+            resetGame();
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
+            const q = currentQuestions[currentQuestionIndex];
+            const correctAnswer = q.answer.toLowerCase();
+
+            if (userAnswer === '') {
+                showFeedback('⚠️ Yuk isi jawaban dulu!', 'hint');
+                return;
+            }
+
+            const normalizedUser = userAnswer.replace(/\s+/g, ' ').trim();
+            const normalizedCorrect = correctAnswer.replace(/\s+/g, ' ').trim();
+
+            if (normalizedUser === normalizedCorrect) {
+                let points = 1;
+                if (!usedHint) {
+                    streak++;
+                } else {
+                    streak = 0;
+                }
+                score += points;
+                totalAnswered++;
+                
+                updateStats();
+                showFeedback(`✅ BENAR! "${correctAnswer}" adalah jawaban yang tepat! ${!usedHint ? '🔥 Streak +1!' : '⚠️ Streak di-reset karena pakai bocoran'}`, 'correct');
+                
+                createConfetti();
+                
+                if (currentQuestionIndex + 1 < currentQuestions.length) {
+                    setTimeout(() => {
+                        currentQuestionIndex++;
+                        loadQuestion();
+                        document.getElementById('feedback').innerHTML = '';
+                    }, 1500);
+                } else {
+                    setTimeout(() => {
+                        showFeedback(`🎉 SELAMAT! Kamu menyelesaikan semua ${currentQuestions.length} soal Future Tenses! Skor akhir: ${score}/${totalAnswered} 🎉`, 'correct');
+                    }, 500);
+                }
+            } else {
+                showFeedback(`❌ SALAH! Jawaban yang benar adalah: "${correctAnswer}". Game Over! Memulai ulang...`, 'wrong');
+                setTimeout(() => {
+                    resetGame();
+                }, 2000);
+            }
+        }
+
+        function showHint() {
+            if (usedHint) {
+                showFeedback('⚠️ Kamu sudah pakai bocoran untuk soal ini!', 'hint');
+                return;
+            }
+            const q = currentQuestions[currentQuestionIndex];
+            usedHint = true;
+            showFeedback(`💡 BOCORAN: ${q.hint}<br>📝 Jawaban: "${q.answer}"<br>⚠️ Streak akan di-reset jika jawaban benar!`, 'hint');
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex + 1 < currentQuestions.length) {
+                currentQuestionIndex++;
+                loadQuestion();
+                document.getElementById('feedback').innerHTML = '';
+                usedHint = false;
+            } else {
+                showFeedback('🎉 Kamu sudah sampai di soal terakhir! Selesaikan dulu ya!', 'hint');
+            }
+        }
+
+        function showFeedback(message, type) {
+            const feedbackDiv = document.getElementById('feedback');
+            feedbackDiv.innerHTML = message;
+            feedbackDiv.className = `feedback ${type}`;
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.width = Math.random() * 8 + 4 + 'px';
+                confetti.style.height = Math.random() * 8 + 4 + 'px';
+                confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.borderRadius = '50%';
+                confetti.style.zIndex = '1000';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.animation = 'fall 2s linear forwards';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 2000);
+            }
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+            
+            document.querySelectorAll('.materi-card').forEach(card => card.classList.remove('active'));
+            document.getElementById(`materi-${tab}`).classList.add('active');
+        }
+
+        document.getElementById('answerInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        // Initialize
+        loadQuestionsForMode();
+        startTimer();
+    </script>
+    <style>
+        @keyframes fall {
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</body>
+</html>

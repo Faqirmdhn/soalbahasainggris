@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar 4 Past Tenses - Interaktif</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c2c 0%, #2d5a3b 50%, #1a4a2a 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 span {
+            background: white;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-stroke: 1px white;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+            box-shadow: 0 5px 15px rgba(45, 106, 79, 0.4);
+        }
+
+        /* Kartu Materi */
+        .materi-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .materi-card.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .materi-card h2 {
+            color: #2d6a4f;
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-left: 4px solid #2d6a4f;
+            padding-left: 15px;
+        }
+
+        .pola-box {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .pola-box h3 {
+            color: #1b4332;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .pola-box code {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d6a4f;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .contoh-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .contoh-item {
+            background: #e8ecf1;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contoh-item:hover {
+            background: #2d6a4f;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Timer & Stats */
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .timer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        /* Kartu Soal */
+        .quiz-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .selected-tense {
+            background: #2d6a4f;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s;
+            border-radius: 10px;
+        }
+
+        .soal-area {
+            background: #f8f9ff;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .soal-indo {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .soal-indo span {
+            background: #e8ecf1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #2d6a4f;
+        }
+
+        .soal-eng {
+            font-size: 20px;
+            color: #1b4332;
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            border: 2px dashed #ddd;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 3px solid #2d6a4f;
+            color: #2d6a4f;
+            font-weight: bold;
+        }
+
+        input.answer-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: monospace;
+            transition: all 0.3s;
+        }
+
+        input.answer-input:focus {
+            outline: none;
+            border-color: #2d6a4f;
+            box-shadow: 0 0 10px rgba(45, 106, 79, 0.3);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-check {
+            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+            color: white;
+        }
+
+        .btn-check:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 106, 79, 0.4);
+        }
+
+        .btn-next {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-next:hover {
+            background: #38a169;
+        }
+
+        .btn-hint {
+            background: #ed8936;
+            color: white;
+        }
+
+        .btn-hint:hover {
+            background: #dd6b20;
+        }
+
+        .btn-reset {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #c53030;
+        }
+
+        /* Feedback */
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+
+        .feedback.correct {
+            background: #c6f6d5;
+            color: #22543d;
+            border-left: 4px solid #48bb78;
+        }
+
+        .feedback.wrong {
+            background: #fed7d7;
+            color: #742a2a;
+            border-left: 4px solid #f56565;
+        }
+
+        .feedback.hint {
+            background: #feebc8;
+            color: #7b341e;
+            border-left: 4px solid #ed8936;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mode selector */
+        .mode-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.05);
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+            border-color: #ffd700;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .soal-indo {
+                font-size: 18px;
+            }
+
+            .soal-eng {
+                font-size: 16px;
+            }
+
+            .stat-value {
+                font-size: 18px;
+            }
+
+            .btn-group button {
+                font-size: 12px;
+            }
+
+            .tab-btn {
+                font-size: 11px;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📚 Belajar <span>4 Past Tenses</span></h1>
+            <p>Simple Past | Past Continuous | Past Perfect | Past Perfect Continuous</p>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('simple')">📖 Simple Past</button>
+            <button class="tab-btn" onclick="switchTab('continuous')">🔄 Past Continuous</button>
+            <button class="tab-btn" onclick="switchTab('perfect')">✨ Past Perfect</button>
+            <button class="tab-btn" onclick="switchTab('perfectcont')">⏳ Past Perfect Continuous</button>
+        </div>
+
+        <!-- Materi Simple Past -->
+        <div id="materi-simple" class="materi-card active">
+            <h2>📖 Simple Past Tense</h2>
+            <div class="pola-box">
+                <h3>📐 Pola Kalimat:</h3>
+                <code>(+) S + V2 + O</code>
+                <code>(-) S + did + not + V1 + O</code>
+                <code>(?) Did + S + V1 + O?</code>
+            </div>
+            <div class="pola-box">
+                <h3>✨ Kapan Digunakan?</h3>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Kejadian di masa lalu yang sudah selesai → I went to market yesterday</li>
+                    <li>Kebiasaan di masa lalu → I played football every Sunday when I was a child</li>
+                    <li>Fakta di masa lalu → He lived in London for 5 years</li>
+                </ul>
+            </div>
+            <h3>📝 Contoh Kalimat:</h3>
+            <div class="contoh-list">
+                <div class="contoh-item">I went to market yesterday</div>
+                <div class="contoh-item">She ate pizza last night</div>
+                <div class="contoh-item">They bought a new car</div>
+                <div class="contoh-item">He visited his grandmother</div>
+            </div>
+        </div>
+
+        <!-- Materi Past Continuous -->
+        <div id="materi-continuous" class="materi-card">
+            <h2>🔄 Past Continuous Tense</h2>
+            <div class="pola-box">
+                <h3>📐 Pola Kalimat:</h3>
+                <code>(+) S + was/were + V-ing + O</code>
+                <code>(-) S + was/were + not + V-ing + O</code>
+                <code>(?) Was/Were + S + V-ing + O?</code>
+            </div>
+            <div class="pola-box">
+                <h3>✨ Kapan Digunakan?</h3>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Kejadian yang sedang berlangsung di masa lalu → I was watching TV when you called</li>
+                    <li>Dua kejadian bersamaan di masa lalu → While I was cooking, she was sleeping</li>
+                    <li>Suasana di masa lalu → It was raining heavily last night</li>
+                </ul>
+            </div>
+            <h3>📝 Contoh Kalimat:</h3>
+            <div class="contoh-list">
+                <div class="contoh-item">I was watching TV when you called</div>
+                <div class="contoh-item">She was sleeping at 10 PM</div>
+                <div class="contoh-item">They were playing football</div>
+                <div class="contoh-item">It was raining heavily</div>
+            </div>
+        </div>
+
+        <!-- Materi Past Perfect -->
+        <div id="materi-perfect" class="materi-card">
+            <h2>✨ Past Perfect Tense</h2>
+            <div class="pola-box">
+                <h3>📐 Pola Kalimat:</h3>
+                <code>(+) S + had + V3 + O</code>
+                <code>(-) S + had + not + V3 + O</code>
+                <code>(?) Had + S + V3 + O?</code>
+            </div>
+            <div class="pola-box">
+                <h3>✨ Kapan Digunakan?</h3>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Kejadian yang selesai SEBELUM kejadian lain di masa lalu → I had finished my homework before
+                        dinner</li>
+                    <li>Pengalaman di masa lalu → I had never seen such a beautiful place</li>
+                    <li>Penyebab kejadian di masa lalu → He was tired because he had worked hard</li>
+                </ul>
+            </div>
+            <h3>📝 Contoh Kalimat:</h3>
+            <div class="contoh-list">
+                <div class="contoh-item">I had finished my homework before dinner</div>
+                <div class="contoh-item">She had left when I arrived</div>
+                <div class="contoh-item">They had eaten all the food</div>
+                <div class="contoh-item">He had never been to Bali</div>
+            </div>
+        </div>
+
+        <!-- Materi Past Perfect Continuous -->
+        <div id="materi-perfectcont" class="materi-card">
+            <h2>⏳ Past Perfect Continuous Tense</h2>
+            <div class="pola-box">
+                <h3>📐 Pola Kalimat:</h3>
+                <code>(+) S + had + been + V-ing + O</code>
+                <code>(-) S + had + not + been + V-ing + O</code>
+                <code>(?) Had + S + been + V-ing + O?</code>
+            </div>
+            <div class="pola-box">
+                <h3>✨ Kapan Digunakan?</h3>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Durasi kejadian sebelum kejadian lain di masa lalu → I had been waiting for 2 hours when the bus
+                        came</li>
+                    <li>Menekankan lamanya waktu → She had been studying for 5 years before moving</li>
+                    <li>Penyebab dengan durasi → He was tired because he had been running</li>
+                </ul>
+            </div>
+            <h3>📝 Contoh Kalimat:</h3>
+            <div class="contoh-list">
+                <div class="contoh-item">I had been waiting for 2 hours</div>
+                <div class="contoh-item">She had been studying for 5 years</div>
+                <div class="contoh-item">They had been playing for an hour</div>
+                <div class="contoh-item">It had been raining since morning</div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-card">
+            <div class="quiz-header">
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="score">0</div>
+                        <div class="stat-label">✅ Skor</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="total">0</div>
+                        <div class="stat-label">📝 Soal</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="streak">0</div>
+                        <div class="stat-label">🔥 Streak</div>
+                    </div>
+                </div>
+                <div class="timer" id="timer">⏱️ 00:00</div>
+            </div>
+
+            <div class="mode-selector">
+                <button class="mode-btn active" onclick="setMode('all')">🎲 SEMUA TENSES</button>
+                <button class="mode-btn" onclick="setMode('simple')">📖 Simple Past</button>
+                <button class="mode-btn" onclick="setMode('continuous')">🔄 Past Continuous</button>
+                <button class="mode-btn" onclick="setMode('perfect')">✨ Past Perfect</button>
+                <button class="mode-btn" onclick="setMode('perfectcont')">⏳ Past Perfect Continuous</button>
+            </div>
+
+            <div class="selected-tense" id="selectedTenseDisplay">🎲 Mode: Semua Tenses</div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="soal-area">
+                <div class="soal-indo">
+                    <span>🇮🇩 INDONESIA</span><br>
+                    <strong id="soalIndonesia">Saya pergi ke pasar kemarin</strong>
+                </div>
+                <div class="soal-eng">
+                    <span>🇬🇧 ENGLISH</span><br>
+                    <span id="soalInggris">I ________ to market yesterday</span>
+                </div>
+            </div>
+
+            <input type="text" class="answer-input" id="answerInput" placeholder="Ketik jawabanmu di sini..."
+                autocomplete="off">
+
+            <div class="btn-group">
+                <button class="btn-check" onclick="checkAnswer()">✅ CEK JAWABAN</button>
+                <button class="btn-hint" onclick="showHint()">💡 BOCORAN</button>
+                <button class="btn-next" onclick="nextQuestion()">⏩ SOAL NEXT</button>
+                <button class="btn-reset" onclick="resetGame()">🔄 RESET GAME</button>
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+        </div>
+    </div>
+
+    <script>
+        // ============ DATABASE SOAL SEMUA PAST TENSES ============
+        const questionsDatabase = {
+            simple: [
+                { indo: "Saya pergi ke pasar kemarin", inggris: "I ________ to market yesterday", answer: "went", hint: "go → went (irregular verb)" },
+                { indo: "Dia (perempuan) makan pizza tadi malam", inggris: "She ________ pizza last night", answer: "ate", hint: "eat → ate (irregular)" },
+                { indo: "Mereka membeli mobil baru minggu lalu", inggris: "They ________ a new car last week", answer: "bought", hint: "buy → bought (irregular)" },
+                { indo: "Dia (laki-laki) mengunjungi neneknya", inggris: "He ________ his grandmother", answer: "visited", hint: "visit → visited (regular +ed)" },
+                { indo: "Kami menonton film tadi malam", inggris: "We ________ a movie last night", answer: "watched", hint: "watch → watched (regular)" },
+                { indo: "Saya bangun kesiangan pagi ini", inggris: "I ________ up late this morning", answer: "woke", hint: "wake → woke (irregular)" },
+                { indo: "Dia tidak pergi ke sekolah kemarin", inggris: "She ________ go to school yesterday", answer: "did not", hint: "Kalimat negatif → did not + V1" },
+                { indo: "Apakah kamu meneleponnya tadi malam?", inggris: "________ you call him last night?", answer: "did", hint: "Did + S + V1?" },
+                { indo: "Kucing itu meminum semua susu", inggris: "The cat ________ all the milk", answer: "drank", hint: "drink → drank (irregular)" },
+                { indo: "Saya melihat dia di pesta", inggris: "I ________ him at the party", answer: "saw", hint: "see → saw (irregular)" },
+                { indo: "Dia menulis surat untuk temannya", inggris: "She ________ a letter to her friend", answer: "wrote", hint: "write → wrote (irregular)" },
+                { indo: "Mereka berenang di danau", inggris: "They ________ in the lake", answer: "swam", hint: "swim → swam (irregular)" }
+            ],
+            continuous: [
+                { indo: "Saya sedang menonton TV ketika kamu menelepon", inggris: "I ________ TV when you called", answer: "was watching", hint: "I + was + V-ing" },
+                { indo: "Dia (perempuan) sedang tidur jam 10 malam", inggris: "She ________ at 10 PM last night", answer: "was sleeping", hint: "She + was + V-ing" },
+                { indo: "Mereka sedang bermain sepak bola ketika hujan", inggris: "They ________ football when it rained", answer: "were playing", hint: "They + were + V-ing" },
+                { indo: "Hujan sedang turun deras", inggris: "It ________ heavily", answer: "was raining", hint: "It + was + V-ing" },
+                { indo: "Kami sedang belajar sepanjang malam", inggris: "We ________ all night", answer: "were studying", hint: "We + were + V-ing" },
+                { indo: "Dia (laki-laki) sedang membaca buku", inggris: "He ________ a book", answer: "was reading", hint: "He + was + V-ing" },
+                { indo: "Saya tidak sedang tidur ketika kamu datang", inggris: "I ________ when you arrived", answer: "was not sleeping", hint: "was not + V-ing" },
+                { indo: "Apakah dia sedang menangis di pesta?", inggris: "________ she crying at the party?", answer: "was", hint: "Was + S + V-ing?" },
+                { indo: "Bayi itu menangis sepanjang malam", inggris: "The baby ________ all night", answer: "was crying", hint: "The baby = It + was + V-ing" },
+                { indo: "Mereka sedang makan malam ketika saya datang", inggris: "They ________ dinner when I came", answer: "were having", hint: "They + were + V-ing" }
+            ],
+            perfect: [
+                { indo: "Saya sudah menyelesaikan PR sebelum makan malam", inggris: "I ________ my homework before dinner", answer: "had finished", hint: "had + V3" },
+                { indo: "Dia sudah pergi ketika saya tiba", inggris: "She ________ when I arrived", answer: "had left", hint: "had + V3 (leave → left)" },
+                { indo: "Mereka sudah makan semua makanan", inggris: "They ________ all the food", answer: "had eaten", hint: "had + V3 (eat → eaten)" },
+                { indo: "Saya belum pernah ke Bali sebelumnya", inggris: "I ________ to Bali before", answer: "had never been", hint: "had + never + V3" },
+                { indo: "Dia sudah kehilangan kuncinya", inggris: "He ________ his keys", answer: "had lost", hint: "had + V3 (lose → lost)" },
+                { indo: "Kami belum memulai rapat ketika dia datang", inggris: "We ________ the meeting when he came", answer: "had not started", hint: "had not + V3" },
+                { indo: "Apakah kamu pernah mencoba sushi sebelumnya?", inggris: "________ you ever tried sushi before?", answer: "had", hint: "Had + S + V3?" },
+                { indo: "Dia sudah belajar bahasa Inggris sebelum pindah", inggris: "She ________ English before moving", answer: "had studied", hint: "had + V3" },
+                { indo: "Saya sudah kehilangan harapan", inggris: "I ________ hope", answer: "had lost", hint: "had + V3" },
+                { indo: "Mereka sudah menikah selama 10 tahun", inggris: "They ________ for 10 years", answer: "had been married", hint: "had + been + adjective" }
+            ],
+            perfectcont: [
+                { indo: "Saya sudah menunggu selama 2 jam ketika bus datang", inggris: "I ________ for 2 hours when the bus came", answer: "had been waiting", hint: "had been + V-ing" },
+                { indo: "Dia sudah belajar bahasa Inggris selama 5 tahun sebelum pindah", inggris: "She ________ English for 5 years before moving", answer: "had been studying", hint: "had been + V-ing" },
+                { indo: "Mereka sudah bermain selama 1 jam ketika hujan", inggris: "They ________ for an hour when it started to rain", answer: "had been playing", hint: "had been + V-ing" },
+                { indo: "Dia sudah bekerja di perusahaan itu selama 10 tahun", inggris: "He ________ at the company for 10 years", answer: "had been working", hint: "had been + V-ing" },
+                { indo: "Hujan sudah turun sejak pagi", inggris: "It ________ since morning", answer: "had been raining", hint: "had been + V-ing" },
+                { indo: "Saya sudah memikirkannya sepanjang hari", inggris: "I ________ about it all day", answer: "had been thinking", hint: "had been + V-ing" },
+                { indo: "Dia sudah merasa sakit selama seminggu", inggris: "She ________ sick for a week", answer: "had been feeling", hint: "had been + V-ing" },
+                { indo: "Mereka sudah bertengkar selama satu jam", inggris: "They ________ for an hour", answer: "had been arguing", hint: "had been + V-ing" },
+                { indo: "Apakah dia sudah menangis sebelumnya?", inggris: "________ she been crying before?", answer: "had", hint: "Had + S + been + V-ing?" },
+                { indo: "Kami belum tidur nyenyak sebelum pindah", inggris: "We ________ well before moving", answer: "had not been sleeping", hint: "had not been + V-ing" }
+            ]
+        };
+
+        // State game
+        let currentMode = 'all';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let totalAnswered = 0;
+        let streak = 0;
+        let usedHint = false;
+        let timerSeconds = 0;
+        let timerInterval = null;
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function loadQuestionsForMode() {
+            if (currentMode === 'all') {
+                let allQuestions = [];
+                for (let tense in questionsDatabase) {
+                    allQuestions = allQuestions.concat(questionsDatabase[tense]);
+                }
+                currentQuestions = shuffleArray([...allQuestions]);
+            } else {
+                currentQuestions = shuffleArray([...questionsDatabase[currentMode]]);
+            }
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerSeconds = 0;
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const minutes = Math.floor(timerSeconds / 60);
+                const seconds = timerSeconds % 60;
+                document.getElementById('timer').innerHTML = `⏱️ ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function resetGame() {
+            loadQuestionsForMode();
+            currentQuestionIndex = 0;
+            score = 0;
+            totalAnswered = 0;
+            streak = 0;
+            usedHint = false;
+            updateStats();
+            loadQuestion();
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('answerInput').value = '';
+            document.getElementById('answerInput').focus();
+            if (timerInterval) clearInterval(timerInterval);
+            startTimer();
+        }
+
+        function loadQuestion() {
+            if (currentQuestions.length === 0) {
+                loadQuestionsForMode();
+            }
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('soalIndonesia').innerHTML = q.indo;
+            document.getElementById('soalInggris').innerHTML = q.inggris;
+            document.getElementById('answerInput').value = '';
+            document.getElementById('answerInput').focus();
+            usedHint = false;
+
+            const progress = (totalAnswered / currentQuestions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function updateStats() {
+            document.getElementById('score').innerHTML = score;
+            document.getElementById('total').innerHTML = totalAnswered;
+            document.getElementById('streak').innerHTML = streak;
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+
+            const modeNames = {
+                'all': '🎲 Mode: Semua Tenses',
+                'simple': '📖 Mode: Simple Past',
+                'continuous': '🔄 Mode: Past Continuous',
+                'perfect': '✨ Mode: Past Perfect',
+                'perfectcont': '⏳ Mode: Past Perfect Continuous'
+            };
+            document.getElementById('selectedTenseDisplay').innerHTML = modeNames[mode];
+
+            resetGame();
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
+            const q = currentQuestions[currentQuestionIndex];
+            const correctAnswer = q.answer.toLowerCase();
+
+            if (userAnswer === '') {
+                showFeedback('⚠️ Yuk isi jawaban dulu!', 'hint');
+                return;
+            }
+
+            const normalizedUser = userAnswer.replace(/\s+/g, ' ').trim();
+            const normalizedCorrect = correctAnswer.replace(/\s+/g, ' ').trim();
+
+            if (normalizedUser === normalizedCorrect) {
+                let points = 1;
+                if (!usedHint) {
+                    streak++;
+                } else {
+                    streak = 0;
+                }
+                score += points;
+                totalAnswered++;
+
+                updateStats();
+                showFeedback(`✅ BENAR! "${correctAnswer}" adalah jawaban yang tepat! ${!usedHint ? '🔥 Streak +1!' : '⚠️ Streak di-reset karena pakai bocoran'}`, 'correct');
+
+                createConfetti();
+
+                if (currentQuestionIndex + 1 < currentQuestions.length) {
+                    setTimeout(() => {
+                        currentQuestionIndex++;
+                        loadQuestion();
+                        document.getElementById('feedback').innerHTML = '';
+                    }, 1500);
+                } else {
+                    setTimeout(() => {
+                        showFeedback(`🎉 SELAMAT! Kamu menyelesaikan semua ${currentQuestions.length} soal! Skor akhir: ${score}/${totalAnswered} 🎉`, 'correct');
+                    }, 500);
+                }
+            } else {
+                showFeedback(`❌ SALAH! Jawaban yang benar adalah: "${correctAnswer}". Game Over! Memulai ulang...`, 'wrong');
+                setTimeout(() => {
+                    resetGame();
+                }, 2000);
+            }
+        }
+
+        function showHint() {
+            if (usedHint) {
+                showFeedback('⚠️ Kamu sudah pakai bocoran untuk soal ini!', 'hint');
+                return;
+            }
+            const q = currentQuestions[currentQuestionIndex];
+            usedHint = true;
+            showFeedback(`💡 BOCORAN: ${q.hint}<br>📝 Jawaban: "${q.answer}"<br>⚠️ Streak akan di-reset jika jawaban benar!`, 'hint');
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex + 1 < currentQuestions.length) {
+                currentQuestionIndex++;
+                loadQuestion();
+                document.getElementById('feedback').innerHTML = '';
+                usedHint = false;
+            } else {
+                showFeedback('🎉 Kamu sudah sampai di soal terakhir! Selesaikan dulu ya!', 'hint');
+            }
+        }
+
+        function showFeedback(message, type) {
+            const feedbackDiv = document.getElementById('feedback');
+            feedbackDiv.innerHTML = message;
+            feedbackDiv.className = `feedback ${type}`;
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.width = Math.random() * 8 + 4 + 'px';
+                confetti.style.height = Math.random() * 8 + 4 + 'px';
+                confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.borderRadius = '50%';
+                confetti.style.zIndex = '1000';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.animation = 'fall 2s linear forwards';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 2000);
+            }
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (event && event.target) event.target.classList.add('active');
+
+            document.querySelectorAll('.materi-card').forEach(card => card.classList.remove('active'));
+            document.getElementById(`materi-${tab}`).classList.add('active');
+        }
+
+        document.getElementById('answerInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        // Initialize
+        loadQuestionsForMode();
+        startTimer();
+    </script>
+    <style>
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</body>
+
+</html>
