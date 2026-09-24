@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vocabulary Bank - English for Business</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #f0f4f8;
+            color: #1a1a2e;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0f0c29, #1a1a3e, #24243e);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 26px;
+            color: #4facfe;
+        }
+
+        .logo h1 {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo span {
+            color: #8892b0;
+            font-weight: 400;
+            font-size: 13px;
+            -webkit-text-fill-color: #8892b0;
+        }
+
+        .nav {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: #8892b0;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav a.active {
+            color: white;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .nav a i {
+            margin-right: 5px;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #0f0c29, #1a1a3e);
+            padding: 40px 0 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .page-header p {
+            color: #8892b0;
+            font-size: 16px;
+            margin-top: 6px;
+        }
+
+        .vocab-section {
+            padding: 40px 0;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 40px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #1a1a2e;
+        }
+
+        .filter-btn:hover {
+            border-color: #4facfe;
+            background: #f0f7ff;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            border-color: #4facfe;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .vocab-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .vocab-card:hover {
+            border-color: #4facfe;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        .vocab-card .en {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f0c29;
+        }
+
+        .vocab-card .id {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .vocab-card .tag {
+            display: inline-block;
+            background: #f1f5f9;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #475569;
+            margin-top: 4px;
+        }
+
+        .footer {
+            background: #0f0c29;
+            color: #8892b0;
+            padding: 30px 0 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer h4 {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer a {
+            color: #8892b0;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .footer .bottom {
+            text-align: center;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav {
+                justify-content: center;
+            }
+
+            .nav a {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+
+            .vocab-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .vocab-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-briefcase"></i>
+                <h1>Eng<span>Biz</span></h1>
+            </a>
+            <nav class="nav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="modules.html"><i class="fas fa-book"></i> Modules</a>
+                <a href="vocabulary.html" class="active"><i class="fas fa-graduation-cap"></i> Vocabulary</a>
+                <a href="practice.html"><i class="fas fa-puzzle-piece"></i> Practice</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>📖 Vocabulary Bank</h1>
+            <p>Kosakata bisnis berdasarkan industri untuk meningkatkan kemampuan bahasa Inggris profesionalmu</p>
+        </div>
+    </section>
+
+    <section class="vocab-section">
+        <div class="container">
+            <div class="filter-group">
+                <button class="filter-btn active" onclick="filterVocab('all')">📌 All</button>
+                <button class="filter-btn" onclick="filterVocab('finance')">💰 Finance</button>
+                <button class="filter-btn" onclick="filterVocab('marketing')">📢 Marketing</button>
+                <button class="filter-btn" onclick="filterVocab('hr')">👥 HR</button>
+                <button class="filter-btn" onclick="filterVocab('general')">📋 General</button>
+            </div>
+            <div class="vocab-grid" id="vocabGrid">
+                <!-- Diisi oleh JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>📚 EngBiz</h4>
+                    <p style="font-size:13px; color:#64748b;">Belajar English for Business dengan cara yang interaktif
+                        dan menyenangkan.</p>
+                </div>
+                <div>
+                    <h4>Navigation</h4>
+                    <a href="index.html">Home</a>
+                    <a href="modules.html">Modules</a>
+                    <a href="vocabulary.html">Vocabulary</a>
+                    <a href="practice.html">Practice</a>
+                </div>
+                <div>
+                    <h4>Topik</h4>
+                    <a href="communication.html">Communication</a>
+                    <a href="presentations.html">Presentations</a>
+                    <a href="negotiation.html">Negotiation</a>
+                    <a href="interviews.html">Interviews</a>
+                </div>
+            </div>
+            <div class="bottom">
+                &copy; 2024 EngBiz. Made with <i class="fas fa-heart" style="color:#f5576c;"></i> for professionals.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ================================================================
+        //  VOCABULARY DATA
+        // ================================================================
+        const vocabData = [
+            // Finance
+            { en: "Revenue", id: "Pendapatan", tag: "finance" },
+            { en: "Expense", id: "Biaya/Pengeluaran", tag: "finance" },
+            { en: "Profit", id: "Keuntungan", tag: "finance" },
+            { en: "Investment", id: "Investasi", tag: "finance" },
+            { en: "Asset", id: "Aset", tag: "finance" },
+            { en: "Liability", id: "Kewajiban/Hutang", tag: "finance" },
+            { en: "Equity", id: "Ekuitas", tag: "finance" },
+            { en: "Cash flow", id: "Arus kas", tag: "finance" },
+            { en: "Audit", id: "Audit", tag: "finance" },
+            { en: "Budget", id: "Anggaran", tag: "finance" },
+            { en: "Forecast", id: "Perkiraan", tag: "finance" },
+            { en: "Invoice", id: "Faktur", tag: "finance" },
+
+            // Marketing
+            { en: "Brand", id: "Merek", tag: "marketing" },
+            { en: "Campaign", id: "Kampanye", tag: "marketing" },
+            { en: "Target audience", id: "Target audiens", tag: "marketing" },
+            { en: "Lead generation", id: "Generasi prospek", tag: "marketing" },
+            { en: "Conversion rate", id: "Tingkat konversi", tag: "marketing" },
+            { en: "ROI", id: "Pengembalian investasi", tag: "marketing" },
+            { en: "Market share", id: "Pangsa pasar", tag: "marketing" },
+            { en: "Customer acquisition", id: "Akuisisi pelanggan", tag: "marketing" },
+            { en: "Engagement", id: "Keterlibatan", tag: "marketing" },
+            { en: "SEO", id: "Optimasi mesin pencari", tag: "marketing" },
+            { en: "Content marketing", id: "Pemasaran konten", tag: "marketing" },
+
+            // HR
+            { en: "Recruitment", id: "Rekrutmen", tag: "hr" },
+            { en: "Onboarding", id: "Orientasi karyawan baru", tag: "hr" },
+            { en: "Performance review", id: "Evaluasi kinerja", tag: "hr" },
+            { en: "Compensation", id: "Kompensasi", tag: "hr" },
+            { en: "Benefits", id: "Tunjangan", tag: "hr" },
+            { en: "Career development", id: "Pengembangan karir", tag: "hr" },
+            { en: "Workforce", id: "Tenaga kerja", tag: "hr" },
+            { en: "Diversity", id: "Keberagaman", tag: "hr" },
+            { en: "Talent management", id: "Manajemen bakat", tag: "hr" },
+            { en: "Employee engagement", id: "Keterlibatan karyawan", tag: "hr" },
+
+            // General
+            { en: "Stakeholder", id: "Pemangku kepentingan", tag: "general" },
+            { en: "Strategy", id: "Strategi", tag: "general" },
+            { en: "Objective", id: "Tujuan", tag: "general" },
+            { en: "Milestone", id: "Tonggak pencapaian", tag: "general" },
+            { en: "Deadline", id: "Batas waktu", tag: "general" },
+            { en: "Deliverable", id: "Hasil yang diserahkan", tag: "general" },
+            { en: "Workflow", id: "Alur kerja", tag: "general" },
+            { en: "Best practice", id: "Praktik terbaik", tag: "general" },
+            { en: "Benchmark", id: "Tolok ukur", tag: "general" },
+            { en: "Scalable", id: "Dapat diperluas", tag: "general" },
+            { en: "Agile", id: "Agile", tag: "general" },
+            { en: "Synergy", id: "Sinergi", tag: "general" },
+            { en: "Core competency", id: "Kompetensi inti", tag: "general" },
+            { en: "Value proposition", id: "Proposisi nilai", tag: "general" },
+            { en: "Business plan", id: "Rencana bisnis", tag: "general" },
+        ];
+
+        function renderVocab(filter) {
+            const grid = document.getElementById('vocabGrid');
+            const filtered = filter === 'all' ? vocabData : vocabData.filter(v => v.tag === filter);
+            grid.innerHTML = filtered.map(v => `
+                <div class="vocab-card">
+                    <div class="en">${v.en}</div>
+                    <div class="id">${v.id}</div>
+                    <span class="tag">${v.tag}</span>
+                </div>
+            `).join('');
+        }
+
+        function filterVocab(filter) {
+            renderVocab(filter);
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // ================================================================
+        //  INIT
+        // ================================================================
+        renderVocab('all');
+    </script>
+
+</body>
+
+</html>

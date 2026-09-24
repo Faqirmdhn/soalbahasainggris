@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>1000+ Kosakata Inggris · Flashcard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="icon" href="asset/logo.png">
     <style>
         * {
             margin: 0;
@@ -56,6 +57,35 @@
             font-weight: 600;
             margin-top: 10px;
             border: 1px solid rgba(167, 139, 250, 0.2);
+        }
+
+        .back-nav {
+            display: flex;
+            justify-content: flex-start;
+            padding: 10px 0 0;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #9ca3cf;
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: rgba(167, 139, 250, 0.15);
+            color: #a78bfa;
+            border-color: rgba(167, 139, 250, 0.3);
+            transform: translateX(-3px);
         }
 
         .categories {
@@ -236,6 +266,9 @@
 <body>
 
     <div class="container">
+        <div class="back-nav">
+            <a href="../index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Dashboard</a>
+        </div>
         <div class="header">
             <h1>📚 1000+ Kosakata Inggris</h1>
             <p>Belajar kosakata dengan sistem flashcard · Pilih kategori di bawah</p>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Business Communication - English for Business</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #f0f4f8;
+            color: #1a1a2e;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, #0f0c29, #1a1a3e, #24243e);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 26px;
+            color: #4facfe;
+        }
+
+        .logo h1 {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo span {
+            color: #8892b0;
+            font-weight: 400;
+            font-size: 13px;
+            -webkit-text-fill-color: #8892b0;
+        }
+
+        .nav {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: #8892b0;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav a.active {
+            color: white;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .nav a i {
+            margin-right: 5px;
+        }
+
+        .back-btn {
+            color: #4facfe;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .back-btn:hover {
+            color: #00f2fe;
+        }
+
+        /* ===== CONTENT ===== */
+        .content {
+            padding: 40px 0;
+        }
+
+        .content h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .content .subtitle {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .topic-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .topic-card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4facfe;
+            margin-bottom: 12px;
+        }
+
+        .topic-card h2 i {
+            margin-right: 10px;
+        }
+
+        .topic-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .topic-card ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .topic-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .topic-card ul li .en {
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .topic-card ul li .id {
+            color: #64748b;
+        }
+
+        .topic-card ul li .badge {
+            background: #f1f5f9;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .example-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 12px;
+            border-left: 4px solid #4facfe;
+        }
+
+        .example-box .label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .example-box .text {
+            font-size: 15px;
+            margin-top: 4px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0f0c29;
+            color: #8892b0;
+            padding: 30px 0 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer h4 {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer a {
+            color: #8892b0;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .footer .bottom {
+            text-align: center;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav {
+                justify-content: center;
+            }
+
+            .nav a {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+
+            .content h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-briefcase"></i>
+                <h1>Eng<span>Biz</span></h1>
+            </a>
+            <nav class="nav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="modules.html" class="active"><i class="fas fa-book"></i> Modules</a>
+                <a href="vocabulary.html"><i class="fas fa-graduation-cap"></i> Vocabulary</a>
+                <a href="practice.html"><i class="fas fa-puzzle-piece"></i> Practice</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== CONTENT ===== -->
+    <section class="content">
+        <div class="container">
+            <a href="modules.html" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali ke Modules</a>
+
+            <h1>✉️ Business Communication</h1>
+            <p class="subtitle">Pelajari cara menulis email profesional, telepon bisnis, dan berpartisipasi dalam
+                meeting</p>
+
+            <!-- EMAIL -->
+            <div class="topic-card">
+                <h2><i class="fas fa-envelope"></i> Email Writing</h2>
+                <ul>
+                    <li>
+                        <span class="en">Dear Sir/Madam,</span>
+                        <span class="id">- Salam pembuka formal</span>
+                        <span class="badge">Formal</span>
+                    </li>
+                    <li>
+                        <span class="en">I am writing to inquire about...</span>
+                        <span class="id">- Menanyakan sesuatu</span>
+                        <span class="badge">Inquiry</span>
+                    </li>
+                    <li>
+                        <span class="en">Please find attached...</span>
+                        <span class="id">- Mengirim lampiran</span>
+                        <span class="badge">Attachment</span>
+                    </li>
+                    <li>
+                        <span class="en">I look forward to hearing from you.</span>
+                        <span class="id">- Menunggu balasan</span>
+                        <span class="badge">Closing</span>
+                    </li>
+                    <li>
+                        <span class="en">Sincerely,</span>
+                        <span class="id">- Penutup formal</span>
+                        <span class="badge">Formal</span>
+                    </li>
+                    <li>
+                        <span class="en">Best regards,</span>
+                        <span class="id">- Penutup semi-formal</span>
+                        <span class="badge">Semi-formal</span>
+                    </li>
+                </ul>
+                <div class="example-box">
+                    <div class="label">📝 Contoh Email</div>
+                    <div class="text">
+                        <strong>Subject:</strong> Meeting Request<br><br>
+                        Dear Mr. Johnson,<br><br>
+                        I am writing to request a meeting to discuss the upcoming project. Please let me know your
+                        availability next week.<br><br>
+                        I look forward to hearing from you.<br><br>
+                        Sincerely,<br>
+                        Sarah
+                    </div>
+                </div>
+            </div>
+
+            <!-- TELEPHONING -->
+            <div class="topic-card">
+                <h2><i class="fas fa-phone"></i> Telephoning</h2>
+                <ul>
+                    <li>
+                        <span class="en">Good morning, this is [name] from [company].</span>
+                        <span class="id">- Memperkenalkan diri</span>
+                        <span class="badge">Opening</span>
+                    </li>
+                    <li>
+                        <span class="en">Could I speak to [name], please?</span>
+                        <span class="id">- Minta bicara dengan seseorang</span>
+                        <span class="badge">Request</span>
+                    </li>
+                    <li>
+                        <span class="en">I'm calling about...</span>
+                        <span class="id">- Menyebutkan tujuan telepon</span>
+                        <span class="badge">Purpose</span>
+                    </li>
+                    <li>
+                        <span class="en">Could you repeat that, please?</span>
+                        <span class="id">- Minta diulang</span>
+                        <span class="badge">Clarification</span>
+                    </li>
+                    <li>
+                        <span class="en">I'll transfer you to [name].</span>
+                        <span class="id">- Mentransfer telepon</span>
+                        <span class="badge">Transfer</span>
+                    </li>
+                    <li>
+                        <span class="en">Thank you for calling. Goodbye.</span>
+                        <span class="id">- Menutup telepon</span>
+                        <span class="badge">Closing</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- MEETING -->
+            <div class="topic-card">
+                <h2><i class="fas fa-handshake"></i> Meeting Phrases</h2>
+                <ul>
+                    <li>
+                        <span class="en">Let's get started.</span>
+                        <span class="id">- Membuka meeting</span>
+                        <span class="badge">Opening</span>
+                    </li>
+                    <li>
+                        <span class="en">The main agenda today is...</span>
+                        <span class="id">- Menyebutkan agenda</span>
+                        <span class="badge">Agenda</span>
+                    </li>
+                    <li>
+                        <span class="en">Could you elaborate on that?</span>
+                        <span class="id">- Minta penjelasan lebih lanjut</span>
+                        <span class="badge">Clarification</span>
+                    </li>
+                    <li>
+                        <span class="en">I see your point, but...</span>
+                        <span class="id">- Setuju tapi ada catatan</span>
+                        <span class="badge">Polite Disagreement</span>
+                    </li>
+                    <li>
+                        <span class="en">Let's move on to the next point.</span>
+                        <span class="id">- Pindah ke topik selanjutnya</span>
+                        <span class="badge">Transition</span>
+                    </li>
+                    <li>
+                        <span class="en">To sum up...</span>
+                        <span class="id">- Menyimpulkan</span>
+                        <span class="badge">Closing</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>📚 EngBiz</h4>
+                    <p style="font-size:13px; color:#64748b;">Belajar English for Business dengan cara yang interaktif
+                        dan menyenangkan.</p>
+                </div>
+                <div>
+                    <h4>Navigation</h4>
+                    <a href="index.html">Home</a>
+                    <a href="modules.html">Modules</a>
+                    <a href="vocabulary.html">Vocabulary</a>
+                    <a href="practice.html">Practice</a>
+                </div>
+                <div>
+                    <h4>Topik</h4>
+                    <a href="communication.html">Communication</a>
+                    <a href="presentations.html">Presentations</a>
+                    <a href="negotiation.html">Negotiation</a>
+                    <a href="interviews.html">Interviews</a>
+                </div>
+            </div>
+            <div class="bottom">
+                &copy; 2024 EngBiz. Made with <i class="fas fa-heart" style="color:#f5576c;"></i> for professionals.
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

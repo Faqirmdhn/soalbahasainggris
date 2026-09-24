@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Practice Zone - English for Business</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #f0f4f8;
+            color: #1a1a2e;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0f0c29, #1a1a3e, #24243e);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 26px;
+            color: #4facfe;
+        }
+
+        .logo h1 {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo span {
+            color: #8892b0;
+            font-weight: 400;
+            font-size: 13px;
+            -webkit-text-fill-color: #8892b0;
+        }
+
+        .nav {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: #8892b0;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav a.active {
+            color: white;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .nav a i {
+            margin-right: 5px;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #0f0c29, #1a1a3e);
+            padding: 40px 0 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .page-header p {
+            color: #8892b0;
+            font-size: 16px;
+            margin-top: 6px;
+        }
+
+        .practice-section {
+            padding: 40px 0;
+        }
+
+        .practice-box {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .practice-box .progress {
+            margin-bottom: 16px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .practice-box .progress .bar {
+            height: 100%;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            border-radius: 10px;
+            transition: width 0.5s;
+        }
+
+        .practice-box .score-text {
+            text-align: center;
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .practice-box .question {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a2e;
+        }
+
+        .practice-box .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .practice-box .options button {
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            color: #1a1a2e;
+        }
+
+        .practice-box .options button:hover:not(:disabled) {
+            border-color: #4facfe;
+            background: #f0f7ff;
+        }
+
+        .practice-box .options button.correct {
+            border-color: #11998e;
+            background: #e6f9f1;
+            color: #11998e;
+        }
+
+        .practice-box .options button.wrong {
+            border-color: #f5576c;
+            background: #fde8eb;
+            color: #f5576c;
+        }
+
+        .practice-box .options button:disabled {
+            cursor: not-allowed;
+        }
+
+        .practice-box .feedback {
+            margin-top: 16px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .practice-box .feedback.show {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .practice-box .feedback.correct {
+            background: #e6f9f1;
+            color: #11998e;
+            border: 1px solid #11998e;
+        }
+
+        .practice-box .feedback.wrong {
+            background: #fde8eb;
+            color: #f5576c;
+            border: 1px solid #f5576c;
+        }
+
+        .practice-box .feedback .fb-text {
+            font-size: 15px;
+        }
+
+        .practice-box .btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #1a1a2e;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-outline:hover {
+            border-color: #4facfe;
+            background: #f0f7ff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer {
+            background: #0f0c29;
+            color: #8892b0;
+            padding: 30px 0 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer h4 {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer a {
+            color: #8892b0;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .footer .bottom {
+            text-align: center;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav {
+                justify-content: center;
+            }
+
+            .nav a {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+
+            .practice-box {
+                padding: 20px;
+            }
+
+            .practice-box .options {
+                grid-template-columns: 1fr;
+            }
+
+            .practice-box .question {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-briefcase"></i>
+                <h1>Eng<span>Biz</span></h1>
+            </a>
+            <nav class="nav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="modules.html"><i class="fas fa-book"></i> Modules</a>
+                <a href="vocabulary.html"><i class="fas fa-graduation-cap"></i> Vocabulary</a>
+                <a href="practice.html" class="active"><i class="fas fa-puzzle-piece"></i> Practice</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>🧠 Practice Zone</h1>
+            <p>Uji kemampuan Business English-mu dengan kuis interaktif ini</p>
+        </div>
+    </section>
+
+    <section class="practice-section">
+        <div class="container">
+            <div class="practice-box" id="practiceBox">
+                <div class="progress">
+                    <div class="bar" id="progressBar" style="width:0%;"></div>
+                </div>
+                <div class="score-text" id="scoreText">Skor: 0 / <span id="totalQuestions">0</span></div>
+
+                <div class="question" id="questionText">Loading...</div>
+
+                <div class="options" id="optionsContainer">
+                    <!-- Diisi oleh JS -->
+                </div>
+
+                <div class="feedback" id="feedbackPractice">
+                    <div class="fb-text" id="feedbackText"></div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn" style="display:none;">
+                        <i class="fas fa-arrow-right"></i> Soal Berikutnya
+                    </button>
+                    <button class="btn btn-success" onclick="resetPractice()" id="resetBtn">
+                        <i class="fas fa-redo"></i> Reset Kuis
+                    </button>
+                    <a href="modules.html" class="btn btn-outline">
+                        <i class="fas fa-book"></i> Kembali ke Modules
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>📚 EngBiz</h4>
+                    <p style="font-size:13px; color:#64748b;">Belajar English for Business dengan cara yang interaktif
+                        dan menyenangkan.</p>
+                </div>
+                <div>
+                    <h4>Navigation</h4>
+                    <a href="index.html">Home</a>
+                    <a href="modules.html">Modules</a>
+                    <a href="vocabulary.html">Vocabulary</a>
+                    <a href="practice.html">Practice</a>
+                </div>
+                <div>
+                    <h4>Topik</h4>
+                    <a href="communication.html">Communication</a>
+                    <a href="presentations.html">Presentations</a>
+                    <a href="negotiation.html">Negotiation</a>
+                    <a href="interviews.html">Interviews</a>
+                </div>
+            </div>
+            <div class="bottom">
+                &copy; 2024 EngBiz. Made with <i class="fas fa-heart" style="color:#f5576c;"></i> for professionals.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ================================================================
+        //  PRACTICE DATA
+        // ================================================================
+        const practiceQuestions = [{
+            question: 'What is the best way to start a professional email to someone you don\'t know?',
+            options: ['Hey, what\'s up?', 'Dear Sir/Madam,', 'Hi there!', 'Yo bro!'],
+            correct: 1,
+            explanation: '"Dear Sir/Madam," adalah sapaan formal yang tepat untuk email profesional.'
+        }, {
+            question: 'Which phrase is appropriate to politely disagree in a meeting?',
+            options: ['You\'re completely wrong!', 'I see it differently...', 'That\'s stupid!', 'No way!'],
+            correct: 1,
+            explanation: '"I see it differently..." adalah cara sopan untuk menyatakan ketidaksetujuan.'
+        }, {
+            question: 'How do you ask for clarification during a presentation?',
+            options: ['What did you say?', 'Could you elaborate on that point?', 'Huh?', 'I don\'t get it.'],
+            correct: 1,
+            explanation: '"Could you elaborate on that point?" adalah cara profesional untuk meminta klarifikasi.'
+        }, {
+            question: 'Which phrase is best to open a business presentation?',
+            options: ['Good morning everyone, thank you for being here.', 'Listen up!', 'Okay, let\'s start.',
+                'Hello!'
+            ],
+            correct: 0,
+            explanation: 'Pembukaan formal dengan sapaan dan ucapan terima kasih adalah yang paling profesional.'
+        }, {
+            question: 'What does "STAR" stand for in job interview method?',
+            options: ['Situation, Task, Action, Result', 'Start, Think, Act, Review',
+                'Strategy, Target, Action, Result', 'Speak, Tell, Answer, Respond'
+            ],
+            correct: 0,
+            explanation: 'STAR = Situation, Task, Action, Result. Metode untuk menjawab pertanyaan wawancara.'
+        }, {
+            question: 'How do you politely interrupt in a meeting?',
+            options: ['Shut up!', 'Excuse me, may I add something?', 'Wait!', 'Stop talking!'],
+            correct: 1,
+            explanation: '"Excuse me, may I add something?" adalah cara sopan untuk menyela.'
+        }, {
+            question: 'What is the best response to "Thank you for your presentation"?',
+            options: ['You\'re welcome.', 'Thank you for your attention.', 'No problem.', 'Sure.'],
+            correct: 1,
+            explanation: '"Thank you for your attention." adalah balasan yang profesional dan sopan.'
+        }, {
+            question: 'Which phrase is used to negotiate a price?',
+            options: ['Give me a discount!', 'Is there any room for negotiation?', 'That\'s too expensive!',
+                'Cheaper please!'
+            ],
+            correct: 1,
+            explanation: '"Is there any room for negotiation?" adalah cara profesional untuk menawar.'
+        }, {
+            question: 'What is a "stakeholder" in business?',
+            options: ['A person who invests money', 'A person or group with interest in a business',
+                'A company owner', 'An employee'
+            ],
+            correct: 1,
+            explanation: 'Stakeholder adalah pihak yang memiliki kepentingan dalam bisnis.'
+        }, {
+            question: 'How do you end a formal business email?',
+            options: ['Cheers!', 'Sincerely,', 'Bye!', 'See ya!'],
+            correct: 1,
+            explanation: '"Sincerely," adalah penutup formal yang tepat untuk email bisnis.'
+        }];
+
+        // ================================================================
+        //  GAME STATE
+        // ================================================================
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function loadPractice() {
+            const total = practiceQuestions.length;
+            document.getElementById('totalQuestions').textContent = total;
+            currentQuestion = 0;
+            score = 0;
+            answered = false;
+            renderQuestion();
+            document.getElementById('scoreText').textContent = `Skor: 0 / ${total}`;
+            document.getElementById('resetBtn').style.display = 'inline-flex';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('feedbackPractice').className = 'feedback';
+        }
+
+        function renderQuestion() {
+            const q = practiceQuestions[currentQuestion];
+            if (!q) return;
+
+            document.getElementById('questionText').textContent = q.question;
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = q.options.map((opt, idx) => `
+                    <button onclick="selectAnswer(${idx})" data-idx="${idx}">${opt}</button>
+                `).join('');
+
+            document.getElementById('feedbackPractice').className = 'feedback';
+            document.getElementById('nextBtn').style.display = 'none';
+            answered = false;
+
+            const total = practiceQuestions.length;
+            document.getElementById('progressBar').style.width = `${((currentQuestion) / total) * 100}%`;
+            document.getElementById('scoreText').textContent = `Skor: ${score} / ${total}`;
+        }
+
+        function selectAnswer(idx) {
+            if (answered) return;
+            answered = true;
+
+            const q = practiceQuestions[currentQuestion];
+            const buttons = document.querySelectorAll('#optionsContainer button');
+            const isCorrect = idx === q.correct;
+
+            buttons.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === q.correct) btn.classList.add('correct');
+                if (i === idx && !isCorrect) btn.classList.add('wrong');
+            });
+
+            const feedback = document.getElementById('feedbackPractice');
+            if (isCorrect) {
+                score++;
+                feedback.className = 'feedback show correct';
+                document.getElementById('feedbackText').textContent = `✅ Benar! ${q.explanation}`;
+            } else {
+                feedback.className = 'feedback show wrong';
+                document.getElementById('feedbackText').textContent = `❌ Kurang tepat. ${q.explanation}`;
+            }
+
+            document.getElementById('scoreText').textContent = `Skor: ${score} / ${practiceQuestions.length}`;
+
+            if (currentQuestion + 1 < practiceQuestions.length) {
+                document.getElementById('nextBtn').style.display = 'inline-flex';
+                document.getElementById('nextBtn').textContent = 'Soal Berikutnya →';
+            } else {
+                document.getElementById('nextBtn').style.display = 'inline-flex';
+                document.getElementById('nextBtn').textContent = '🏆 Lihat Hasil';
+                document.getElementById('nextBtn').onclick = function () {
+                    document.getElementById('feedbackPractice').className = 'feedback show correct';
+                    document.getElementById('feedbackText').textContent =
+                        `🎉 Selesai! Skor akhir: ${score} / ${practiceQuestions.length} ${score === practiceQuestions.length ? '🌟 Sempurna!' : ''}`;
+                    document.getElementById('nextBtn').style.display = 'none';
+                    document.getElementById('resetBtn').style.display = 'inline-flex';
+                    document.getElementById('progressBar').style.width = '100%';
+                };
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion + 1 < practiceQuestions.length) {
+                currentQuestion++;
+                renderQuestion();
+            }
+        }
+
+        function resetPractice() {
+            loadPractice();
+        }
+
+        // ================================================================
+        //  INIT
+        // ================================================================
+        loadPractice();
+
+        console.log('🧠 Practice Zone Loaded!');
+        console.log('📝 Ada 10 soal Business English');
+    </script>
+
+</body>
+
+</html>

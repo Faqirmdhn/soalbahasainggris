@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belajar 4 Past Tenses - Interaktif</title>
+    <title>Belajar 4 Past Tenses · Flashcard & Kuis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="icon" href="asset/logo.png">
     <style>
         * {
             margin: 0;
@@ -13,366 +15,615 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c2c 0%, #2d5a3b 50%, #1a4a2a 100%);
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             min-height: 100vh;
+            background: linear-gradient(145deg, #0f0e1a, #1a1a2e);
             padding: 20px;
+            color: #f0f3fa;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 960px;
             margin: 0 auto;
         }
 
-        /* Header */
+        /* ===== HEADER MATCHING WORDS ===== */
         .header {
-            background: linear-gradient(135deg, #2d6a4f, #1b4332);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 16px 0 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 24px;
         }
 
-        .header h1 {
-            color: white;
-            font-size: 28px;
-            margin-bottom: 10px;
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
-        .header h1 span {
-            background: white;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            -webkit-text-stroke: 1px white;
-        }
-
-        .header p {
-            color: rgba(255, 255, 255, 0.9);
+        .header-left .back-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #9ca3cf;
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
             font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* Tab Navigation */
+        .header-left .back-btn:hover {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+            border-color: rgba(52, 211, 153, 0.3);
+            transform: translateX(-3px);
+        }
+
+        .header-title-box h1 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6ee7b7, #34d399, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        .header-title-box p {
+            color: #9ca3cf;
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-right .badge {
+            background: rgba(52, 211, 153, 0.12);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            padding: 6px 18px;
+            border-radius: 40px;
+            color: #34d399;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ===== TABS NAVIGATION ===== */
         .tabs {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
         }
 
         .tab-btn {
             flex: 1;
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
+            min-width: 170px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 14px;
+            color: #9ca3cf;
+            font-size: 13.5px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-align: center;
         }
 
         .tab-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border-color: rgba(52, 211, 153, 0.3);
             transform: translateY(-2px);
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, #2d6a4f, #1b4332);
-            box-shadow: 0 5px 15px rgba(45, 106, 79, 0.4);
+            background: linear-gradient(135deg, rgba(52, 211, 153, 0.2), rgba(5, 150, 105, 0.25));
+            color: #34d399;
+            border-color: #34d399;
+            box-shadow: 0 8px 24px rgba(5, 150, 105, 0.25);
         }
 
-        /* Kartu Materi */
+        /* ===== MATERI CARDS ===== */
         .materi-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 28px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             display: none;
         }
 
         .materi-card.active {
             display: block;
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .materi-card h2 {
-            color: #2d6a4f;
-            margin-bottom: 15px;
-            font-size: 20px;
-            border-left: 4px solid #2d6a4f;
-            padding-left: 15px;
+            color: #f0f3fa;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .materi-card h2 span {
+            color: #34d399;
+        }
+
+        .materi-section-title {
+            color: #d6defa;
+            font-size: 15px;
+            font-weight: 700;
+            margin: 18px 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .pola-box {
-            background: #e8f5e9;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-left: 4px solid #34d399;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
         }
 
         .pola-box h3 {
-            color: #1b4332;
-            font-size: 16px;
-            margin-bottom: 10px;
+            color: #34d399;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pola-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pola-tag {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+            padding: 2px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid rgba(52, 211, 153, 0.2);
         }
 
         .pola-box code {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2d6a4f;
-            background: white;
-            padding: 8px 15px;
+            font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+            font-size: 15px;
+            font-weight: 600;
+            color: #e2e8f0;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 6px 14px;
             border-radius: 10px;
             display: inline-block;
-            margin: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .usage-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .usage-list li {
+            position: relative;
+            padding-left: 24px;
+            color: #cbd5e1;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .usage-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 6px;
+            color: #34d399;
+            font-size: 11px;
+            top: 2px;
+        }
+
+        .usage-list strong {
+            color: #f1f5f9;
         }
 
         .contoh-list {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         .contoh-item {
-            background: #e8ecf1;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13.5px;
+            color: #d6defa;
             cursor: pointer;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .contoh-item:hover {
-            background: #2d6a4f;
-            color: white;
-            transform: scale(1.05);
+            background: rgba(52, 211, 153, 0.15);
+            border-color: rgba(52, 211, 153, 0.4);
+            color: #fff;
+            transform: translateY(-2px);
         }
 
-        /* Timer & Stats */
-        .quiz-header {
+        /* ===== QUIZ CARD ===== */
+        .quiz-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 32px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Stats Bar matching Words */
+        .score-bar {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
+            gap: 16px;
+            padding: 14px 20px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .score-bar .item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #9ca3cf;
+        }
+
+        .score-bar .item .num {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .score-bar .item .num.green {
+            color: #34d399;
+        }
+
+        .score-bar .item .num.mint {
+            color: #6ee7b7;
+        }
+
+        .score-bar .item .num.gold {
+            color: #fbbf24;
+        }
+
+        .score-bar .item .num.cyan {
+            color: #38bdf8;
+        }
+
+        /* Mode Selector */
+        .mode-selector {
+            display: flex;
+            gap: 8px;
             margin-bottom: 20px;
             flex-wrap: wrap;
-            gap: 10px;
         }
 
-        .stats {
-            display: flex;
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 50px;
-        }
-
-        .stat-box {
+        .mode-btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 9px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 30px;
+            color: #9ca3cf;
+            font-size: 12.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
             text-align: center;
         }
 
-        .stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffd700;
+        .mode-btn:hover {
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff;
+            border-color: rgba(52, 211, 153, 0.25);
         }
 
-        .stat-label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .timer {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #ffd700;
-        }
-
-        /* Kartu Soal */
-        .quiz-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        .mode-btn.active {
+            background: rgba(52, 211, 153, 0.15);
+            border-color: #34d399;
+            color: #34d399;
+            box-shadow: 0 4px 15px rgba(52, 211, 153, 0.2);
         }
 
         .selected-tense {
-            background: #2d6a4f;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            display: inline-block;
-            margin-bottom: 15px;
+            background: rgba(52, 211, 153, 0.1);
+            color: #34d399;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            margin-bottom: 18px;
         }
 
+        /* Progress Bar */
         .progress-bar {
-            background: #e0e0e0;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
             height: 8px;
-            margin: 15px 0;
+            margin-bottom: 24px;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .progress-fill {
-            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+            background: linear-gradient(135deg, #34d399, #059669);
             height: 100%;
             width: 0%;
-            transition: width 0.5s;
-            border-radius: 10px;
+            transition: width 0.4s ease;
+            border-radius: 12px;
         }
 
+        /* Question Box */
         .soal-area {
-            background: #f8f9ff;
-            border-radius: 16px;
-            padding: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 28px 24px;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            position: relative;
         }
 
         .soal-indo {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 16px;
+            line-height: 1.4;
         }
 
-        .soal-indo span {
-            background: #e8ecf1;
-            padding: 5px 12px;
+        .badge-country {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 3px 12px;
             border-radius: 20px;
-            font-size: 12px;
-            color: #2d6a4f;
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .soal-eng {
             font-size: 20px;
-            color: #1b4332;
-            margin-top: 15px;
-            padding: 15px;
-            background: white;
-            border-radius: 12px;
-            border: 2px dashed #ddd;
+            color: #34d399;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            border: 1.5px dashed rgba(52, 211, 153, 0.3);
+            display: inline-block;
+            max-width: 100%;
+            line-height: 1.5;
         }
 
         .blank {
             display: inline-block;
-            min-width: 150px;
-            border-bottom: 3px solid #2d6a4f;
-            color: #2d6a4f;
-            font-weight: bold;
+            min-width: 120px;
+            border-bottom: 2.5px solid #34d399;
+            color: #e2e8f0;
+            font-weight: 700;
+            padding: 0 4px;
+        }
+
+        /* Answer Input */
+        .answer-input-box {
+            position: relative;
+            margin-bottom: 20px;
         }
 
         input.answer-input {
             width: 100%;
-            padding: 15px;
+            padding: 16px 20px;
             font-size: 18px;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            color: #fff;
             text-align: center;
-            font-family: monospace;
+            font-family: 'JetBrains Mono', Consolas, monospace;
             transition: all 0.3s;
         }
 
         input.answer-input:focus {
             outline: none;
-            border-color: #2d6a4f;
-            box-shadow: 0 0 10px rgba(45, 106, 79, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #34d399;
+            box-shadow: 0 0 20px rgba(52, 211, 153, 0.25);
         }
 
+        input.answer-input::placeholder {
+            color: #64748b;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-size: 15px;
+        }
+
+        /* Buttons */
         .btn-group {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin-top: 10px;
             flex-wrap: wrap;
         }
 
-        button {
+        .btn-group button {
             flex: 1;
-            padding: 12px;
+            min-width: 130px;
+            padding: 13px 20px;
             font-size: 14px;
-            font-weight: bold;
+            font-weight: 700;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-check {
-            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+            background: linear-gradient(135deg, #34d399, #059669);
             color: white;
+            box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3);
         }
 
         .btn-check:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(45, 106, 79, 0.4);
-        }
-
-        .btn-next {
-            background: #48bb78;
-            color: white;
-        }
-
-        .btn-next:hover {
-            background: #38a169;
+            box-shadow: 0 12px 25px rgba(5, 150, 105, 0.4);
+            filter: brightness(1.1);
         }
 
         .btn-hint {
-            background: #ed8936;
-            color: white;
+            background: rgba(251, 191, 36, 0.12);
+            border: 1px solid rgba(251, 191, 36, 0.25) !important;
+            color: #fbbf24;
         }
 
         .btn-hint:hover {
-            background: #dd6b20;
+            background: rgba(251, 191, 36, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-next {
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.25) !important;
+            color: #38bdf8;
+        }
+
+        .btn-next:hover {
+            background: rgba(56, 189, 248, 0.2);
+            transform: translateY(-2px);
         }
 
         .btn-reset {
-            background: #e53e3e;
-            color: white;
+            background: rgba(244, 63, 94, 0.12);
+            border: 1px solid rgba(244, 63, 94, 0.25) !important;
+            color: #f43f5e;
         }
 
         .btn-reset:hover {
-            background: #c53030;
+            background: rgba(244, 63, 94, 0.2);
+            transform: translateY(-2px);
         }
 
-        /* Feedback */
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Feedback Toasts */
         .feedback {
             margin-top: 20px;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 16px 20px;
+            border-radius: 16px;
             text-align: center;
-            animation: fadeIn 0.5s;
+            font-size: 15px;
+            font-weight: 600;
+            display: none;
+            animation: fadeIn 0.3s ease;
+            line-height: 1.5;
         }
 
         .feedback.correct {
-            background: #c6f6d5;
-            color: #22543d;
-            border-left: 4px solid #48bb78;
+            display: block;
+            background: rgba(52, 211, 153, 0.12);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
         }
 
         .feedback.wrong {
-            background: #fed7d7;
-            color: #742a2a;
-            border-left: 4px solid #f56565;
+            display: block;
+            background: rgba(244, 63, 94, 0.12);
+            color: #fca5a5;
+            border: 1px solid rgba(244, 63, 94, 0.3);
         }
 
         .feedback.hint {
-            background: #feebc8;
-            color: #7b341e;
-            border-left: 4px solid #ed8936;
+            display: block;
+            background: rgba(251, 191, 36, 0.12);
+            color: #fde68a;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #4a4a6a;
+            padding: 30px 0 10px;
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 30px;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
+                transform: translateY(-6px);
             }
 
             to {
@@ -381,32 +632,45 @@
             }
         }
 
-        /* Mode selector */
-        .mode-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            animation: fall 2s linear forwards;
+            z-index: 1000;
+            pointer-events: none;
+            border-radius: 50%;
         }
 
-        .mode-btn {
-            flex: 1;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.05);
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            color: #333;
-            cursor: pointer;
-            transition: all 0.3s;
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
         }
 
-        .mode-btn.active {
-            background: linear-gradient(135deg, #2d6a4f, #1b4332);
-            border-color: #ffd700;
-            color: white;
-        }
+        /* Responsive */
+        @media (max-width: 640px) {
+            body {
+                padding: 14px;
+            }
 
-        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .header-title-box h1 {
+                font-size: 22px;
+            }
+
+            .materi-card,
+            .quiz-card {
+                padding: 20px 16px;
+                border-radius: 20px;
+            }
+
             .soal-indo {
                 font-size: 18px;
             }
@@ -415,17 +679,15 @@
                 font-size: 16px;
             }
 
-            .stat-value {
-                font-size: 18px;
-            }
-
             .btn-group button {
-                font-size: 12px;
+                font-size: 12.5px;
+                padding: 11px 12px;
             }
 
             .tab-btn {
-                font-size: 11px;
-                padding: 8px 10px;
+                min-width: 140px;
+                font-size: 12.5px;
+                padding: 10px;
             }
         }
     </style>
@@ -433,182 +695,203 @@
 
 <body>
     <div class="container">
-        <!-- Header -->
+        <!-- Top Header with Back to Dashboard -->
         <div class="header">
-            <h1>📚 Belajar <span>4 Past Tenses</span></h1>
-            <p>Simple Past | Past Continuous | Past Perfect | Past Perfect Continuous</p>
+            <div class="header-left">
+                <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Dashboard</a>
+                <div class="header-title-box">
+                    <h1>🕰️ Past Tenses</h1>
+                    <p>Simple · Continuous · Perfect · Perfect Continuous</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="badge"><i class="fas fa-clock-rotate-left"></i> 4 Tenses & 42 Soal</span>
+            </div>
         </div>
 
         <!-- Tab Navigation -->
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('simple')">📖 Simple Past</button>
-            <button class="tab-btn" onclick="switchTab('continuous')">🔄 Past Continuous</button>
-            <button class="tab-btn" onclick="switchTab('perfect')">✨ Past Perfect</button>
-            <button class="tab-btn" onclick="switchTab('perfectcont')">⏳ Past Perfect Continuous</button>
+            <button class="tab-btn active" onclick="switchTab('simple', this)"><i class="fas fa-history"></i> Simple Past</button>
+            <button class="tab-btn" onclick="switchTab('continuous', this)"><i class="fas fa-sync-alt"></i> Past Continuous</button>
+            <button class="tab-btn" onclick="switchTab('perfect', this)"><i class="fas fa-check-double"></i> Past Perfect</button>
+            <button class="tab-btn" onclick="switchTab('perfectcont', this)"><i class="fas fa-hourglass-half"></i> Past Perfect Cont.</button>
         </div>
 
         <!-- Materi Simple Past -->
         <div id="materi-simple" class="materi-card active">
-            <h2>📖 Simple Past Tense</h2>
+            <h2><i class="fas fa-history" style="color: #34d399;"></i> Simple Past Tense</h2>
             <div class="pola-box">
                 <h3>📐 Pola Kalimat:</h3>
-                <code>(+) S + V2 + O</code>
-                <code>(-) S + did + not + V1 + O</code>
-                <code>(?) Did + S + V1 + O?</code>
+                <div class="pola-item"><span class="pola-tag">(+)</span> <code>S + V2 + O</code></div>
+                <div class="pola-item"><span class="pola-tag">(-)</span> <code>S + did + not + V1 + O</code></div>
+                <div class="pola-item"><span class="pola-tag">(?)</span> <code>Did + S + V1 + O?</code></div>
             </div>
             <div class="pola-box">
                 <h3>✨ Kapan Digunakan?</h3>
-                <ul style="margin-left: 20px; color: #555;">
-                    <li>Kejadian di masa lalu yang sudah selesai → I went to market yesterday</li>
-                    <li>Kebiasaan di masa lalu → I played football every Sunday when I was a child</li>
-                    <li>Fakta di masa lalu → He lived in London for 5 years</li>
+                <ul class="usage-list">
+                    <li><strong>Kejadian yang sudah selesai di masa lampau</strong> → I went to Bali last year</li>
+                    <li><strong>Kebiasaan di masa lalu (Past Habits)</strong> → I played soccer when I was a kid</li>
+                    <li><strong>Urutan aksi di masa lampau</strong> → He entered the room and sat down</li>
                 </ul>
             </div>
-            <h3>📝 Contoh Kalimat:</h3>
+            <div class="materi-section-title"><i class="fas fa-comments"></i> Contoh Kalimat:</div>
             <div class="contoh-list">
-                <div class="contoh-item">I went to market yesterday</div>
-                <div class="contoh-item">She ate pizza last night</div>
-                <div class="contoh-item">They bought a new car</div>
-                <div class="contoh-item">He visited his grandmother</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> I went to market yesterday</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> She ate pizza last night</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> They bought a new car</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> He visited his grandmother</div>
             </div>
         </div>
 
         <!-- Materi Past Continuous -->
         <div id="materi-continuous" class="materi-card">
-            <h2>🔄 Past Continuous Tense</h2>
+            <h2><i class="fas fa-sync-alt" style="color: #34d399;"></i> Past Continuous Tense</h2>
             <div class="pola-box">
                 <h3>📐 Pola Kalimat:</h3>
-                <code>(+) S + was/were + V-ing + O</code>
-                <code>(-) S + was/were + not + V-ing + O</code>
-                <code>(?) Was/Were + S + V-ing + O?</code>
+                <div class="pola-item"><span class="pola-tag">(+)</span> <code>S + was/were + V-ing + O</code></div>
+                <div class="pola-item"><span class="pola-tag">(-)</span> <code>S + was/were + not + V-ing + O</code></div>
+                <div class="pola-item"><span class="pola-tag">(?)</span> <code>Was/Were + S + V-ing + O?</code></div>
             </div>
             <div class="pola-box">
                 <h3>✨ Kapan Digunakan?</h3>
-                <ul style="margin-left: 20px; color: #555;">
-                    <li>Kejadian yang sedang berlangsung di masa lalu → I was watching TV when you called</li>
-                    <li>Dua kejadian bersamaan di masa lalu → While I was cooking, she was sleeping</li>
-                    <li>Suasana di masa lalu → It was raining heavily last night</li>
+                <ul class="usage-list">
+                    <li><strong>Sedang terjadi di waktu tertentu di masa lampau</strong> → I was studying at 8 PM</li>
+                    <li><strong>Kejadian berlangsung saat kejadian lain menyela</strong> → I was watching TV when you called</li>
+                    <li><strong>Dua aktivitas yang berjalan bersamaan</strong> → She was cooking while I was reading</li>
                 </ul>
             </div>
-            <h3>📝 Contoh Kalimat:</h3>
+            <div class="materi-section-title"><i class="fas fa-comments"></i> Contoh Kalimat:</div>
             <div class="contoh-list">
-                <div class="contoh-item">I was watching TV when you called</div>
-                <div class="contoh-item">She was sleeping at 10 PM</div>
-                <div class="contoh-item">They were playing football</div>
-                <div class="contoh-item">It was raining heavily</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> I was watching TV when you called</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> She was sleeping at 10 PM</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> They were playing football</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> It was raining heavily</div>
             </div>
         </div>
 
         <!-- Materi Past Perfect -->
         <div id="materi-perfect" class="materi-card">
-            <h2>✨ Past Perfect Tense</h2>
+            <h2><i class="fas fa-check-double" style="color: #34d399;"></i> Past Perfect Tense</h2>
             <div class="pola-box">
                 <h3>📐 Pola Kalimat:</h3>
-                <code>(+) S + had + V3 + O</code>
-                <code>(-) S + had + not + V3 + O</code>
-                <code>(?) Had + S + V3 + O?</code>
+                <div class="pola-item"><span class="pola-tag">(+)</span> <code>S + had + V3 + O</code></div>
+                <div class="pola-item"><span class="pola-tag">(-)</span> <code>S + had + not + V3 + O</code></div>
+                <div class="pola-item"><span class="pola-tag">(?)</span> <code>Had + S + V3 + O?</code></div>
             </div>
             <div class="pola-box">
                 <h3>✨ Kapan Digunakan?</h3>
-                <ul style="margin-left: 20px; color: #555;">
-                    <li>Kejadian yang selesai SEBELUM kejadian lain di masa lalu → I had finished my homework before
-                        dinner</li>
-                    <li>Pengalaman di masa lalu → I had never seen such a beautiful place</li>
-                    <li>Penyebab kejadian di masa lalu → He was tired because he had worked hard</li>
+                <ul class="usage-list">
+                    <li><strong>Kejadian yang telah selesai sebelum kejadian masa lalu lainnya terjadi</strong> → She had left when I arrived</li>
+                    <li><strong>Pengalaman sebelum waktu tertentu di masa lalu</strong> → I had never seen that before 2020</li>
+                    <li><strong>Conditional Type 3 (penyesalan masa lalu)</strong> → If I had known, I would have told you</li>
                 </ul>
             </div>
-            <h3>📝 Contoh Kalimat:</h3>
+            <div class="materi-section-title"><i class="fas fa-comments"></i> Contoh Kalimat:</div>
             <div class="contoh-list">
-                <div class="contoh-item">I had finished my homework before dinner</div>
-                <div class="contoh-item">She had left when I arrived</div>
-                <div class="contoh-item">They had eaten all the food</div>
-                <div class="contoh-item">He had never been to Bali</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> I had finished my homework before dinner</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> She had left when I arrived</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> They had eaten all the food</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> I had never been to Bali before</div>
             </div>
         </div>
 
         <!-- Materi Past Perfect Continuous -->
         <div id="materi-perfectcont" class="materi-card">
-            <h2>⏳ Past Perfect Continuous Tense</h2>
+            <h2><i class="fas fa-hourglass-half" style="color: #34d399;"></i> Past Perfect Continuous Tense</h2>
             <div class="pola-box">
                 <h3>📐 Pola Kalimat:</h3>
-                <code>(+) S + had + been + V-ing + O</code>
-                <code>(-) S + had + not + been + V-ing + O</code>
-                <code>(?) Had + S + been + V-ing + O?</code>
+                <div class="pola-item"><span class="pola-tag">(+)</span> <code>S + had + been + V-ing + O</code></div>
+                <div class="pola-item"><span class="pola-tag">(-)</span> <code>S + had + not + been + V-ing + O</code></div>
+                <div class="pola-item"><span class="pola-tag">(?)</span> <code>Had + S + been + V-ing + O?</code></div>
             </div>
             <div class="pola-box">
                 <h3>✨ Kapan Digunakan?</h3>
-                <ul style="margin-left: 20px; color: #555;">
-                    <li>Durasi kejadian sebelum kejadian lain di masa lalu → I had been waiting for 2 hours when the bus
-                        came</li>
-                    <li>Menekankan lamanya waktu → She had been studying for 5 years before moving</li>
-                    <li>Penyebab dengan durasi → He was tired because he had been running</li>
+                <ul class="usage-list">
+                    <li><strong>Durasi suatu aktivitas sebelum kejadian lampau lainnya</strong> → I had been waiting for 2 hours when the bus came</li>
+                    <li><strong>Menunjukkan penyebab kejadian di masa lampau</strong> → He was tired because he had been running</li>
                 </ul>
             </div>
-            <h3>📝 Contoh Kalimat:</h3>
+            <div class="materi-section-title"><i class="fas fa-comments"></i> Contoh Kalimat:</div>
             <div class="contoh-list">
-                <div class="contoh-item">I had been waiting for 2 hours</div>
-                <div class="contoh-item">She had been studying for 5 years</div>
-                <div class="contoh-item">They had been playing for an hour</div>
-                <div class="contoh-item">It had been raining since morning</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> I had been waiting for 2 hours when the bus came</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> She had been studying English for 5 years before moving</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> They had been playing for an hour when it rained</div>
+                <div class="contoh-item"><i class="fas fa-check-circle"></i> He had been working at the company for 10 years</div>
             </div>
         </div>
 
         <!-- Quiz Section -->
         <div class="quiz-card">
-            <div class="quiz-header">
-                <div class="stats">
-                    <div class="stat-box">
-                        <div class="stat-value" id="score">0</div>
-                        <div class="stat-label">✅ Skor</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="total">0</div>
-                        <div class="stat-label">📝 Soal</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="streak">0</div>
-                        <div class="stat-label">🔥 Streak</div>
-                    </div>
+            <!-- Stats Bar matching Words -->
+            <div class="score-bar">
+                <div class="item">
+                    <i class="fas fa-check-circle" style="color:#34d399;"></i>
+                    <span>Skor:</span>
+                    <span class="num green" id="score">0</span>
                 </div>
-                <div class="timer" id="timer">⏱️ 00:00</div>
+                <div class="item">
+                    <i class="fas fa-list-ol" style="color:#6ee7b7;"></i>
+                    <span>Soal:</span>
+                    <span class="num mint" id="total">0</span>
+                </div>
+                <div class="item">
+                    <i class="fas fa-fire" style="color:#fbbf24;"></i>
+                    <span>Streak:</span>
+                    <span class="num gold" id="streak">0</span>
+                </div>
+                <div class="item">
+                    <i class="fas fa-clock" style="color:#38bdf8;"></i>
+                    <span id="timer">00:00</span>
+                </div>
             </div>
 
+            <!-- Mode Selector -->
             <div class="mode-selector">
-                <button class="mode-btn active" onclick="setMode('all')">🎲 SEMUA TENSES</button>
-                <button class="mode-btn" onclick="setMode('simple')">📖 Simple Past</button>
-                <button class="mode-btn" onclick="setMode('continuous')">🔄 Past Continuous</button>
-                <button class="mode-btn" onclick="setMode('perfect')">✨ Past Perfect</button>
-                <button class="mode-btn" onclick="setMode('perfectcont')">⏳ Past Perfect Continuous</button>
+                <button class="mode-btn active" onclick="setMode('all', this)">🎲 SEMUA TENSES</button>
+                <button class="mode-btn" onclick="setMode('simple', this)">📖 Simple Past</button>
+                <button class="mode-btn" onclick="setMode('continuous', this)">🔄 Continuous</button>
+                <button class="mode-btn" onclick="setMode('perfect', this)">✨ Perfect</button>
+                <button class="mode-btn" onclick="setMode('perfectcont', this)">⏳ Perfect Cont.</button>
             </div>
 
-            <div class="selected-tense" id="selectedTenseDisplay">🎲 Mode: Semua Tenses</div>
+            <div>
+                <span class="selected-tense" id="selectedTenseDisplay"><i class="fas fa-dice"></i> Mode: Semua Tenses</span>
+            </div>
 
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
 
             <div class="soal-area">
-                <div class="soal-indo">
-                    <span>🇮🇩 INDONESIA</span><br>
-                    <strong id="soalIndonesia">Saya pergi ke pasar kemarin</strong>
+                <div>
+                    <span class="badge-country">🇮🇩 BAHASA INDONESIA</span>
                 </div>
-                <div class="soal-eng">
-                    <span>🇬🇧 ENGLISH</span><br>
-                    <span id="soalInggris">I ________ to market yesterday</span>
+                <div class="soal-indo" id="soalIndonesia">Saya pergi ke pasar kemarin</div>
+                
+                <div>
+                    <span class="badge-country">🇬🇧 ENGLISH</span>
+                </div>
+                <div class="soal-eng" id="soalInggris">
+                    I <span class="blank">________</span> to market yesterday
                 </div>
             </div>
 
-            <input type="text" class="answer-input" id="answerInput" placeholder="Ketik jawabanmu di sini..."
-                autocomplete="off">
+            <div class="answer-input-box">
+                <input type="text" class="answer-input" id="answerInput" placeholder="Ketik jawabanmu di sini..." autocomplete="off">
+            </div>
 
             <div class="btn-group">
-                <button class="btn-check" onclick="checkAnswer()">✅ CEK JAWABAN</button>
-                <button class="btn-hint" onclick="showHint()">💡 BOCORAN</button>
-                <button class="btn-next" onclick="nextQuestion()">⏩ SOAL NEXT</button>
-                <button class="btn-reset" onclick="resetGame()">🔄 RESET GAME</button>
+                <button class="btn-check" onclick="checkAnswer()"><i class="fas fa-check"></i> CEK JAWABAN</button>
+                <button class="btn-hint" onclick="showHint()"><i class="fas fa-lightbulb"></i> BOCORAN</button>
+                <button class="btn-next" onclick="nextQuestion()"><i class="fas fa-forward"></i> SOAL NEXT</button>
+                <button class="btn-reset" onclick="resetGame()"><i class="fas fa-redo"></i> RESET GAME</button>
             </div>
 
             <div class="feedback" id="feedback"></div>
+        </div>
+
+        <div class="footer">
+            <p>✨ Latihan Past Tenses Interaktif · Dibuat untuk Kemudahan Belajar Bahasa Inggris</p>
         </div>
     </div>
 
@@ -705,7 +988,7 @@
                 timerSeconds++;
                 const minutes = Math.floor(timerSeconds / 60);
                 const seconds = timerSeconds % 60;
-                document.getElementById('timer').innerHTML = `⏱️ ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                document.getElementById('timer').textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }, 1000);
         }
 
@@ -718,10 +1001,11 @@
             usedHint = false;
             updateStats();
             loadQuestion();
-            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('feedback').style.display = 'none';
             document.getElementById('answerInput').value = '';
             document.getElementById('answerInput').focus();
-            if (timerInterval) clearInterval(timerInterval);
+            document.querySelector('.btn-check').disabled = false;
+            document.querySelector('.btn-next').disabled = false;
             startTimer();
         }
 
@@ -730,8 +1014,8 @@
                 loadQuestionsForMode();
             }
             const q = currentQuestions[currentQuestionIndex];
-            document.getElementById('soalIndonesia').innerHTML = q.indo;
-            document.getElementById('soalInggris').innerHTML = q.inggris;
+            document.getElementById('soalIndonesia').textContent = q.indo;
+            document.getElementById('soalInggris').innerHTML = q.inggris.replace('________', '<span class="blank">________</span>');
             document.getElementById('answerInput').value = '';
             document.getElementById('answerInput').focus();
             usedHint = false;
@@ -741,15 +1025,17 @@
         }
 
         function updateStats() {
-            document.getElementById('score').innerHTML = score;
-            document.getElementById('total').innerHTML = totalAnswered;
-            document.getElementById('streak').innerHTML = streak;
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = currentQuestions.length;
+            document.getElementById('streak').textContent = streak;
         }
 
-        function setMode(mode) {
+        function setMode(mode, btnElement) {
             currentMode = mode;
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-            if (event && event.target) event.target.classList.add('active');
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
 
             const modeNames = {
                 'all': '🎲 Mode: Semua Tenses',
@@ -758,7 +1044,7 @@
                 'perfect': '✨ Mode: Past Perfect',
                 'perfectcont': '⏳ Mode: Past Perfect Continuous'
             };
-            document.getElementById('selectedTenseDisplay').innerHTML = modeNames[mode];
+            document.getElementById('selectedTenseDisplay').innerHTML = `<i class="fas fa-tag"></i> ${modeNames[mode]}`;
 
             resetGame();
         }
@@ -777,13 +1063,12 @@
             const normalizedCorrect = correctAnswer.replace(/\s+/g, ' ').trim();
 
             if (normalizedUser === normalizedCorrect) {
-                let points = 1;
                 if (!usedHint) {
                     streak++;
                 } else {
                     streak = 0;
                 }
-                score += points;
+                score += 1;
                 totalAnswered++;
 
                 updateStats();
@@ -795,18 +1080,19 @@
                     setTimeout(() => {
                         currentQuestionIndex++;
                         loadQuestion();
-                        document.getElementById('feedback').innerHTML = '';
+                        document.getElementById('feedback').style.display = 'none';
                     }, 1500);
                 } else {
                     setTimeout(() => {
-                        showFeedback(`🎉 SELAMAT! Kamu menyelesaikan semua ${currentQuestions.length} soal! Skor akhir: ${score}/${totalAnswered} 🎉`, 'correct');
+                        showFeedback(`🎉 SELAMAT! Kamu menyelesaikan semua ${currentQuestions.length} soal Past Tenses! Skor akhir: ${score}/${totalAnswered} 🎉`, 'correct');
+                        document.querySelector('.btn-check').disabled = true;
+                        document.querySelector('.btn-next').disabled = true;
                     }, 500);
                 }
             } else {
-                showFeedback(`❌ SALAH! Jawaban yang benar adalah: "${correctAnswer}". Game Over! Memulai ulang...`, 'wrong');
-                setTimeout(() => {
-                    resetGame();
-                }, 2000);
+                streak = 0;
+                updateStats();
+                showFeedback(`❌ SALAH! Jawaban yang benar adalah: "${correctAnswer}". Coba lagi atau tekan Soal Next!`, 'wrong');
             }
         }
 
@@ -817,17 +1103,17 @@
             }
             const q = currentQuestions[currentQuestionIndex];
             usedHint = true;
-            showFeedback(`💡 BOCORAN: ${q.hint}<br>📝 Jawaban: "${q.answer}"<br>⚠️ Streak akan di-reset jika jawaban benar!`, 'hint');
+            showFeedback(`💡 BOCORAN: ${q.hint} — JAWABAN: "${q.answer}" (Streak akan di-reset)`, 'hint');
         }
 
         function nextQuestion() {
             if (currentQuestionIndex + 1 < currentQuestions.length) {
                 currentQuestionIndex++;
                 loadQuestion();
-                document.getElementById('feedback').innerHTML = '';
+                document.getElementById('feedback').style.display = 'none';
                 usedHint = false;
             } else {
-                showFeedback('🎉 Kamu sudah sampai di soal terakhir! Selesaikan dulu ya!', 'hint');
+                showFeedback('🎉 Kamu sudah sampai di soal terakhir!', 'hint');
             }
         }
 
@@ -835,32 +1121,34 @@
             const feedbackDiv = document.getElementById('feedback');
             feedbackDiv.innerHTML = message;
             feedbackDiv.className = `feedback ${type}`;
+            feedbackDiv.style.display = 'block';
         }
 
         function createConfetti() {
             for (let i = 0; i < 30; i++) {
                 const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
+                confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = `hsl(${Math.random() * 360}, 90%, 65%)`;
                 confetti.style.top = '-10px';
                 confetti.style.width = Math.random() * 8 + 4 + 'px';
                 confetti.style.height = Math.random() * 8 + 4 + 'px';
-                confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                confetti.style.borderRadius = '50%';
-                confetti.style.zIndex = '1000';
-                confetti.style.pointerEvents = 'none';
-                confetti.style.animation = 'fall 2s linear forwards';
                 document.body.appendChild(confetti);
                 setTimeout(() => confetti.remove(), 2000);
             }
         }
 
-        function switchTab(tab) {
+        function switchTab(tab, btnElement) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            if (event && event.target) event.target.classList.add('active');
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
 
             document.querySelectorAll('.materi-card').forEach(card => card.classList.remove('active'));
-            document.getElementById(`materi-${tab}`).classList.add('active');
+            const targetMateri = document.getElementById(`materi-${tab}`);
+            if (targetMateri) {
+                targetMateri.classList.add('active');
+            }
         }
 
         document.getElementById('answerInput').addEventListener('keypress', function (e) {
@@ -871,16 +1159,10 @@
 
         // Initialize
         loadQuestionsForMode();
+        updateStats();
+        loadQuestion();
         startTimer();
     </script>
-    <style>
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-        }
-    </style>
 </body>
 
 </html>

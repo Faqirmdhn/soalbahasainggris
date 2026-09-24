@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOEFL Structure & Written Expression - Latihan</title>
+    <title>TOEFL Structure & Written Expression · Latihan Soal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="icon" href="asset/logo.png">
     <style>
         * {
             margin: 0;
@@ -12,123 +15,214 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0c1445 0%, #1a2a6c 50%, #0f3460 100%);
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             min-height: 100vh;
+            background: linear-gradient(145deg, #0f0e1a, #1a1a2e);
             padding: 20px;
+            color: #f0f3fa;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
         }
 
-        /* Header */
+        /* ===== HEADER MATCHING WORDS ===== */
         .header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .header h1 {
-            color: white;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .header h1 span {
-            color: #ffd700;
-        }
-
-        .header p {
-            color: rgba(255,255,255,0.9);
-            font-size: 14px;
-        }
-
-        /* Timer & Score */
-        .info-panel {
-            background: white;
-            border-radius: 20px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            gap: 16px;
+            padding: 16px 0 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 24px;
         }
 
-        .score-box, .timer-box, .question-counter {
-            text-align: center;
-            flex: 1;
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
-        .score-box .label, .timer-box .label, .question-counter .label {
-            font-size: 12px;
-            color: #888;
-            letter-spacing: 1px;
+        .header-left .back-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #9ca3cf;
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .score-box .value, .timer-box .value, .question-counter .value {
-            font-size: 28px;
-            font-weight: bold;
+        .header-left .back-btn:hover {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.3);
+            transform: translateX(-3px);
         }
 
-        .score-box .value { color: #2d6a4f; }
-        .timer-box .value { color: #e53e3e; }
-        .question-counter .value { color: #667eea; }
+        .header-title-box h1 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fde047, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+        }
+
+        .header-title-box p {
+            color: #9ca3cf;
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-right .badge {
+            background: rgba(251, 191, 36, 0.12);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            padding: 6px 18px;
+            border-radius: 40px;
+            color: #fbbf24;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ===== SCORE BAR MATCHING WORDS ===== */
+        .score-bar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 20px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .score-bar .item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #9ca3cf;
+        }
+
+        .score-bar .item .num {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .score-bar .item .num.green {
+            color: #34d399;
+        }
+
+        .score-bar .item .num.gold {
+            color: #fbbf24;
+        }
+
+        .score-bar .item .num.cyan {
+            color: #38bdf8;
+        }
 
         /* Progress Bar */
         .progress-bar {
-            background: #e0e0e0;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
             height: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .progress-fill {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
             height: 100%;
             width: 0%;
-            transition: width 0.5s;
-            border-radius: 10px;
+            transition: width 0.4s ease;
+            border-radius: 12px;
         }
 
-        /* Soal Card */
+        /* ===== SOAL CARD ===== */
         .soal-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 32px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .soal-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .soal-number {
-            background: #667eea;
-            color: white;
-            display: inline-block;
-            padding: 5px 15px;
+            background: rgba(251, 191, 36, 0.12);
+            color: #fbbf24;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid rgba(251, 191, 36, 0.25);
+        }
+
+        .soal-type-badge {
+            background: rgba(255, 255, 255, 0.05);
+            color: #9ca3cf;
+            padding: 4px 14px;
             border-radius: 20px;
-            font-size: 14px;
-            margin-bottom: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .soal-text {
-            font-size: 18px;
+            font-size: 20px;
             line-height: 1.6;
-            color: #333;
-            margin-bottom: 20px;
+            color: #f8fafc;
+            margin-bottom: 24px;
+            padding: 22px 24px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .soal-text strong {
-            color: #667eea;
+            color: #f87171;
+            text-decoration: underline;
+            text-underline-offset: 4px;
         }
 
+        /* ===== OPTIONS GRID / LIST ===== */
         .options {
             display: flex;
             flex-direction: column;
@@ -136,239 +230,493 @@
             margin: 20px 0;
         }
 
-        .option {
+        .option-card {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 12px 15px;
-            background: #f8f9ff;
-            border-radius: 12px;
+            gap: 16px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1.5px solid rgba(255, 255, 255, 0.07);
+            border-radius: 18px;
             cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
+            transition: all 0.25s ease;
+            user-select: none;
         }
 
-        .option:hover {
-            background: #e8ecf1;
-            transform: translateX(5px);
+        .option-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(251, 191, 36, 0.3);
+            transform: translateX(4px);
         }
 
-        .option.selected {
-            background: #e0e7ff;
-            border-color: #667eea;
+        .option-letter {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #9ca3cf;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .option input {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-
-        .option label {
+        .option-label {
             flex: 1;
-            cursor: pointer;
             font-size: 16px;
-            color: #333;
+            color: #e2e8f0;
+            font-weight: 500;
+            line-height: 1.4;
         }
 
-        /* Tombol */
+        .option-icon {
+            font-size: 18px;
+            display: none;
+        }
+
+        /* Option States */
+        .option-card.selected {
+            background: rgba(251, 191, 36, 0.12);
+            border-color: #fbbf24;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.15);
+        }
+
+        .option-card.selected .option-letter {
+            background: #fbbf24;
+            color: #1a1a2e;
+        }
+
+        .option-card.correct {
+            background: rgba(52, 211, 153, 0.15) !important;
+            border-color: #34d399 !important;
+            box-shadow: 0 4px 20px rgba(52, 211, 153, 0.2) !important;
+        }
+
+        .option-card.correct .option-letter {
+            background: #34d399 !important;
+            color: #1a1a2e !important;
+        }
+
+        .option-card.correct .option-icon {
+            display: block;
+            color: #34d399;
+        }
+
+        .option-card.wrong {
+            background: rgba(244, 63, 94, 0.15) !important;
+            border-color: #f43f5e !important;
+            box-shadow: 0 4px 20px rgba(244, 63, 94, 0.2) !important;
+        }
+
+        .option-card.wrong .option-letter {
+            background: #f43f5e !important;
+            color: #fff !important;
+        }
+
+        .option-card.wrong .option-icon {
+            display: block;
+            color: #f43f5e;
+        }
+
+        .option-card.correct-highlight {
+            border-color: #34d399 !important;
+            background: rgba(52, 211, 153, 0.08) !important;
+        }
+
+        .option-card.correct-highlight .option-letter {
+            border-color: #34d399;
+            color: #34d399;
+        }
+
+        .option-card.disabled {
+            cursor: default;
+            pointer-events: none;
+        }
+
+        /* ===== BUTTONS ===== */
         .btn-group {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 24px;
             flex-wrap: wrap;
         }
 
-        button {
+        .btn-group button {
             flex: 1;
-            padding: 12px 20px;
-            font-size: 16px;
-            font-weight: bold;
+            min-width: 140px;
+            padding: 13px 20px;
+            font-size: 14px;
+            font-weight: 700;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-check {
-            background: linear-gradient(135deg, #2d6a4f, #1b4332);
-            color: white;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1a1a2e;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
         }
 
         .btn-check:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(45,106,79,0.4);
+            box-shadow: 0 12px 25px rgba(245, 158, 11, 0.4);
+            filter: brightness(1.1);
         }
 
         .btn-next {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.25) !important;
+            color: #38bdf8;
         }
 
         .btn-next:hover {
+            background: rgba(56, 189, 248, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-pembahasan {
+            background: rgba(167, 139, 250, 0.12);
+            border: 1px solid rgba(167, 139, 250, 0.25) !important;
+            color: #c084fc;
+        }
+
+        .btn-pembahasan:hover {
+            background: rgba(167, 139, 250, 0.2);
             transform: translateY(-2px);
         }
 
         .btn-reset {
-            background: #e53e3e;
-            color: white;
+            background: rgba(244, 63, 94, 0.12);
+            border: 1px solid rgba(244, 63, 94, 0.25) !important;
+            color: #f43f5e;
         }
 
         .btn-reset:hover {
-            background: #c53030;
+            background: rgba(244, 63, 94, 0.2);
+            transform: translateY(-2px);
         }
 
-        .btn-pembahasan {
-            background: #ed8936;
-            color: white;
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
-        .btn-pembahasan:hover {
-            background: #dd6b20;
-        }
-
-        /* Feedback & Pembahasan */
+        /* ===== FEEDBACK TOASTS ===== */
         .feedback {
             margin-top: 20px;
-            padding: 15px;
-            border-radius: 12px;
-            animation: fadeIn 0.5s;
+            padding: 16px 20px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            display: none;
+            animation: fadeIn 0.3s ease;
+            line-height: 1.5;
         }
 
         .feedback.correct {
-            background: #c6f6d5;
-            color: #22543d;
-            border-left: 4px solid #48bb78;
+            display: block;
+            background: rgba(52, 211, 153, 0.12);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
         }
 
         .feedback.wrong {
-            background: #fed7d7;
-            color: #742a2a;
-            border-left: 4px solid #f56565;
+            display: block;
+            background: rgba(244, 63, 94, 0.12);
+            color: #fca5a5;
+            border: 1px solid rgba(244, 63, 94, 0.3);
         }
 
+        /* Pembahasan */
         .pembahasan {
-            margin-top: 15px;
-            padding: 15px;
-            background: #fef9e6;
-            border-radius: 12px;
-            border-left: 4px solid #ed8936;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            border-left: 4px solid #c084fc;
             display: none;
+            animation: fadeIn 0.3s ease;
         }
 
         .pembahasan.show {
             display: block;
-            animation: fadeIn 0.5s;
         }
 
         .pembahasan h4 {
-            color: #ed8936;
+            color: #c084fc;
             margin-bottom: 8px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .pembahasan p {
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-size: 14.5px;
         }
 
-        /* Hasil Akhir */
+        /* ===== HASIL AKHIR (RESULT CARD) ===== */
         .result-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 40px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.5s ease;
         }
 
         .result-card h2 {
-            color: #667eea;
-            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fde047, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
         }
 
         .final-score {
-            font-size: 48px;
-            font-weight: bold;
-            color: #2d6a4f;
-            margin: 20px 0;
+            font-size: 54px;
+            font-weight: 800;
+            color: #34d399;
+            margin: 15px 0;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .toefl-score {
             font-size: 24px;
-            color: #764ba2;
-            margin-bottom: 20px;
+            color: #fbbf24;
+            font-weight: 700;
+            margin-bottom: 12px;
         }
 
         .predicate {
-            font-size: 18px;
-            padding: 10px;
-            border-radius: 10px;
-            margin: 20px 0;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 24px;
         }
 
-        .predicate.excellent { background: #c6f6d5; color: #22543d; }
-        .predicate.good { background: #feebc8; color: #7b341e; }
-        .predicate.fair { background: #fed7d7; color: #742a2a; }
+        .predicate.excellent {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .predicate.good {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .predicate.fair {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
 
         .btn-restart {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 15px 30px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1a1a2e;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
             margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
         }
 
         /* Review Section */
         .review-section {
             margin-top: 30px;
             text-align: left;
-            max-height: 400px;
+            max-height: 440px;
             overflow-y: auto;
-            padding: 10px;
+            padding-right: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .review-item {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
+            padding: 16px 20px;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-left: 4px solid #f43f5e;
         }
 
-        .review-item.correct { background: #e8f5e9; }
-        .review-item.wrong { background: #ffebee; }
-
         .review-question {
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .review-user-ans {
+            color: #fca5a5;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .review-correct-ans {
+            color: #34d399;
+            font-size: 14px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .review-pembahasan {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.08);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #4a4a6a;
+            padding: 30px 0 10px;
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 30px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            animation: fall 2s linear forwards;
+            z-index: 1000;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
         }
 
         /* Responsive */
-        @media (max-width: 600px) {
-            .soal-text { font-size: 16px; }
-            .option label { font-size: 14px; }
-            .btn-group button { font-size: 12px; }
+        @media (max-width: 640px) {
+            body {
+                padding: 14px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .header-title-box h1 {
+                font-size: 22px;
+            }
+
+            .soal-card,
+            .result-card {
+                padding: 20px 16px;
+                border-radius: 20px;
+            }
+
+            .soal-text {
+                font-size: 17px;
+                padding: 16px;
+            }
+
+            .option-card {
+                padding: 12px 14px;
+            }
+
+            .option-label {
+                font-size: 14.5px;
+            }
+
+            .btn-group button {
+                font-size: 12.5px;
+                padding: 11px 12px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <!-- Header -->
+        <!-- Top Header with Back to Dashboard -->
         <div class="header">
-            <h1>📚 TOEFL <span>Structure & Written Expression</span></h1>
-            <p>Latihan Soal Structure (Grammar) & Written Expression | 100 Soal</p>
+            <div class="header-left">
+                <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Dashboard</a>
+                <div class="header-title-box">
+                    <h1>🏆 TOEFL Practice</h1>
+                    <p>Structure & Written Expression</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="badge"><i class="fas fa-graduation-cap"></i> 100 Soal Lengkap</span>
+            </div>
         </div>
 
-        <!-- Info Panel -->
-        <div class="info-panel" id="infoPanel">
-            <div class="score-box">
-                <div class="label">✅ SKOR</div>
-                <div class="value" id="score">0</div>
+        <!-- Info / Score Bar -->
+        <div class="score-bar">
+            <div class="item">
+                <i class="fas fa-check-circle" style="color:#34d399;"></i>
+                <span>Skor:</span>
+                <span class="num green" id="score">0</span>
             </div>
-            <div class="question-counter">
-                <div class="label">📝 SOAL</div>
-                <div class="value" id="currentQuestion">1</div>
-                <div class="label" style="font-size: 12px;">/ <span id="totalSoal">100</span></div>
+            <div class="item">
+                <i class="fas fa-list-ol" style="color:#fbbf24;"></i>
+                <span>Soal:</span>
+                <span class="num gold" id="currentQuestionDisplay">1 / 100</span>
             </div>
-            <div class="timer-box">
-                <div class="label">⏱️ WAKTU</div>
-                <div class="value" id="timer">00:00</div>
+            <div class="item">
+                <i class="fas fa-clock" style="color:#38bdf8;"></i>
+                <span id="timer">00:00</span>
             </div>
         </div>
 
@@ -376,14 +724,18 @@
             <div class="progress-fill" id="progressFill"></div>
         </div>
 
-        <!-- Soal Container -->
+        <!-- Container Soal / Hasil -->
         <div id="soalContainer"></div>
+
+        <div class="footer">
+            <p>✨ TOEFL Structure & Written Expression Practice · Dibuat untuk Meningkatkan Skor TOEFL Kamu</p>
+        </div>
     </div>
 
     <script>
         // ============ DATABASE SOAL TOEFL (100 SOAL) ============
         const toeflQuestions = [
-            // Structure Questions (1-50) - Pilih kata yang tepat
+            // Structure Questions (1-25)
             { type: "structure", text: "The committee ________ to approve the budget yesterday.", options: ["decide", "decided", "deciding", "has decided"], answer: 1, pembahasan: "Kata 'yesterday' menunjukkan waktu lampau, jadi menggunakan Simple Past (decided)." },
             { type: "structure", text: "She is the woman ________ won the competition.", options: ["who", "which", "whom", "whose"], answer: 0, pembahasan: "'Who' digunakan untuk menerangkan orang sebagai subjek." },
             { type: "structure", text: "If I ________ you, I would take the job.", options: ["am", "was", "were", "be"], answer: 2, pembahasan: "Conditional type 2 menggunakan 'were' untuk semua subjek." },
@@ -409,8 +761,8 @@
             { type: "structure", text: "I'd rather you ________ quiet.", options: ["keep", "kept", "to keep", "keeping"], answer: 1, pembahasan: "'Would rather + subject + past tense' untuk harapan." },
             { type: "structure", text: "The house ________ green is my aunt's.", options: ["painted", "painting", "to paint", "paints"], answer: 0, pembahasan: "Past participle sebagai adjective (the house that is painted)." },
             { type: "structure", text: "She is accustomed to ________ early.", options: ["wake up", "waking up", "woke up", "wakes up"], answer: 1, pembahasan: "'Accustomed to' + gerund." },
-            
-            // Written Expression Questions (26-50) - Cari kata yang salah
+
+            // Written Expression Questions (26-50)
             { type: "error", text: "The professor, together with his students, <strong>are</strong> going to the conference.", options: ["The professor", "together with", "are", "to the conference"], answer: 2, pembahasan: "Subject 'The professor' singular, harusnya 'is', bukan 'are'." },
             { type: "error", text: "She <strong>don't</strong> like spicy food.", options: ["She", "don't", "like", "spicy food"], answer: 1, pembahasan: "She adalah singular, harusnya 'doesn't', bukan 'don't'." },
             { type: "error", text: "If I <strong>was</strong> rich, I would buy a car.", options: ["If I", "was", "would buy", "a car"], answer: 1, pembahasan: "Conditional type 2 menggunakan 'were' untuk semua subjek." },
@@ -436,7 +788,7 @@
             { type: "error", text: "She <strong>use to</strong> live in Bandung.", options: ["She", "use to", "live", "in Bandung"], answer: 1, pembahasan: "Used to, bukan use to." },
             { type: "error", text: "I <strong>didn't see</strong> nobody at the party.", options: ["I", "didn't see", "nobody", "at the party"], answer: 2, pembahasan: "Double negative → anyone/somebody." },
             { type: "error", text: "The police <strong>is</strong> investigating the case.", options: ["The police", "is", "investigating", "the case"], answer: 1, pembahasan: "Police plural → are." },
-            
+
             // Additional Structure Questions (51-75)
             { type: "structure", text: "She ________ a shower when the phone rang.", options: ["had", "was having", "has", "is having"], answer: 1, pembahasan: "Past Continuous untuk kejadian yang sedang berlangsung." },
             { type: "structure", text: "I'd rather ________ at home tonight.", options: ["stay", "to stay", "staying", "stayed"], answer: 0, pembahasan: "'Would rather' + V1." },
@@ -463,7 +815,7 @@
             { type: "structure", text: "She is ________ to be a lawyer.", options: ["enough smart", "smart enough", "too smart", "so smart"], answer: 1, pembahasan: "Adjective + enough." },
             { type: "structure", text: "The committee ________ in disagreement.", options: ["is", "am", "are", "be"], answer: 0, pembahasan: "Committee sebagai kesatuan → singular." },
             { type: "structure", text: "She can't help ________ when she sees him.", options: ["laugh", "to laugh", "laughing", "laughed"], answer: 2, pembahasan: "Can't help + V-ing." },
-            
+
             // Additional Error Questions (76-100)
             { type: "error", text: "She <strong>don't have</strong> enough money to buy that bag.", options: ["She", "don't have", "enough money", "to buy that bag"], answer: 1, pembahasan: "She doesn't have, bukan don't have." },
             { type: "error", text: "He is <strong>enough strong</strong> to lift the box.", options: ["He is", "enough strong", "to lift", "the box"], answer: 1, pembahasan: "Strong enough, bukan enough strong." },
@@ -489,7 +841,7 @@
             { type: "error", text: "He <strong>has went</strong> to the store.", options: ["He", "has went", "to the", "store"], answer: 1, pembahasan: "Has gone, bukan has went." },
             { type: "error", text: "She <strong>enjoy</strong> watching movies.", options: ["She", "enjoy", "watching", "movies"], answer: 1, pembahasan: "She enjoys, bukan enjoy." },
             { type: "error", text: "I have <strong>never saw</strong> that movie.", options: ["I have", "never saw", "that", "movie"], answer: 1, pembahasan: "Have never seen." },
-            { type: "error", text: "She is <strong>more happier</strong> now.", options: ["She is", "more happier", "now", ""], answer: 1, pembahasan: "Happier (sudah comparative)." }
+            { type: "error", text: "She is <strong>more happier</strong> now.", options: ["She is", "more happier", "now", "than before"], answer: 1, pembahasan: "Happier (sudah comparative)." }
         ];
 
         // State
@@ -504,12 +856,9 @@
         // DOM Elements
         const soalContainer = document.getElementById('soalContainer');
         const scoreElement = document.getElementById('score');
-        const currentQuestionElement = document.getElementById('currentQuestion');
-        const totalSoalElement = document.getElementById('totalSoal');
+        const currentQuestionDisplay = document.getElementById('currentQuestionDisplay');
         const timerElement = document.getElementById('timer');
         const progressFill = document.getElementById('progressFill');
-
-        totalSoalElement.textContent = toeflQuestions.length;
 
         function startTimer() {
             if (timerInterval) clearInterval(timerInterval);
@@ -546,41 +895,66 @@
 
             let html = `
                 <div class="soal-card">
-                    <div class="soal-number">Soal ${currentIndex + 1} dari ${toeflQuestions.length}</div>
+                    <div class="soal-meta">
+                        <span class="soal-number"><i class="fas fa-bookmark"></i> Soal ${currentIndex + 1} dari ${toeflQuestions.length}</span>
+                        <span class="soal-type-badge">${q.type === 'structure' ? '📝 Structure' : '🔍 Written Expression'}</span>
+                    </div>
+
                     <div class="soal-text">
                         ${q.text}
                     </div>
+
                     <div class="options">
             `;
 
             q.options.forEach((opt, idx) => {
-                const isSelected = (selectedAnswer === idx);
+                const letter = String.fromCharCode(65 + idx);
+                let stateClass = '';
+                let iconHtml = '';
+
+                if (isAnswered) {
+                    if (idx === q.answer) {
+                        stateClass = 'correct';
+                        iconHtml = '<i class="fas fa-check-circle option-icon"></i>';
+                    } else if (selectedAnswer === idx) {
+                        stateClass = 'wrong';
+                        iconHtml = '<i class="fas fa-times-circle option-icon"></i>';
+                    }
+                    stateClass += ' disabled';
+                } else if (selectedAnswer === idx) {
+                    stateClass = 'selected';
+                }
+
                 html += `
-                    <div class="option ${isSelected ? 'selected' : ''}" onclick="selectAnswer(${idx})">
-                        <input type="radio" name="answer" value="${idx}" id="opt${idx}" ${isSelected ? 'checked' : ''} ${isAnswered ? 'disabled' : ''}>
-                        <label for="opt${idx}">${String.fromCharCode(65+idx)}. ${opt}</label>
+                    <div class="option-card ${stateClass}" onclick="selectAnswer(${idx})">
+                        <div class="option-letter">${letter}</div>
+                        <div class="option-label">${opt}</div>
+                        ${iconHtml}
                     </div>
                 `;
             });
 
             html += `
                     </div>
+
                     <div class="btn-group">
-                        <button class="btn-check" onclick="checkAnswer()" ${isAnswered ? 'disabled' : ''}>✅ CEK JAWABAN</button>
-                        <button class="btn-next" onclick="nextQuestion()">⏩ SOAL BERIKUTNYA</button>
-                        <button class="btn-reset" onclick="resetQuiz()">🔄 RESET</button>
-                        <button class="btn-pembahasan" onclick="togglePembahasan()">📖 LIHAT PEMBAHASAN</button>
+                        <button class="btn-check" onclick="checkAnswer()" ${isAnswered ? 'disabled' : ''}><i class="fas fa-check"></i> CEK JAWABAN</button>
+                        <button class="btn-next" onclick="nextQuestion()"><i class="fas fa-arrow-right"></i> SOAL BERIKUTNYA</button>
+                        <button class="btn-pembahasan" onclick="togglePembahasan()"><i class="fas fa-lightbulb"></i> PEMBAHASAN</button>
+                        <button class="btn-reset" onclick="resetQuiz()"><i class="fas fa-redo"></i> RESET</button>
                     </div>
+
                     <div class="feedback" id="feedback"></div>
+
                     <div class="pembahasan" id="pembahasan">
-                        <h4>📝 Pembahasan:</h4>
+                        <h4><i class="fas fa-info-circle"></i> Pembahasan Soal:</h4>
                         <p>${q.pembahasan}</p>
                     </div>
                 </div>
             `;
 
             soalContainer.innerHTML = html;
-            currentQuestionElement.textContent = currentIndex + 1;
+            currentQuestionDisplay.textContent = `${currentIndex + 1} / ${toeflQuestions.length}`;
             updateProgress();
         }
 
@@ -598,33 +972,24 @@
 
             const selected = userAnswers[currentIndex];
             if (selected === null) {
-                showFeedback('⚠️ Pilih jawaban dulu ya!', 'wrong');
+                showFeedback('⚠️ Silakan pilih jawaban (A, B, C, atau D) dulu ya!', 'wrong');
                 return;
             }
 
             const q = toeflQuestions[currentIndex];
             const isCorrect = (selected === q.answer);
-            
+
             answered[currentIndex] = true;
-            
-            if (isCorrect) {
-                showFeedback(`✅ BENAR! Jawaban yang tepat adalah ${String.fromCharCode(65+q.answer)}. ${q.options[q.answer]}`, 'correct');
-                createConfetti();
-            } else {
-                showFeedback(`❌ SALAH! Jawaban yang benar adalah ${String.fromCharCode(65+q.answer)}. ${q.options[q.answer]}`, 'wrong');
-            }
-            
             updateScore();
             renderQuestion();
-            
-            // Auto move to next question after 2 seconds
-            setTimeout(() => {
-                if (currentIndex + 1 < toeflQuestions.length) {
-                    nextQuestion();
-                } else if (!quizFinished) {
-                    finishQuiz();
-                }
-            }, 2000);
+
+            // Tampilkan feedback setelah renderQuestion agar tidak terhapus
+            if (isCorrect) {
+                showFeedback(`✅ BENAR! Jawaban yang tepat adalah ${String.fromCharCode(65 + q.answer)}. ${q.options[q.answer]}`, 'correct');
+                createConfetti();
+            } else {
+                showFeedback(`❌ SALAH! Jawaban yang benar adalah ${String.fromCharCode(65 + q.answer)}. ${q.options[q.answer]}`, 'wrong');
+            }
         }
 
         function showFeedback(message, type) {
@@ -632,6 +997,7 @@
             if (feedbackDiv) {
                 feedbackDiv.innerHTML = message;
                 feedbackDiv.className = `feedback ${type}`;
+                feedbackDiv.style.display = 'block';
             }
         }
 
@@ -647,73 +1013,74 @@
                 currentIndex++;
                 renderQuestion();
             } else {
-                if (!quizFinished) {
-                    finishQuiz();
-                }
+                finishQuiz();
             }
         }
 
         function finishQuiz() {
             quizFinished = true;
             if (timerInterval) clearInterval(timerInterval);
-            
+
             const finalScore = score;
-            const percentage = (finalScore / toeflQuestions.length) * 100;
-            let toeflScaled = Math.round((percentage / 100) * 677);
+            const percentage = Math.round((finalScore / toeflQuestions.length) * 100);
+            let toeflScaled = Math.round(200 + (percentage / 100) * (677 - 200));
             toeflScaled = Math.max(200, Math.min(677, toeflScaled));
-            
+
             let predicate = '';
             let predicateClass = '';
             if (percentage >= 80) {
-                predicate = 'EXCELLENT! Kamu memiliki pemahaman grammar yang sangat baik!';
+                predicate = '🏆 EXCELLENT! Pemahaman Structure & Written Expression kamu luar biasa!';
                 predicateClass = 'excellent';
             } else if (percentage >= 60) {
-                predicate = 'GOOD! Kamu cukup baik, tapi perlu lebih banyak latihan!';
+                predicate = '✨ GOOD! Sudah cukup baik, terus pertajam latihan pola soal!';
                 predicateClass = 'good';
-            } else if (percentage >= 40) {
-                predicate = 'FAIR! Kamu perlu belajar lebih giat lagi!';
-                predicateClass = 'fair';
             } else {
-                predicate = 'NEEDS IMPROVEMENT! Perbanyak latihan structure TOEFL!';
+                predicate = '📚 PERLU LATIHAN! Pelajari kembali aturan grammar dan coba lagi!';
                 predicateClass = 'fair';
             }
-            
-            // Create review of wrong answers
+
             let wrongAnswersHtml = '';
+            let wrongCount = 0;
             for (let i = 0; i < toeflQuestions.length; i++) {
                 if (userAnswers[i] !== null && userAnswers[i] !== toeflQuestions[i].answer) {
+                    wrongCount++;
                     const q = toeflQuestions[i];
                     wrongAnswersHtml += `
-                        <div class="review-item wrong">
-                            <div class="review-question">Soal ${i+1}: ${q.text}</div>
-                            <div>Jawaban kamu: ${String.fromCharCode(65+userAnswers[i])}. ${q.options[userAnswers[i]]}</div>
-                            <div>Jawaban benar: ${String.fromCharCode(65+q.answer)}. ${q.options[q.answer]}</div>
-                            <div style="font-size: 12px; margin-top: 5px;">📖 ${q.pembahasan}</div>
+                        <div class="review-item">
+                            <div class="review-question">Soal #${i + 1}: ${q.text}</div>
+                            <div class="review-user-ans">❌ Jawabanmu: ${String.fromCharCode(65 + userAnswers[i])}. ${q.options[userAnswers[i]]}</div>
+                            <div class="review-correct-ans">✅ Jawaban Benar: ${String.fromCharCode(65 + q.answer)}. ${q.options[q.answer]}</div>
+                            <div class="review-pembahasan">💡 ${q.pembahasan}</div>
                         </div>
                     `;
                 }
             }
-            
+
             const resultHtml = `
                 <div class="result-card">
                     <h2>🎉 HASIL LATIHAN TOEFL 🎉</h2>
                     <div class="final-score">${finalScore} / ${toeflQuestions.length}</div>
-                    <div class="toefl-score">📊 Skor TOEFL (Estimated): ${toeflScaled}</div>
+                    <div class="toefl-score">📊 Estimasi Skor TOEFL: ${toeflScaled} / 677</div>
                     <div class="predicate ${predicateClass}">${predicate}</div>
-                    <div>⏱️ Waktu yang ditempuh: ${timerElement.textContent}</div>
-                    <button class="btn-restart" onclick="resetQuiz()">🔄 MULAI LAGI</button>
-                    ${wrongAnswersHtml ? `
-                        <div style="margin-top: 30px;">
-                            <h3>📋 Review Soal yang Salah:</h3>
+                    <div style="color: #9ca3cf; font-size: 14px;">⏱️ Waktu Pengerjaan: ${timerElement.textContent}</div>
+                    
+                    <div>
+                        <button class="btn-restart" onclick="resetQuiz()"><i class="fas fa-redo"></i> MULAI LAGI</button>
+                    </div>
+
+                    ${wrongCount > 0 ? `
+                        <div style="margin-top: 35px; text-align: left;">
+                            <h3 style="color: #f87171; margin-bottom: 12px; font-size: 17px;"><i class="fas fa-clipboard-list"></i> Review Soal yang Salah (${wrongCount} Soal):</h3>
                             <div class="review-section">
                                 ${wrongAnswersHtml}
                             </div>
                         </div>
-                    ` : '<div style="margin-top: 30px; color: #2d6a4f;">🎯 SEMPURNA! Tidak ada soal yang salah!</div>'}
+                    ` : '<div style="margin-top: 30px; color: #34d399; font-weight: 700; font-size: 18px;">🎯 SEMPURNA! Semua soal dijawab dengan benar!</div>'}
                 </div>
             `;
-            
+
             soalContainer.innerHTML = resultHtml;
+            progressFill.style.width = '100%';
         }
 
         function resetQuiz() {
@@ -725,26 +1092,21 @@
             timerSeconds = 0;
             timerElement.textContent = '00:00';
             scoreElement.textContent = '0';
-            
+
             if (timerInterval) clearInterval(timerInterval);
             startTimer();
-            
             renderQuestion();
         }
 
         function createConfetti() {
             for (let i = 0; i < 30; i++) {
                 const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
+                confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = `hsl(${Math.random() * 360}, 90%, 65%)`;
                 confetti.style.top = '-10px';
                 confetti.style.width = Math.random() * 8 + 4 + 'px';
                 confetti.style.height = Math.random() * 8 + 4 + 'px';
-                confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                confetti.style.borderRadius = '50%';
-                confetti.style.zIndex = '1000';
-                confetti.style.pointerEvents = 'none';
-                confetti.style.animation = 'fall 2s linear forwards';
                 document.body.appendChild(confetti);
                 setTimeout(() => confetti.remove(), 2000);
             }
@@ -754,14 +1116,6 @@
         startTimer();
         renderQuestion();
     </script>
-    <style>
-        @keyframes fall {
-            to { transform: translateY(100vh); opacity: 0; }
-        }
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-    </style>
 </body>
+
 </html>

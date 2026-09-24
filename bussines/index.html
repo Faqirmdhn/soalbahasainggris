@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>English for Business - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #f0f4f8;
+            color: #1a1a2e;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, #0f0c29, #1a1a3e, #24243e);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 26px;
+            color: #4facfe;
+        }
+
+        .logo h1 {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo span {
+            color: #8892b0;
+            font-weight: 400;
+            font-size: 13px;
+            -webkit-text-fill-color: #8892b0;
+        }
+
+        .nav {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: #8892b0;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav a.active {
+            color: white;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .nav a i {
+            margin-right: 5px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #0f0c29, #1a1a3e, #24243e);
+            padding: 60px 0 70px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 14px;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #8892b0;
+            max-width: 600px;
+            margin: 0 auto 28px;
+            line-height: 1.8;
+        }
+
+        .hero .btn-group {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(17, 153, 142, 0.3);
+        }
+
+        /* ===== FEATURES ===== */
+        .features {
+            padding: 50px 0;
+            background: white;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .features .subtitle {
+            text-align: center;
+            color: #8892b0;
+            margin-bottom: 36px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+            border-color: #4facfe;
+        }
+
+        .feature-card .icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* ===== STATS ===== */
+        .stats-bar {
+            background: #f8fafc;
+            padding: 30px 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stats-grid .num {
+            font-size: 32px;
+            font-weight: 900;
+            color: #4facfe;
+        }
+
+        .stats-grid .label {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0f0c29;
+            color: #8892b0;
+            padding: 30px 0 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer h4 {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer a {
+            color: #8892b0;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .footer .bottom {
+            text-align: center;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 30px;
+            }
+            .header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav {
+                justify-content: center;
+            }
+            .nav a {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-briefcase"></i>
+                <h1>Eng<span>Biz</span></h1>
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="modules.html"><i class="fas fa-book"></i> Modules</a>
+                <a href="vocabulary.html"><i class="fas fa-graduation-cap"></i> Vocabulary</a>
+                <a href="practice.html"><i class="fas fa-puzzle-piece"></i> Practice</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <h1>Master <span class="highlight">Business English</span><br />for Career Success</h1>
+            <p>Kuasai bahasa Inggris profesional untuk komunikasi bisnis, presentasi, negosiasi, dan wawancara kerja. Dapatkan kepercayaan diri untuk bersaing di dunia kerja global!</p>
+            <div class="btn-group">
+                <a href="modules.html" class="btn btn-primary"><i class="fas fa-rocket"></i> Mulai Belajar</a>
+                <a href="practice.html" class="btn btn-outline"><i class="fas fa-play-circle"></i> Coba Kuis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features">
+        <div class="container">
+            <h2>Kenapa Belajar <span style="color:#4facfe;">English for Business</span>?</h2>
+            <p class="subtitle">4 alasan mengapa kemampuan ini penting untuk karirmu</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">💼</div>
+                    <h3>Karier Lebih Cepat</h3>
+                    <p>Perusahaan multinasional mencari kandidat dengan kemampuan bahasa Inggris profesional.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🌍</div>
+                    <h3>Jangkauan Global</h3>
+                    <p>Berkomunikasi dengan kolega dan klien dari seluruh dunia tanpa hambatan.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">💰</div>
+                    <h3>Gaji Lebih Tinggi</h3>
+                    <p>Kemampuan bahasa Inggris bisnis bisa meningkatkan nilai jual dan pendapatan.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🚀</div>
+                    <h3>Percaya Diri</h3>
+                    <p>Presentasi, negosiasi, dan meeting jadi lebih lancar dengan bahasa Inggris profesional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div><div class="num">4</div><div class="label">Modul Pembelajaran</div></div>
+                <div><div class="num">50+</div><div class="label">Kosakata Bisnis</div></div>
+                <div><div class="num">10</div><div class="label">Soal Interaktif</div></div>
+                <div><div class="num">100%</div><div class="label">Gratis</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>📚 EngBiz</h4>
+                    <p style="font-size:13px; color:#64748b;">Belajar English for Business dengan cara yang interaktif dan menyenangkan.</p>
+                </div>
+                <div>
+                    <h4>Navigation</h4>
+                    <a href="index.html">Home</a>
+                    <a href="modules.html">Modules</a>
+                    <a href="vocabulary.html">Vocabulary</a>
+                    <a href="practice.html">Practice</a>
+                </div>
+                <div>
+                    <h4>Topik</h4>
+                    <a href="communication.html">Communication</a>
+                    <a href="presentations.html">Presentations</a>
+                    <a href="negotiation.html">Negotiation</a>
+                    <a href="interviews.html">Interviews</a>
+                </div>
+            </div>
+            <div class="bottom">
+                &copy; 2024 EngBiz. Made with <i class="fas fa-heart" style="color:#f5576c;"></i> for professionals.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

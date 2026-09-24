@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modules - English for Business</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #f0f4f8;
+            color: #1a1a2e;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, #0f0c29, #1a1a3e, #24243e);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 26px;
+            color: #4facfe;
+        }
+
+        .logo h1 {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo span {
+            color: #8892b0;
+            font-weight: 400;
+            font-size: 13px;
+            -webkit-text-fill-color: #8892b0;
+        }
+
+        .nav {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: #8892b0;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav a.active {
+            color: white;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .nav a i {
+            margin-right: 5px;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            background: linear-gradient(135deg, #0f0c29, #1a1a3e);
+            padding: 40px 0 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .page-header p {
+            color: #8892b0;
+            font-size: 16px;
+            margin-top: 6px;
+        }
+
+        /* ===== MODULES ===== */
+        .modules-section {
+            padding: 50px 0;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .module-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px 24px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: #1a1a2e;
+            display: block;
+        }
+
+        .module-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border-color: #4facfe;
+        }
+
+        .module-card .icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .module-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .module-card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .module-card .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .module-card .topics span {
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .module-card .arrow {
+            display: inline-block;
+            margin-top: 12px;
+            color: #4facfe;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0f0c29;
+            color: #8892b0;
+            padding: 30px 0 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer h4 {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer a {
+            color: #8892b0;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .footer .bottom {
+            text-align: center;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav {
+                justify-content: center;
+            }
+            .nav a {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-briefcase"></i>
+                <h1>Eng<span>Biz</span></h1>
+            </a>
+            <nav class="nav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="modules.html" class="active"><i class="fas fa-book"></i> Modules</a>
+                <a href="vocabulary.html"><i class="fas fa-graduation-cap"></i> Vocabulary</a>
+                <a href="practice.html"><i class="fas fa-puzzle-piece"></i> Practice</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>📚 Modules</h1>
+            <p>Pilih topik yang ingin kamu pelajari untuk meningkatkan kemampuan Business English</p>
+        </div>
+    </section>
+
+    <!-- ===== MODULES ===== -->
+    <section class="modules-section">
+        <div class="container">
+            <div class="modules-grid">
+
+                <a href="communication.html" class="module-card">
+                    <div class="icon">✉️</div>
+                    <h3>Business Communication</h3>
+                    <p>Email writing, telephoning, dan meeting phrases yang profesional.</p>
+                    <div class="topics">
+                        <span>📧 Email</span>
+                        <span>📞 Telepon</span>
+                        <span>🤝 Meeting</span>
+                    </div>
+                    <span class="arrow">Pelajari →</span>
+                </a>
+
+                <a href="presentations.html" class="module-card">
+                    <div class="icon">🎤</div>
+                    <h3>Presentations</h3>
+                    <p>Teknik membuka presentasi, menyusun konten, dan sesi Q&A.</p>
+                    <div class="topics">
+                        <span>🎯 Opening</span>
+                        <span>📊 Structuring</span>
+                        <span>❓ Q&A</span>
+                    </div>
+                    <span class="arrow">Pelajari →</span>
+                </a>
+
+                <a href="negotiation.html" class="module-card">
+                    <div class="icon">🤝</div>
+                    <h3>Negotiation</h3>
+                    <p>Cara tawar-menawar, setuju/tidak setuju dengan sopan dalam negosiasi.</p>
+                    <div class="topics">
+                        <span>💰 Bargaining</span>
+                        <span>✅ Agreeing</span>
+                        <span>❌ Disagreeing</span>
+                    </div>
+                    <span class="arrow">Pelajari →</span>
+                </a>
+
+                <a href="interviews.html" class="module-card">
+                    <div class="icon">👔</div>
+                    <h3>Job Interviews</h3>
+                    <p>Pertanyaan umum, metode STAR, dan tips menjawab dengan percaya diri.</p>
+                    <div class="topics">
+                        <span>📝 Common Qs</span>
+                        <span>⭐ STAR Method</span>
+                        <span>💡 Tips</span>
+                    </div>
+                    <span class="arrow">Pelajari →</span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>📚 EngBiz</h4>
+                    <p style="font-size:13px; color:#64748b;">Belajar English for Business dengan cara yang interaktif dan menyenangkan.</p>
+                </div>
+                <div>
+                    <h4>Navigation</h4>
+                    <a href="index.html">Home</a>
+                    <a href="modules.html">Modules</a>
+                    <a href="vocabulary.html">Vocabulary</a>
+                    <a href="practice.html">Practice</a>
+                </div>
+                <div>
+                    <h4>Topik</h4>
+                    <a href="communication.html">Communication</a>
+                    <a href="presentations.html">Presentations</a>
+                    <a href="negotiation.html">Negotiation</a>
+                    <a href="interviews.html">Interviews</a>
+                </div>
+            </div>
+            <div class="bottom">
+                &copy; 2024 EngBiz. Made with <i class="fas fa-heart" style="color:#f5576c;"></i> for professionals.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
